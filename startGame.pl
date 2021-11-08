@@ -14,4 +14,4 @@ startGame:-
     write('% 7. a.      : gerak ke barat 1 langkah                                        %\n'),
     write('% 8. help.   : menampilkan bantuan                                             %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n'),
-    write('PENTING!!!\nAkhiri semua perintahmu dengan titik (.)').
+    write('PENTING!!!\nAkhiri semua perintahmu dengan titik (.)'), !.
