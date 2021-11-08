@@ -10,3 +10,6 @@ Tugas Besar Logika Komputasi IF2121. Pada tugas besar ini kita diminta untuk mem
 | Muhammad Garebaldhie ER Rahman | 13520029 |
 | Aditya Prawira Nugroho         | 13520049 |
 | Felicia Sutandijo              | 13520050 |
+
+## Spesifikasi Tugas Besar
+[Tugas Besar Logika Komputasional – IF2121](https://docs.google.com/document/d/15iaOJ1DnSfNMVwf6HU0i5PdTpW8opQNcFwil6gcQzq4/edit)
