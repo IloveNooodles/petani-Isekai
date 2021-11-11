@@ -1,4 +1,4 @@
-# IF2121 - Isekai
+# IF2121 - JauhiTaniDekatiFeline
 
 Tugas Besar Logika Komputasi IF2121. Pada tugas besar ini kita diminta untuk membuat sebuah game yang memiliki banyak spesifikasi dengan bahasa prolog. Made with <3 from GalaxyS22.
 
