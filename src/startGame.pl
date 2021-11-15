@@ -14,4 +14,23 @@ startGame:-
     write('% 7. a.      : gerak ke barat 1 langkah                                        %\n'),
     write('% 8. help.   : menampilkan bantuan                                             %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n'),
-    write('PENTING!!!\nAkhiri semua perintahmu dengan titik (.)'), !.
+    write('PENTING!!! Akhiri semua perintah atau inputmu dengan titik (.)\n'), !.
+
+start:-
+    write('Welcome to Harvest Galaxy S22! Please choose your specialty (1-3):\n'),
+    write('1. Fisherman\n'),
+    write('2. Farmer\n'),
+    write('3. Rancher\n'),
+    write('> '),
+    read(Job),
+    ((
+        Job = 1,
+        write('You chose fisherman. ')
+    );(
+        Job = 2,
+        write('You chose farmer. ')
+    );(
+        Job = 3,
+        write('You chose rancher. ')
+    )),
+    write('Let\'s start farming!\n').
