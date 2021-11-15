@@ -1,11 +1,7 @@
-/* INCLUDES */
-:- include('startGame.pl').
-
 /* DYNAMICS */
 :- dynamic(state/1).
-/*
-- dynamic(job/1) -- startGame.pl
-*/
 
+/* INCLUDES */
+:- include('startGame.pl').
 
 /* START GAME */
