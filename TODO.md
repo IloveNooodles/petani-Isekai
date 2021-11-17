@@ -18,11 +18,11 @@ Afan
 
 Gare
 
-1. Items
+1. Items (WIP)
 2. House
 3. Endgame
 
 Changelog:
 
-- Add startGame, start, baseStats, ResetStats, Status by Feli
--
+- Add startGame, start, baseStats, ResetStats, Status (Feli)
+- Item WIP (Gare)
