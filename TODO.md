@@ -6,8 +6,8 @@ Feli
 
 Adit
 
-1. Peta
-2. Inventory
+1. Peta (done kayanya)
+2. Inventory (done kayanya)
 3. MANTAPANJING
 
 Afan
