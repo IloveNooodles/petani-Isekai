@@ -1,6 +1,7 @@
 /* TO DO */
 % fix status window: add time and weather, fix exp level up requirement
 
+/* DYNAMICS */
 :- dynamic(job/1).
 :- dynamic(exp/1). /* General */
 :- dynamic(expFish/1).
@@ -12,6 +13,7 @@
 :- dynamic(levelRanch/1).
 :- dynamic(stamina/1).
 :- dynamic(gold/1).
+:- dynamic(playerName/1).
 
 /* START GAME (WELCOME SCREEN) */
 startGame:- 
@@ -36,7 +38,10 @@ start:-
     % Clear all stats
     resetStat,
     % Choose job
-    write('Welcome to Harvest Galaxy S22! Please choose your specialty (1-3):\n'),
+    write('Welcome to Harvest Galaxy S22! What\'s your name?\n> '),
+    read(Name),
+    setPlayerName(Name),
+    format('Hello, ~w! Please choose your specialty (1-3):\n', [Name]),
     write('1. Fisherman\n'),
     write('2. Farmer\n'),
     write('3. Rancher\n'),
@@ -57,9 +62,14 @@ start:-
     )),
     % Assert level one stats
     levelOne,
-    write('Let\'s start farming!\n').
+    fill_map,
+    write('Let\'s start farming!\nHint: you can now check your status ;)\n').
 
-/* BASE STATS */    
+/* PLAYER NAME AND BASE STATS */
+setPlayerName(Name) :-
+    retractall(playerName(_)),
+    asserta(playerName(Name)).
+
 setStat(fisherman):-
     asserta(job(fisherman)),
     asserta(expFish(20)),
@@ -103,6 +113,7 @@ resetStat:-
 
 /* STATUS */
 status:-
+    playerName(Name),
     job(Job),
     level(Level),
     levelFish(LevelFish),
@@ -115,11 +126,11 @@ status:-
     stamina(Stamina),
     gold(Gold),
     % Print
-    write('~Your Status~\n-------------------------\n'),
+    format('~w\'s stats\n-------------------------\n', [Name]),
     format('Job      : ~w\n', [Job]),
-    format('Level    : ~d (~d/100)\n', [Level, Exp]),
-    format('Fishing  : ~d (~d/100)\n', [LevelFish, ExpFish]),
-    format('Farming  : ~d (~d/100)\n', [LevelFarm, ExpFarm]),
-    format('Ranching : ~d (~d/100)\n', [LevelRanch, ExpRanch]),
+    format('Level    : ~d (~d/100 exp)\n', [Level, Exp]),
+    format('Fishing  : ~d (~d/100 exp)\n', [LevelFish, ExpFish]),
+    format('Farming  : ~d (~d/100 exp)\n', [LevelFarm, ExpFarm]),
+    format('Ranching : ~d (~d/100 exp)\n', [LevelRanch, ExpRanch]),
     format('Stamina  : ~d/100\n', [Stamina]),
     format('Gold     : ~d\n', [Gold]).
