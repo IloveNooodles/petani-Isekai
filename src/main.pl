@@ -15,8 +15,9 @@
 */
 
 /* INCLUDES */
-:- include('startGame.pl'). %startGame, start, setStat(X), levelOne, resetStat, status
+:- include('startGame.pl'). %startGame, start, setPlayerName(X), setStat(X), levelOne, resetStat, status
 :- include('map.pl').
+:- include('farming.pl').
 
 /* START GAME */
 lesgo :-

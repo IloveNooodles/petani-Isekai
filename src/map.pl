@@ -18,7 +18,7 @@ kolom(22).
 :- dynamic(digged_coordinate/2). /* koordinat border */
 :- dynamic(water_coordinate/2). /* koordinat border */
 :- dynamic(loc_tile/1).
-:- dynamic(player_name/1). /* ini sementara */
+:- dynamic(playerName/1). /* ini sementara */
 
 /* Spek Map
 border = #
@@ -35,11 +35,12 @@ water = o
 /*
 Ada predikat loc_tile untuk menyatakan situasi lokasi player, seperti:
 home: player masuk home
-quest: playert masuk quest
+quest: player masuk quest
 ranch: player masuk ranch
 market: player masuk market
 digged: player di kebun
 lake_edge: player di pinggir danau
+dirt: player di tanah kosong
 */
 
 /* Map */
@@ -115,17 +116,13 @@ fill_map :-
     % deklarasi loc tile
     asserta(loc_tile(_)).
 
-% Set player name
-setPlayerName(Name) :-
-    asserta(player_name(Name)).
-
 % Debugging loc_check
-print_loc_now :- player_name(Name), loc_tile(quest), !, format('~w bisa mengambil quest!', [Name]), nl.
-print_loc_now :- player_name(Name), loc_tile(market), !, format('~w masuk ke Marketplace!', [Name]), nl.
-print_loc_now :- player_name(Name), loc_tile(home), !, format('~w masuk ke Home!', [Name]), nl.
-print_loc_now :- player_name(Name), loc_tile(ranch), !, format('~w masuk ke Ranch!', [Name]), nl.
-print_loc_now :- player_name(Name), loc_tile(digged), !, format('~w sedang mengecek kebun!', [Name]), nl.
-print_loc_now :- player_name(Name), loc_tile(lake_edge), !, format('~w di pinggir danau!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(quest), !, format('~w bisa mengambil quest!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(market), !, format('~w masuk ke Marketplace!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(home), !, format('~w masuk ke Home!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(ranch), !, format('~w masuk ke Ranch!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(digged), !, format('~w sedang mengecek kebun!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(lake_edge), !, format('~w di pinggir danau!', [Name]), nl.
 
 /* print karakter */
 printChar(X, Y) :- border(X, Y), !, write('#').
@@ -184,7 +181,7 @@ loc_check(X,Y) :-
     digged_coordinate(X,Y),
     !,
     retractall(loc_tile(_)),
-    asserta(loc_tile(market)),
+    asserta(loc_tile(digged)),
     print_loc_now.
     
 % Cek kalo dia di pinggir danau, ada 8 kasus, player di kanan, kiri, atas, bawah, trus di serong kanan atas, dst
@@ -256,10 +253,16 @@ loc_check(X,Y) :-
     asserta(loc_tile(lake_edge)),
     print_loc_now.
 
+loc_check(X,Y) :-
+    dirt(X, Y),
+    !,
+    retractall(loc_tile(_)),
+    asserta(loc_tile(dirt)).
+
 % Buat gerak gerak
 % Buat w
 w :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Ynow is Y - 1,
     border(X,Ynow),
@@ -267,7 +270,7 @@ w :-
     format('~w nabrak pagar :(', [Name]), nl.
 
 w :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Ynow is Y - 1,
     water_coordinate(X,Ynow),
@@ -275,7 +278,7 @@ w :-
     format('~w hampir aja masuk danau, kasian ntar tenggelam, dia gabisa renang.', [Name]), nl.
 
 w :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Ynow is Y - 1,
     retractall(player(_,_)),
@@ -283,7 +286,7 @@ w :-
     !, format('~w bergerak ke utara satu langkah!', [Name]), nl, loc_check(X,Ynow), print_loc_now.
 % Buat a
 a :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Xnow is X-1,
     border(Xnow,Y),
@@ -291,7 +294,7 @@ a :-
     format('~w nabrak pagar :(', [Name]), nl.
 
 a :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Xnow is X-1,
     water_coordinate(Xnow,Y),
@@ -299,7 +302,7 @@ a :-
     format('~w hampir aja masuk danau, kasian ntar tenggelam, dia gabisa renang.', [Name]), nl.
 
 a :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Xnow is X - 1,
     retractall(player(_,_)),
@@ -308,7 +311,7 @@ a :-
 
 % Buat s
 s :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Ynow is Y + 1,
     border(X,Ynow),
@@ -316,7 +319,7 @@ s :-
     format('~w nabrak pagar :(', [Name]), nl.
 
 s :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Ynow is Y + 1,
     water_coordinate(X,Ynow),
@@ -324,7 +327,7 @@ s :-
     format('~w hampir aja masuk danau, kasian ntar tenggelam, dia gabisa renang.', [Name]), nl.
 
 s :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Ynow is Y + 1,
     retractall(player(_,_)),
@@ -333,7 +336,7 @@ s :-
 
 % Buat d
 d :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Xnow is X+1,
     water_coordinate(Xnow,Y),
@@ -341,7 +344,7 @@ d :-
     format('~w hampir aja masuk danau, kasian ntar tenggelam, dia gabisa renang.', [Name]), nl.
 
 d :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Xnow is X+1,
     border(Xnow,Y),
@@ -349,7 +352,7 @@ d :-
     format('~w nabrak pagar :(', [Name]), nl.
 
 d :- 
-    player_name(Name),
+    playerName(Name),
     player(X,Y),
     Xnow is X + 1,
     retractall(player(_,_)),

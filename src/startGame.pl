@@ -1,6 +1,7 @@
 /* TO DO */
 % fix status window: add time and weather, fix exp level up requirement
 
+/* DYNAMICS */
 :- dynamic(job/1).
 :- dynamic(exp/1). /* General */
 :- dynamic(expFish/1).
@@ -61,6 +62,7 @@ start:-
     )),
     % Assert level one stats
     levelOne,
+    fill_map,
     write('Let\'s start farming!\nHint: you can now check your status ;)\n').
 
 /* PLAYER NAME AND BASE STATS */
