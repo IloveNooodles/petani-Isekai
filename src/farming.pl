@@ -3,21 +3,15 @@
 % validate user input when planting
 % ripe system
 
+/* SISTEM EXP FARMING */
+digExp(10).
+plantExp(15).
+harvestExp(50).
+
 /* SISTEM STAMINA FARMING */
 digStamina(10).
 plantStamina(1).
 harvestStamina(5).
-
-minStamina(Smin):-
-    stamina(S),
-    retract(stamina(_)),
-    Snew is S - Smin,
-    asserta(stamina(Snew)).
-
-staminaLessThan(Sminimum):-
-    stamina(S),
-    S < Sminimum,
-    write('Uh-oh, too little stamina to continue. Time to sleep.\n').
 
 /* DIG */
 dig:-
