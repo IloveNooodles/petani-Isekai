@@ -28,9 +28,9 @@ item(cokelat, farming).
 item(cucumber, farming).
 item(tomato, farming).
 item(garlic, farming).
-item(bibitDunia, famring).
+item(bibitDunia, farming).
 item(herb, farming).
-item(fertilizer, famring).
+item(fertilizer, farming).
 
 /* Ranching */
 item(chicken, ranching).
@@ -190,17 +190,17 @@ levelUpItem(ToolsName):-
   item(ToolsName, tools, Level), ! , Newlevel is Level + 1, retractall(item(_,_,_)), asserta(ToolsName, tools, Newlevel).
 
 use(ItemName):-
-  item(ItemName, Category), Category = consumable, !, efek
+  item(ItemName, Category), Category = consumable, !, efek.
 
 use(ItemName):-
-  item(ItemName, Category), Category = farming, !, efek
+  item(ItemName, Category), Category = farming, !, efek.
 
 use(ItemName):-
-  item(ItemName, Category), Category = ranching, !, efek
+  item(ItemName, Category), Category = ranching, !, efek.
 
 use(ItemName):-
-  item(ItemName, Category), Category = fishing, !, efek
+  item(ItemName, Category), Category = fishing, !, efek.
 
 use(ItemName):-
-  item(ItemName, Category), Category = tools, !, efek
+  item(ItemName, Category), Category = tools, !, efek.
 

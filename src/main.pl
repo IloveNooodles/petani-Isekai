@@ -17,6 +17,7 @@
 /* INCLUDES */
 :- include('startGame.pl'). %startGame, start, setPlayerName(X), setStat(X), levelOne, resetStat, status
 :- include('map.pl').
+:- include('items.pl').
 :- include('farming.pl').
 
 /* START GAME */

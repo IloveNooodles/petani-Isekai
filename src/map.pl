@@ -16,6 +16,8 @@ kolom(22).
 :- dynamic(quest_coordinate/2). /* koordinat border */
 :- dynamic(dirt/2). /* koordinat border */
 :- dynamic(digged_coordinate/2). /* koordinat border */
+:- dynamic(ripe_coordinate/3).
+:- dynamic(planted_coordinate/3). /* koordinat border */
 :- dynamic(water_coordinate/2). /* koordinat border */
 :- dynamic(loc_tile/1).
 :- dynamic(playerName/1). /* ini sementara */
@@ -39,6 +41,8 @@ quest: player masuk quest
 ranch: player masuk ranch
 market: player masuk market
 digged: player di kebun
+corn: player di lahan yang sudah ditanami corn
+ripe_corn: player di tanaman corn yang sudah matang
 lake_edge: player di pinggir danau
 dirt: player di tanah kosong
 */
@@ -54,7 +58,9 @@ fill_map :-
     retractall(quest_coordinate(_,_)),
     retractall(dirt(_,_)),
     retractall(digged_coordinate(_,_)),
-    retractall(water_coordinate(_,_)),
+    retractall(planted_coordinate(_,_)),
+    retractall(ripe_coordinate(_,_,_)),
+    retractall(water_coordinate(_,_,_)),
     /* buat map */
     % Border map
     asserta(border(1,_)),
@@ -114,7 +120,7 @@ fill_map :-
     % isi dengan dirt
     asserta(dirt(_,_)),
     % deklarasi loc tile
-    asserta(loc_tile(_)).
+    asserta(loc_tile(dirt)).
 
 % Debugging loc_check
 print_loc_now :- playerName(Name), loc_tile(quest), !, format('~w bisa mengambil quest!', [Name]), nl.
@@ -131,6 +137,17 @@ printChar(X, Y) :- market_coordinate(X, Y), !, write('M').
 printChar(X, Y) :- home_coordinate(X, Y), !, write('H').
 printChar(X, Y) :- ranch_coordinate(X, Y), !, write('R').
 printChar(X, Y) :- quest_coordinate(X, Y), !, write('Q').
+printChar(X, Y) :- 
+    ripe_coordinate(X, Y, Seed),
+    !, 
+    sub_atom(Seed, 0, 1, _, SeedName),
+    lower_upper(SeedName,SeedUp),
+    write(SeedUp).
+printChar(X, Y) :- 
+    planted_coordinate(X, Y, Seed),
+    !, 
+    sub_atom(Seed, 0, 1, _, SeedName),
+    write(SeedName).
 printChar(X, Y) :- digged_coordinate(X, Y), !, write('=').
 printChar(X, Y) :- water_coordinate(X, Y), !, write('o').
 printChar(X, Y) :- dirt(X, Y), !, write('-').

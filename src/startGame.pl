@@ -128,9 +128,9 @@ status:-
     % Print
     format('~w\'s stats\n-------------------------\n', [Name]),
     format('Job      : ~w\n', [Job]),
-    format('Level    : ~d (~d/100)\n', [Level, Exp]),
-    format('Fishing  : ~d (~d/100)\n', [LevelFish, ExpFish]),
-    format('Farming  : ~d (~d/100)\n', [LevelFarm, ExpFarm]),
-    format('Ranching : ~d (~d/100)\n', [LevelRanch, ExpRanch]),
+    format('Level    : ~d (~d/100 exp)\n', [Level, Exp]),
+    format('Fishing  : ~d (~d/100 exp)\n', [LevelFish, ExpFish]),
+    format('Farming  : ~d (~d/100 exp)\n', [LevelFarm, ExpFarm]),
+    format('Ranching : ~d (~d/100 exp)\n', [LevelRanch, ExpRanch]),
     format('Stamina  : ~d/100\n', [Stamina]),
     format('Gold     : ~d\n', [Gold]).
