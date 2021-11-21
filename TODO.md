@@ -27,3 +27,5 @@ Changelog:
 - Add startGame, start, baseStats, ResetStats, Status (Feli)
 - Item WIP (Gare)
 - Map dan exploration mechanism, tapi kurang manggil menu market, home, dll (Adit)
+- Add setPlayerName and fill_map to start. (Feli)
+- Add farming and farming-related functions (Feli)
