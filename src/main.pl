@@ -16,8 +16,10 @@
 
 /* INCLUDES */
 :- include('startGame.pl'). %startGame, start, setPlayerName(X), setStat(X), levelOne, resetStat, status
+:- include('level.pl').
 :- include('map.pl').
 :- include('items.pl').
+:- include('inventory.pl').
 :- include('farming.pl').
 
 /* SISTEM STAMINA */
@@ -38,31 +40,35 @@ staminaLessThan(Sminimum):-
     write('Uh-oh, too little stamina to continue. Time to sleep.\n').
 
 /* SISTEM EXP */
-
+% newLevel(X) ada di level.pl
 
 earnExp(ExpPlus):-
-    /* Menambah exp player sebanyak ExpPlus */
+    /* Menambah exp player sebanyak ExpPlus 
+    dan naik level bila exp cukup */
+    level(Level),
     exp(Exp),
-    retractall(exp(_)),
     ExpNew is Exp + ExpPlus,
-    asserta(exp(ExpNew)).
+    newLevel(ExpNew),
+    % Tulis pesan level up
+    levelUpMessage(Level).
 
 earnExpFish(ExpPlus):-
-    /* Menambah exp player sebanyak ExpPlus */
+    /* Menambah exp fish player sebanyak ExpPlus */
+    levelFish(Level),
     expFish(Exp),
     retractall(expFish(_)),
     ExpNew is Exp + ExpPlus,
     asserta(expFish(ExpNew)).
 
 earnExpFarm(ExpPlus):-
-    /* Menambah exp player sebanyak ExpPlus */
+    /* Menambah exp farm player sebanyak ExpPlus */
     expFarm(Exp),
     retractall(expFarm(_)),
     ExpNew is Exp + ExpPlus,
     asserta(expFarm(ExpNew)).
 
 earnExpRanch(ExpPlus):-
-    /* Menambah exp player sebanyak ExpPlus */
+    /* Menambah exp ranch player sebanyak ExpPlus */
     expRanch(Exp),
     retractall(expRanch(_)),
     ExpNew is Exp + ExpPlus,

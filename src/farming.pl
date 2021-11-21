@@ -15,13 +15,19 @@ harvestStamina(5).
 
 /* DIG */
 dig:-
+    /* Cek prekondisi */
+    % loc_tile == dirt
     player(X, Y),
     loc_tile(dirt),
+    % stamina >= digStamina
+    digStamina(Smin),
+    \+(staminaLessThan(Smin)),
     digTile(X, Y),
     retract(loc_tile(_)),
     asserta(loc_tile(digged)),
-    digStamina(Smin),
-    \+(staminaLessThan(Smin)),
+    digExp(Exp),
+    earnExp(Exp),
+    earnExpFarm(Exp),
     minStamina(Smin),
     write('You digged the tile.\n').
 
@@ -58,3 +64,5 @@ plantTile(X, Y, Seed):-
 
 ripenTile(X, Y, Seed):-
     asserta(ripe_coordinate(X, Y, Seed)).
+
+/* HARVEST */

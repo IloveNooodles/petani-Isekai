@@ -3,7 +3,6 @@ Kapasitas maksnya 100
 Dia nyimpen barang dan equipments tidak terpakai yang didapatkan oleh pemain
 Buat predikat inventory([], 100). [] menyatakan list kosong di awal, 100 menyatakan kapasitas total
 */
-:- include('items.pl').
 
 :- dynamic(inventory/2).
 :- dynamic(inventoryOneItem/1).
