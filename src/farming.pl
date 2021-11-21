@@ -62,7 +62,11 @@ notDiggedTile:-
 plantTile(X, Y, Seed):-
     asserta(planted_coordinate(X, Y, Seed)).
 
+/* RIPEN */
 ripenTile(X, Y, Seed):-
     asserta(ripe_coordinate(X, Y, Seed)).
 
 /* HARVEST */
+harvest:- 
+    loc_tile(ripe),
+    write('You harvested.').

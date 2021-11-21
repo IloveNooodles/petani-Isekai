@@ -1,14 +1,16 @@
 Feli
 
-1. Pemain
-2. Exploration
-3. Farming
+1. Pemain (done kayanya)
+2. Farming (tinggal harvest)
+3. Stamina (done kayanya)
+4. Exp dan Level (done kayanya)
 
 Adit
 
 1. Peta (done kayanya)
-2. Inventory (done kayanya)
-3. MANTAPANJING
+2. Exploration (done kayanya)
+3. Inventory (done kayanya)
+4. MANTAPANJING
 
 Afan
 
