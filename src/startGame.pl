@@ -3,14 +3,10 @@
 
 /* DYNAMICS */
 :- dynamic(job/1).
-:- dynamic(exp/1). /* General */
-:- dynamic(expFish/1).
-:- dynamic(expFarm/1).
-:- dynamic(expRanch/1).
-:- dynamic(level/1).
-:- dynamic(levelFish/1).
-:- dynamic(levelFarm/1).
-:- dynamic(levelRanch/1).
+/* exp(type: [general, fish, farm, ranch], value) */
+:- dynamic(exp/2). 
+/* level(type: [general, fish, farm, ranch], value) */
+:- dynamic(level/2).
 :- dynamic(stamina/1).
 :- dynamic(gold/1).
 :- dynamic(playerName/1).
@@ -72,42 +68,36 @@ setPlayerName(Name) :-
 
 setStat(fisherman):-
     asserta(job(fisherman)),
-    asserta(expFish(20)),
-    asserta(expFarm(0)),
-    asserta(expRanch(0)).
+    asserta(exp(fish, 20)),
+    asserta(exp(farm, 0)),
+    asserta(exp(ranch, 0)).
 
 setStat(farmer):-
     asserta(job(farmer)),
-    asserta(expFish(0)),
-    asserta(expFarm(20)),
-    asserta(expRanch(0)).
+    asserta(exp(fish, 0)),
+    asserta(exp(farm, 20)),
+    asserta(exp(ranch, 0)).
 
 setStat(rancher):-
     asserta(job(rancher)),
-    asserta(expFish(0)),
-    asserta(expFarm(0)),
-    asserta(expRanch(20)).
+    asserta(exp(fish, 0)),
+    asserta(exp(farm, 0)),
+    asserta(exp(ranch, 20)).
 
 levelOne:-
-    asserta(exp(0)),
-    asserta(level(1)),
-    asserta(levelFish(1)),
-    asserta(levelFarm(1)),
-    asserta(levelRanch(1)),
+    asserta(exp(general, 0)),
+    asserta(level(general, 1)),
+    asserta(level(fish, 1)),
+    asserta(level(farm, 1)),
+    asserta(level(ranch, 1)),
     asserta(stamina(100)),
     asserta(gold(500)).
 
 /* RESET STATS */
 resetStat:-
     retractall(job(_)),
-    retractall(exp(_)),
-    retractall(expFish(_)),
-    retractall(expFarm(_)),
-    retractall(expRanch(_)),
-    retractall(level(_)),
-    retractall(levelFish(_)),
-    retractall(levelFarm(_)),
-    retractall(levelRanch(_)),
+    retractall(exp(_,_)),
+    retractall(level(_,_)),
     retractall(stamina(_)),
     retractall(gold(_)).
 
@@ -115,16 +105,16 @@ resetStat:-
 status:-
     playerName(Name),
     job(Job),
-    level(Level),
+    level(general, Level),
     Next is Level+1,
-    naikLevel(Next, NextExp),
-    levelFish(LevelFish),
-    expFish(ExpFish),
-    levelFarm(LevelFarm),
-    expFarm(ExpFarm),
-    levelRanch(LevelRanch),
-    expRanch(ExpRanch),
-    exp(Exp),
+    naikLevel(Next, NextExp, general),
+    level(fish, LevelFish),
+    exp(fish, ExpFish),
+    level(farm, LevelFarm),
+    exp(farm, ExpFarm),
+    level(ranch, LevelRanch),
+    exp(ranch, ExpRanch),
+    exp(general, Exp),
     stamina(Stamina),
     gold(Gold),
     % Print
@@ -135,4 +125,5 @@ status:-
     format('Farming  : ~d (~d/100 exp)\n', [LevelFarm, ExpFarm]),
     format('Ranching : ~d (~d/100 exp)\n', [LevelRanch, ExpRanch]),
     format('Stamina  : ~d/100\n', [Stamina]),
-    format('Gold     : ~d\n', [Gold]).
+    format('Gold     : ~d\n', [Gold]),
+    !.

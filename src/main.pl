@@ -42,37 +42,15 @@ staminaLessThan(Sminimum):-
 /* SISTEM EXP */
 % newLevel(X) ada di level.pl
 
-earnExp(ExpPlus):-
+earnExp(Type, ExpPlus):-
     /* Menambah exp player sebanyak ExpPlus 
     dan naik level bila exp cukup */
-    level(Level),
-    exp(Exp),
+    level(Type, Level),
+    exp(Type, Exp),
     ExpNew is Exp + ExpPlus,
-    newLevel(ExpNew),
+    newLevel(Type, ExpNew),
     % Tulis pesan level up
-    levelUpMessage(Level).
-
-earnExpFish(ExpPlus):-
-    /* Menambah exp fish player sebanyak ExpPlus */
-    levelFish(Level),
-    expFish(Exp),
-    retractall(expFish(_)),
-    ExpNew is Exp + ExpPlus,
-    asserta(expFish(ExpNew)).
-
-earnExpFarm(ExpPlus):-
-    /* Menambah exp farm player sebanyak ExpPlus */
-    expFarm(Exp),
-    retractall(expFarm(_)),
-    ExpNew is Exp + ExpPlus,
-    asserta(expFarm(ExpNew)).
-
-earnExpRanch(ExpPlus):-
-    /* Menambah exp ranch player sebanyak ExpPlus */
-    expRanch(Exp),
-    retractall(expRanch(_)),
-    ExpNew is Exp + ExpPlus,
-    asserta(expRanch(ExpNew)).
+    levelUpMessage(Type, Level).
 
 /* START GAME */
 lesgo :-

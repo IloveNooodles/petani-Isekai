@@ -26,8 +26,8 @@ dig:-
     retract(loc_tile(_)),
     asserta(loc_tile(digged)),
     digExp(Exp),
-    earnExp(Exp),
-    earnExpFarm(Exp),
+    earnExp(farm, Exp),
+    earnExp(general, Exp),
     minStamina(Smin),
     write('You digged the tile.\n').
 
