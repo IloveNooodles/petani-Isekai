@@ -187,7 +187,7 @@ itemEffect(cowFeed, exp, 20).
 itemEffect(sheepFeed, exp, 20).
 
 levelUpItem(ToolsName):-
-  item(ToolsName, tools, Level), ! , Newlevel is Level + 1, retractall(item(_,_,_)), asserta(ToolsName, tools, Newlevel).
+  item(ToolsName, tools, Level), ! , Newlevel is Level + 1, retractall(item(_,_,_)), asserta(item(ToolsName, tools, Newlevel)).
 
 use(ItemName):-
   item(ItemName, Category), Category = consumable, !, efek.
