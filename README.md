@@ -12,13 +12,17 @@ Tugas Besar Logika Komputasi IF2121. Pada tugas besar ini kita diminta untuk mem
 | Felicia Sutandijo              | 13520050 |
 
 ## Spesifikasi
-- GNU Prolog (Windows GUI program or Linux CLI program)
+
+- GNU Prolog (Windows GUI program or UNIX CLI program)
 
 ## Cara Menjalankan Program
+
 1. Install gprolog
-1. Jalankan program dengan command:  
-`gprolog --consult-file src/main.pl`
-1. Untuk memulai program, masukkan command `startGame.` di dalam gprolog.
+2. For windows go to `http://www.gprolog.org/`
+3. if you are in UNIX based system install it with your package manager (ex: `sudo apt install gprolog` for linux and `brew install gnu-prolog` for mac users)
+4. Run program with: `gprolog --consult-file src/main.pl`
+5. to start the game type startGame. in the prolog command line
 
 ## Spesifikasi Tugas Besar
+
 [Tugas Besar Logika Komputasional – IF2121](https://docs.google.com/document/d/15iaOJ1DnSfNMVwf6HU0i5PdTpW8opQNcFwil6gcQzq4/edit)

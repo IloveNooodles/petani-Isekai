@@ -10,7 +10,7 @@ item(susuSegar, consumable).
 item(milkshake, consumable).
 item(crisbar, consumable).
 item(steak, consumable).
-
+item(potion, consumable).
 
 /* Farming */
 item(padi, farming).
@@ -91,6 +91,7 @@ itemPrice(susuSegar, 150).
 itemPrice(milkshake, 300).
 itemPrice(crisbar, 500).
 itemPrice(steak, 1000).
+itemPrice(potion, 2000).
 itemPrice(padi, 50).
 itemPrice(benihSurga, 5000).
 itemPrice(bibitMisterius, 0).
@@ -164,6 +165,8 @@ itemEffect(susuSegar, stamina, 30).
 itemEffect(milkshake, stamina, 50).
 itemEffect(crisbar, stamina, 70).
 itemEffect(steak, stamina, 100).
+itemEffect(potion, exp, 1000).
+
 
 /* farming + shovel + wateringcan*/
 itemEffect(padi, exp, 2).
