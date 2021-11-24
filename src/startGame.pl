@@ -8,6 +8,7 @@
 /* level(type: [general, fish, farm, ranch], value) */
 :- dynamic(level/2).
 :- dynamic(stamina/1).
+:- dynamic(maxStamina/1).
 :- dynamic(gold/1).
 :- dynamic(playerName/1).
 
@@ -91,6 +92,7 @@ levelOne:-
     asserta(level(farm, 1)),
     asserta(level(ranch, 1)),
     asserta(stamina(100)),
+    asserta(maxStamina(100)),
     asserta(gold(500)).
 
 /* RESET STATS */
@@ -99,6 +101,7 @@ resetStat:-
     retractall(exp(_,_)),
     retractall(level(_,_)),
     retractall(stamina(_)),
+    retractall(maxStamina(_)),
     retractall(gold(_)).
 
 /* STATUS */
@@ -106,24 +109,27 @@ status:-
     playerName(Name),
     job(Job),
     level(general, Level),
-    Next is Level+1,
-    naikLevel(Next, NextExp, general),
+    naikLevel(Level, NextExp, general),
     level(fish, LevelFish),
     exp(fish, ExpFish),
+    naikLevel(LevelFish, NextExpFish, fish),
     level(farm, LevelFarm),
     exp(farm, ExpFarm),
+    naikLevel(LevelFarm, NextExpFarm, farm),
     level(ranch, LevelRanch),
     exp(ranch, ExpRanch),
+    naikLevel(LevelRanch, NextExpRanch, fish),
     exp(general, Exp),
     stamina(Stamina),
+    maxStamina(MaxStamina),
     gold(Gold),
     % Print
     format('~w\'s stats\n-------------------------\n', [Name]),
     format('Job      : ~w\n', [Job]),
     format('Level    : ~d (~d/~d exp)\n', [Level, Exp, NextExp]),
-    format('Fishing  : ~d (~d/100 exp)\n', [LevelFish, ExpFish]),
-    format('Farming  : ~d (~d/100 exp)\n', [LevelFarm, ExpFarm]),
-    format('Ranching : ~d (~d/100 exp)\n', [LevelRanch, ExpRanch]),
-    format('Stamina  : ~d/100\n', [Stamina]),
+    format('Fishing  : ~d (~d/~d exp)\n', [LevelFish, ExpFish, NextExpFish]),
+    format('Farming  : ~d (~d/~d exp)\n', [LevelFarm, ExpFarm, NextExpFarm]),
+    format('Ranching : ~d (~d/~d exp)\n', [LevelRanch, ExpRanch, NextExpRanch]),
+    format('Stamina  : ~d/~d\n', [Stamina, MaxStamina]),
     format('Gold     : ~d\n', [Gold]),
     !.

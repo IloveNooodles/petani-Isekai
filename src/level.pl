@@ -1,51 +1,51 @@
 /* CONFIG */
 % General
-naikLevel(2, 100, general).
-naikLevel(3, 150, general).
-naikLevel(4, 200, general).
-naikLevel(5, 250, general).
-naikLevel(6, 300, general).
-naikLevel(7, 350, general).
-naikLevel(8, 400, general).
-naikLevel(9, 450, general).
-naikLevel(10, 500, general).
-naikLevel(11, 0, general).
+naikLevel(1, 100, general).
+naikLevel(2, 150, general).
+naikLevel(3, 200, general).
+naikLevel(4, 250, general).
+naikLevel(5, 300, general).
+naikLevel(6, 350, general).
+naikLevel(7, 400, general).
+naikLevel(8, 450, general).
+naikLevel(9, 500, general).
+naikLevel(10, 0, general).
 
 % Fish
-naikLevel(2, 100, fish).
-naikLevel(3, 150, fish).
-naikLevel(4, 200, fish).
-naikLevel(5, 250, fish).
-naikLevel(6, 300, fish).
-naikLevel(7, 350, fish).
-naikLevel(8, 400, fish).
-naikLevel(9, 450, fish).
-naikLevel(10, 500, fish).
-naikLevel(11, 0, fish).
+naikLevel(1, 100, fish).
+naikLevel(2, 150, fish).
+naikLevel(3, 200, fish).
+naikLevel(4, 250, fish).
+naikLevel(5, 300, fish).
+naikLevel(6, 350, fish).
+naikLevel(7, 400, fish).
+naikLevel(8, 450, fish).
+naikLevel(9, 500, fish).
+naikLevel(10, 0, fish).
 
 % Farm
-naikLevel(2, 100, farm).
-naikLevel(3, 150, farm).
-naikLevel(4, 200, farm).
-naikLevel(5, 250, farm).
-naikLevel(6, 300, farm).
-naikLevel(7, 350, farm).
-naikLevel(8, 400, farm).
-naikLevel(9, 450, farm).
-naikLevel(10, 500, farm).
-naikLevel(11, 0, farm).
+naikLevel(1, 100, farm).
+naikLevel(2, 150, farm).
+naikLevel(3, 200, farm).
+naikLevel(4, 250, farm).
+naikLevel(5, 300, farm).
+naikLevel(6, 350, farm).
+naikLevel(7, 400, farm).
+naikLevel(8, 450, farm).
+naikLevel(9, 500, farm).
+naikLevel(10, 0, farm).
 
 % Ranch
-naikLevel(2, 100, ranch).
-naikLevel(3, 150, ranch).
-naikLevel(4, 200, ranch).
-naikLevel(5, 250, ranch).
-naikLevel(6, 300, ranch).
-naikLevel(7, 350, ranch).
-naikLevel(8, 400, ranch).
-naikLevel(9, 450, ranch).
-naikLevel(10, 500, ranch).
-naikLevel(11, 0, ranch).
+naikLevel(1, 100, ranch).
+naikLevel(2, 150, ranch).
+naikLevel(3, 200, ranch).
+naikLevel(4, 250, ranch).
+naikLevel(5, 300, ranch).
+naikLevel(6, 350, ranch).
+naikLevel(7, 400, ranch).
+naikLevel(8, 450, ranch).
+naikLevel(9, 500, ranch).
+naikLevel(10, 0, ranch).
 
 maxLevel(general, 10).
 maxLevel(fish, 10).
@@ -64,8 +64,7 @@ newLevel(Type,_):-
 /* EARN EXP */
 newLevel(Type, ExpCurrent):-
     level(Type, Level),
-    Next is Level+1,
-    naikLevel(Next, NextExp, Type),
+    naikLevel(Level, NextExp, Type),
     ExpCurrent < NextExp,
     retractall(exp(Type, _)),
     asserta(exp(Type, ExpCurrent)),
@@ -75,20 +74,21 @@ newLevel(Type, ExpCurrent):-
 newLevel(Type, ExpCurrent):-
     level(Type, Level),
     Next is Level+1,
-    naikLevel(Next, NextExp, Type),
+    naikLevel(Level, NextExp, Type),
     ExpCurrent >= NextExp,
     Exp is ExpCurrent - NextExp,
     retractall(level(Type, _)),
     asserta(level(Type, Next)),
-    ((maxedOut,
+    ((maxedOut(Type),
     retractall(exp(Type, _)),
     asserta(exp(Type, 0))
     );
-    (\+maxedOut,
+    (\+maxedOut(Type),
     retractall(exp(Type, _)),
     asserta(exp(Type, Exp)),
     newLevel(Type, Exp)
     )),
+    staminaUp(Type),
     !.
 
 /* LEVEL UP MESSAGE */
@@ -101,4 +101,15 @@ levelUpMessage(Type, Level):-
     level(Type, New),
     Level < New,
     write('Level Up!!!\n'),
+    !.
+
+/* STAMINA UP */
+staminaUp(general):- 
+    maxStamina(CurrStamina),
+    New is CurrStamina + 50,
+    retractall(maxStamina(_)),
+    asserta(maxStamina(New)),
+    !.
+
+staminaUp(_):-
     !.
