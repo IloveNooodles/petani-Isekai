@@ -22,6 +22,9 @@
 :- include('inventory.pl').
 :- include('farming.pl'). % dig, plant, harvest, checkRipe(X,Y), and other functions.
 
+/* SPECIALS */
+:- include('kappa.pl').
+
 /* SISTEM STAMINA */
 minStamina(Smin):-
     /* Mengurangi stamina player sebanyak Smin */
