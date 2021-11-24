@@ -36,3 +36,4 @@ Changelog:
 - Add setPlayerName and fill_map to start. (Feli)
 - Add farming and farming-related functions (Feli)
 - Add max stamina, random event gold (Feli)
+- Add kappa (Feli)
