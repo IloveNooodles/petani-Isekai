@@ -1,14 +1,14 @@
 /* CONFIG */
 % General
-naikLevel(1, 100, general).
-naikLevel(2, 150, general).
-naikLevel(3, 200, general).
-naikLevel(4, 250, general).
-naikLevel(5, 300, general).
-naikLevel(6, 350, general).
-naikLevel(7, 400, general).
-naikLevel(8, 450, general).
-naikLevel(9, 500, general).
+naikLevel(1, 300, general).
+naikLevel(2, 450, general).
+naikLevel(3, 600, general).
+naikLevel(4, 750, general).
+naikLevel(5, 900, general).
+naikLevel(6, 1050, general).
+naikLevel(7, 1200, general).
+naikLevel(8, 1350, general).
+naikLevel(9, 1500, general).
 naikLevel(10, 0, general).
 
 % Fish

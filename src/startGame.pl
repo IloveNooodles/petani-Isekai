@@ -1,12 +1,6 @@
 /* TO DO */
 
 /* DYNAMICS */
-:- dynamic(day/1).
-:- dynamic(time/1).
-:- dynamic(weather/1).
-:- dynamic(season/1).
-:- dynamic(endGame/1).
-:- dynamic(gameCompleted/1).
 :- dynamic(job/1).
 
 /* exp(type: [general, fish, farm, ranch], value) */
@@ -41,7 +35,10 @@ startGame:-
 start:-
     % Clear all stats
     resetStat,
+    resetTime,
+    retractall(endGame(_)),
     asserta(endGame(false)),
+    startTime,
     startDay,
     startSeason,
     startWeather,
@@ -118,6 +115,10 @@ resetStat:-
 /* STATUS */
 status:-
     playerName(Name),
+    time(Time),
+    day(Day),
+    weather(Weather),
+    season(Season),
     job(Job),
     level(general, Level),
     naikLevel(Level, NextExp, general),
@@ -135,6 +136,7 @@ status:-
     maxStamina(MaxStamina),
     gold(Gold),
     % Print
+    format('🕑 ~d:00   📆 ~d   ⛅️ ~w   🌲 ~w\n\n', [Time, Day, Weather, Season]),
     format('~w\'s stats\n-------------------------\n', [Name]),
     format('Job      : ~w\n', [Job]),
     format('Level    : ~d (~d/~d exp)\n', [Level, Exp, NextExp]),
@@ -145,54 +147,3 @@ status:-
     format('Gold     : ~d\n', [Gold]),
     !.
   
-/* Time and Season */
-startDay:-
-  asserta(day(1)).
-
-/* dicek kalo lebih dari 365 end game nya jadi true */
-/* harus di cek kalo day nya udah masuk season baru sm randomize weather */
-
-nextDay:-
-  day(X),
-  X >= 365,
-  retractall(endGame(_)),
-  asserta(endGame(true)).
-
-nextDay:-
-  day(X),
-  X < 365,
-  Y is X + 1,
-  retractall(day(_)),
-  asserta(day(Y)).
-
-setDay(Day):-
-  retractall(day(_)),
-  asserta(day(Day)).
-
-/* anggap mulai 1 Maret beres 28 Februari, biar gampang musimnya */
-/* tergantung mau mulai dari musim kaya gimana */
-/* ini gw masukinnya dari belahan utara ya berarti 4 season */
-/* 1 Maret - 31 Mei - Semi */
-/* 1 Juni - 31 Agustus - Panas */
-/* 1 September - 30 November - Gugur */
-/* 1 Desember - 28 Februari - Dingin */
-
-
-startSeason:-
-  asserta(season(semi)).
-
-%setSeason(Season):-
-
-/* tergantung mau mulai dari cuaca kaya gimana */
-/* cuaca harus bisa dirandom belom kepikiran */
-/* Buat musim semi: panas, ujan jarang bgt, angin*/
-/* Buat musim panas: panas, ujan, angin */
-/* Buat musim Gugur: panas, ujan, angin, daun jatuh2 gatau namanya apa */
-/* Buat musim Dingin: snow, cold, freeze */
-
-startWeather:-
-  asserta(weather(panas)).
-
-%setWeather()
-
-/* bisa aja tambahin status effect kaya kalo dingin gimana kalo panas gimana */

@@ -29,7 +29,8 @@ dig:-
     earnExp(farm, Exp),
     earnExp(general, Exp),
     minStamina(Smin),
-    write('You digged the tile.\n').
+    write('You digged the tile.\n'),
+    randomGold(1,20,10).
 
 digTile(X, Y):-
     asserta(digged_coordinate(X, Y)).

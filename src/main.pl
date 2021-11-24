@@ -2,21 +2,20 @@
 :- dynamic(state/1).
 /* FROM STARTGAME.PL
 :- dynamic(job/1).
-:- dynamic(exp/1).
-:- dynamic(expFish/1).
-:- dynamic(expFarm/1).
-:- dynamic(expRanch/1).
-:- dynamic(level/1).
-:- dynamic(levelFish/1).
-:- dynamic(levelFarm/1).
-:- dynamic(levelRanch/1).
+   % exp(type: [general, fish, farm, ranch], value) 
+:- dynamic(exp/2). 
+   % level(type: [general, fish, farm, ranch], value)
+:- dynamic(level/2).
 :- dynamic(stamina/1).
+:- dynamic(maxStamina/1).
 :- dynamic(gold/1).
+:- dynamic(playerName/1).
 */
 
 /* INCLUDES */
 :- include('startGame.pl'). % startGame, start, setPlayerName(X), setStat(X), levelOne, resetStat, status
 :- include('help.pl'). % help
+:- include('time.pl').
 :- include('level.pl'). % config facts, maxedOut, newLevel, levelUpMessage
 :- include('map.pl').
 :- include('items.pl').
@@ -24,8 +23,6 @@
 :- include('farming.pl').
 
 /* SISTEM STAMINA */
-% Max stamina = 100
-
 minStamina(Smin):-
     /* Mengurangi stamina player sebanyak Smin */
     stamina(S),
@@ -42,7 +39,6 @@ staminaLessThan(Sminimum):-
 
 /* SISTEM EXP */
 % newLevel(X) ada di level.pl
-
 earnExp(Type, ExpPlus):-
     /* Menambah exp player sebanyak ExpPlus 
     dan naik level bila exp cukup */
@@ -52,6 +48,29 @@ earnExp(Type, ExpPlus):-
     newLevel(Type, ExpNew),
     % Tulis pesan level up
     levelUpMessage(Type, Level).
+
+/* GOLD */
+earnGold(X):- 
+    gold(Current),
+    retractall(gold(_)),
+    New is Current + X,
+    asserta(gold(New)).
+
+/* RANDOM EVENT */
+randomGold(Minimum, Maximum, Chance):-
+    random(0, 100, Result),
+    ((
+        % dapat
+        Result =< Chance,
+        random(Minimum, Maximum, Gold),
+        earnGold(Gold),
+        format('WHOA!! You found ~d gold!', [Gold]),
+        !
+    );(
+        % tidak dapat
+        Result > Chance,
+        !
+    )).    
 
 /* START GAME */
 lesgo :-
