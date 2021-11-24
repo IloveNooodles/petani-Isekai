@@ -16,6 +16,7 @@
 
 /* INCLUDES */
 :- include('startGame.pl'). % startGame, start, setPlayerName(X), setStat(X), levelOne, resetStat, status
+:- include('help.pl'). % help
 :- include('level.pl'). % config facts, maxedOut, newLevel, levelUpMessage
 :- include('map.pl').
 :- include('items.pl').

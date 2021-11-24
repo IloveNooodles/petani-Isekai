@@ -1,5 +1,4 @@
 /* TO DO */
-% fix status window: add time and weather, fix exp level up requirement
 
 /* DYNAMICS */
 :- dynamic(day/1).
@@ -130,7 +129,7 @@ status:-
     naikLevel(LevelFarm, NextExpFarm, farm),
     level(ranch, LevelRanch),
     exp(ranch, ExpRanch),
-    naikLevel(LevelRanch, NextExpRanch, fish),
+    naikLevel(LevelRanch, NextExpRanch, ranch),
     exp(general, Exp),
     stamina(Stamina),
     maxStamina(MaxStamina),
@@ -155,7 +154,7 @@ startDay:-
 
 nextDay:-
   day(X),
-  X => 365,
+  X >= 365,
   retractall(endGame(_)),
   asserta(endGame(true)).
 
@@ -182,7 +181,7 @@ setDay(Day):-
 startSeason:-
   asserta(season(semi)).
 
-setSeason(Season):-
+%setSeason(Season):-
 
 /* tergantung mau mulai dari cuaca kaya gimana */
 /* cuaca harus bisa dirandom belom kepikiran */
@@ -194,6 +193,6 @@ setSeason(Season):-
 startWeather:-
   asserta(weather(panas)).
 
-setWeather()
+%setWeather()
 
 /* bisa aja tambahin status effect kaya kalo dingin gimana kalo panas gimana */

@@ -21,7 +21,7 @@ Tugas Besar Logika Komputasi IF2121. Pada tugas besar ini kita diminta untuk mem
 2. For windows go to `http://www.gprolog.org/`
 3. if you are in UNIX based system install it with your package manager (ex: `sudo apt install gprolog` for linux and `brew install gnu-prolog` for mac users)
 4. Run program with: `gprolog --consult-file src/main.pl`
-5. to start the game type startGame. in the prolog command line
+5. To start the game type `startGame.` in the prolog command line
 
 ## Spesifikasi Tugas Besar
 
