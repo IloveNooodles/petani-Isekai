@@ -1,7 +1,7 @@
 Feli
 
 1. Pemain (done kayanya)
-2. Farming (tinggal harvest)
+2. Farming (kurang lebih done, tinggal mindahin checkRipe ke tiap nambah day)
 3. Stamina (done kayanya)
 4. Exp dan Level (done kayanya)
 
@@ -23,6 +23,7 @@ Gare
 1. Items (WIP)
 2. House
 3. Endgame
+4. Season and time
 
 Changelog:
 
@@ -34,4 +35,4 @@ Changelog:
 - Map dan exploration mechanism, tapi kurang manggil menu market, home, dll (Adit)
 - Add setPlayerName and fill_map to start. (Feli)
 - Add farming and farming-related functions (Feli)
-- Add max stamina (Feli)
+- Add max stamina, random event gold (Feli)

@@ -163,3 +163,6 @@ throwItem :-
     )),
     !.
 
+isXinInven(X):-
+    inventoryOneItem(Inven),
+    isXinList(X, Inven).

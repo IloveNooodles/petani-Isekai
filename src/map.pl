@@ -17,7 +17,7 @@ kolom(22).
 :- dynamic(dirt/2). /* koordinat border */
 :- dynamic(digged_coordinate/2). /* koordinat border */
 :- dynamic(ripe_coordinate/3).
-:- dynamic(planted_coordinate/3). /* koordinat border */
+:- dynamic(planted_coordinate/4). /* koordinat border */
 :- dynamic(water_coordinate/2). /* koordinat border */
 :- dynamic(loc_tile/1).
 :- dynamic(playerName/1). /* ini sementara */
@@ -128,6 +128,8 @@ print_loc_now :- playerName(Name), loc_tile(market), !, format('~w masuk ke Mark
 print_loc_now :- playerName(Name), loc_tile(home), !, format('~w masuk ke Home!', [Name]), nl.
 print_loc_now :- playerName(Name), loc_tile(ranch), !, format('~w masuk ke Ranch!', [Name]), nl.
 print_loc_now :- playerName(Name), loc_tile(digged), !, format('~w sedang mengecek kebun!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(planted), !, format('~w sedang mengecek kebun!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(ripe), !, format('~w sedang mengecek kebun! Wah kayanya udah mateng!', [Name]), nl.
 print_loc_now :- playerName(Name), loc_tile(lake_edge), !, format('~w di pinggir danau!', [Name]), nl.
 
 /* print karakter */
@@ -138,16 +140,16 @@ printChar(X, Y) :- home_coordinate(X, Y), !, write('H').
 printChar(X, Y) :- ranch_coordinate(X, Y), !, write('R').
 printChar(X, Y) :- quest_coordinate(X, Y), !, write('Q').
 printChar(X, Y) :- 
+    planted_coordinate(X, Y, Seed, _),
+    !, 
+    sub_atom(Seed, 0, 1, _, SeedName),
+    write(SeedName).
+printChar(X, Y) :- 
     ripe_coordinate(X, Y, Seed),
     !, 
     sub_atom(Seed, 0, 1, _, SeedName),
     lower_upper(SeedName,SeedUp),
     write(SeedUp).
-printChar(X, Y) :- 
-    planted_coordinate(X, Y, Seed),
-    !, 
-    sub_atom(Seed, 0, 1, _, SeedName),
-    write(SeedName).
 printChar(X, Y) :- digged_coordinate(X, Y), !, write('=').
 printChar(X, Y) :- water_coordinate(X, Y), !, write('o').
 printChar(X, Y) :- dirt(X, Y), !, write('-').
@@ -156,6 +158,7 @@ printChar(X, Y) :- dirt(X, Y), !, write('-').
 map :-
     forall(between(1,22,Y),(
         forall(between(1,22,X), (
+            checkRipe(X,Y),
             printChar(X,Y)
         )),
         nl
@@ -191,6 +194,22 @@ loc_check(X,Y) :-
     !,
     retractall(loc_tile(_)),
     asserta(loc_tile(quest)),
+    print_loc_now.
+
+% cek di ripe tile
+loc_check(X,Y) :- 
+    ripe_coordinate(X,Y,_),
+    !,
+    retractall(loc_tile(_)),
+    asserta(loc_tile(ripe)),
+    print_loc_now.
+
+% cek di planted tile
+loc_check(X,Y) :- 
+    planted_coordinate(X,Y,_,_),
+    !,
+    retractall(loc_tile(_)),
+    asserta(loc_tile(planted)),
     print_loc_now.
 
 % cek di digged tile

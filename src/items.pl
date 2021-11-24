@@ -1,5 +1,8 @@
 :- dynamic(item/3).
 
+/* Testing buat farming */
+item(testSeed, farming, 10).
+
 /* Item bakal ada ada 2 arity nama sama tipe */
 
 /* Consumable */

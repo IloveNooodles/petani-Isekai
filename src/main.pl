@@ -20,7 +20,7 @@
 :- include('map.pl').
 :- include('items.pl').
 :- include('inventory.pl').
-:- include('farming.pl').
+:- include('farming.pl'). % dig, plant, harvest, checkRipe(X,Y), and other functions.
 
 /* SISTEM STAMINA */
 minStamina(Smin):-
