@@ -62,6 +62,14 @@ addInven(X) :-
     !,
     retractall(inventory(_,_)),
     asserta(inventory(ListBefore, NewTotal)).
+% addInven lgsg banyak
+% basis
+addInven(_, Num) :-
+    Num =< 0,
+    !,
+    write('Jumlahnya engga valid!').
+addInven(X, Num) :-
+    forall(between(1, Num, _Y), addInven(X)).
 
 % Buat nampilin invent
 showInven([], _) :- !.
