@@ -70,16 +70,16 @@ showInven([H|T], InvenLengkap) :-
     format('>> ~d ~w\n', [Count, H]),
     showInven(T, InvenLengkap).
 
-% Buat nampilin invent farming
-showInvenFarming([], _) :- !.
-showInvenFarming([H|T], InvenLengkap) :-
-    \+ item(H, farming),
+% Buat nampilin invent sesuai tipenya
+showInvenType([], _, _) :- !.
+showInvenType([H|T], InvenLengkap, Tipe) :-
+    \+ item(H, Tipe),
     !,
-    showInven(T, InvenLengkap).
-showInvenFarming([H|T], InvenLengkap) :-
+    showInvenType(T, InvenLengkap, Tipe).
+showInvenType([H|T], InvenLengkap, Tipe) :-
     countXinInven(H, InvenLengkap, Count),
     format('>> ~d ~w\n', [Count, H]),
-    showInven(T, InvenLengkap).
+    showInvenType(T, InvenLengkap, Tipe).
 
 % Update di invenOneItem
 updateInvenOne(Item) :-
@@ -136,12 +136,19 @@ inventory :-
     inventoryOneItem([H1|T1]),
     format('Inventory kamu:  (~d/100)\n', [TotalInven]),
     showInven([H1|T1], List).
-
+% nampilin inven farm
 inventoryFarm :-
     inventory(List, _),
     inventoryOneItem([H1|T1]),
     write('Inventory farming kamu:\n'),
-    showInvenFarming([H1|T1], List).
+    showInvenType([H1|T1], List, farming).
+
+% nampilin inven fish
+inventoryFishing :-
+    inventory(List, _),
+    inventoryOneItem([H1|T1]),
+    write('Inventory fishing kamu:\n'),
+    showInvenType([H1|T1], List, fishing).
 
 throwItem :-
     inventory,
