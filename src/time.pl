@@ -21,9 +21,11 @@ startDay:-
 
 nextDay:-
     day(X),
-    X >= 365,
+    X >= 365, !,
     retractall(endGame(_)),
-    asserta(endGame(true)).
+    asserta(endGame(true)),
+    write('Year have passed...\n').
+
 
 nextDay:-
     day(X),
