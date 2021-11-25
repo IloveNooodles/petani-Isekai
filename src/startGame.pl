@@ -114,8 +114,6 @@ resetStat:-
 
 /* STATUS */
 status:-
-    playerName(Name),
-    time(Time),
     day(Day),
     weather(Weather),
     season(Season),
@@ -136,8 +134,10 @@ status:-
     maxStamina(MaxStamina),
     gold(Gold),
     % Print
-    format('🕑 ~d:00   📆 ~d   ⛅️ ~w   🌲 ~w\n\n', [Time, Day, Weather, Season]),
-    format('~w\'s stats\n-------------------------\n', [Name]),
+    printTime,
+    format('   📆 ~d   ⛅️ ~w   🌲 ~w\n\n', [Day, Weather, Season]),
+    greeting,
+    write('-------------------------\n'),
     format('Job      : ~w\n', [Job]),
     format('Level    : ~d (~d/~d exp)\n', [Level, Exp, NextExp]),
     format('Fishing  : ~d (~d/~d exp)\n', [LevelFish, ExpFish, NextExpFish]),
@@ -146,4 +146,31 @@ status:-
     format('Stamina  : ~d/~d\n', [Stamina, MaxStamina]),
     format('Gold     : ~d\n', [Gold]),
     !.
-  
+
+printTime:-
+    time(H, M),
+    M < 10,
+    format('🕑 ~d:0~d', [H, M]),
+    !.
+
+printTime:-
+    time(H, M),
+    format('🕑 ~d:~d', [H, M]).
+
+greeting:-
+    playerName(Name),
+    time(Hour, _),
+    Hour >= 0, Hour =< 12,
+    format('Good morning, ~w!\n', [Name]).
+
+greeting:-
+    playerName(Name),
+    time(Hour, _),
+    Hour > 12, Hour =< 18,
+    format('Good afternoon, ~w!\n', [Name]).
+
+greeting:-
+    playerName(Name),
+    time(Hour, _),
+    Hour > 18, Hour =< 23,
+    format('Good evening, ~w!\n', [Name]).

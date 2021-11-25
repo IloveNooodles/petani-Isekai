@@ -98,7 +98,7 @@ writeCucumber(10):-
     write('C U C U M B E R . . .'), nl, !.
 
 /* Footnote: Kappa legends
-(src: https://en.wikipedia.org/wiki/Kappa_(folklore))
+(src: https://en.wikipedia.org/wiki/Kappa_(folklore) )
 
 Defeating the kappa
 

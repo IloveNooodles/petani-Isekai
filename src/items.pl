@@ -78,6 +78,17 @@ item(bait, fishing).
 item(goodBait, fishing).
 item(greatestBait, fishing).
 
+/* Seeds */
+ripeTime(padi, 2).
+ripeTime(benihSurga, 10).
+ripeTime(bibitMisterius, 10).
+ripeTime(cocoaSeeds, 5).
+ripeTime(cucumberSeeds, 7).
+ripeTime(tomatoSeeds, 2).
+ripeTime(carrotSeeds, 2).
+ripeTime(coffeeSeeds, 5).
+ripeTime(garlicSeeds, 7).
+
 /* Tools */
 /* Buat bagian tools ini bakal ada nama, tipe, sama level */
 asserta(item(shovel, tools, 1)).

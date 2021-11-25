@@ -1,6 +1,6 @@
 /* DYNAMICS */
 :- dynamic(day/1).
-:- dynamic(time/1).
+:- dynamic(time/2).
 :- dynamic(weather/1).
 :- dynamic(season/1).
 :- dynamic(endGame/1).
@@ -9,11 +9,12 @@
 /* Time and Season */
 resetTime:-
     retractall(day(_)),
-    retractall(time(_)),
+    retractall(time(_,_)),
     retractall(weather(_)),
     retractall(season(_)).
 
 startDay:-
+    retractall(day(_)),
     asserta(day(1)).
 
 /* dicek kalo lebih dari 365 end game nya jadi true */
@@ -29,12 +30,16 @@ nextDay:-
     day(X),
     X < 365,
     Y is X + 1,
-    retractall(day(_)),
-    asserta(day(Y)).
+    setDay(Y).
 
 setDay(Day):-
     retractall(day(_)),
-    asserta(day(Day)).
+    asserta(day(Day)),
+    checkRipe.
+
+setTime(Hour, Minute):-
+    retractall(time(_,_)),
+    asserta(time(Hour, Minute)).
 
 /* anggap mulai 1 Maret beres 28 Februari, biar gampang musimnya */
 /* tergantung mau mulai dari musim kaya gimana */
@@ -64,4 +69,4 @@ startWeather:-
 
 /* bisa aja tambahin status effect kaya kalo dingin gimana kalo panas gimana */
 startTime:-
-    asserta(time(9)).
+    setTime(9,0).

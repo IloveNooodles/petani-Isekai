@@ -66,9 +66,9 @@ plantTile(X, Y, Seed):-
     asserta(planted_coordinate(X, Y, Seed, RipeDay)).
 
 /* RIPEN */
-checkRipe(X, Y):-
-    \+planted_coordinate(X,Y,_,_),
-    !.
+checkRipe:-
+    forall(planted_coordinate(X, Y, _, _),
+        checkRipe(X, Y)).
 
 checkRipe(X, Y):-
     planted_coordinate(X, Y, _, RipeDay),
@@ -83,6 +83,11 @@ checkRipe(X, Y):-
     retract(planted_coordinate(X, Y, Seed, RipeDay)),
     asserta(ripe_coordinate(X, Y, Seed)),
     !.
+
+ripenAll:-
+    forall(planted_coordinate(X, Y, Seed, _),
+        asserta(ripe_coordinate(X, Y, Seed))),
+    retractall(planted_coordinate(_, _, _, _)).
 
 /* HARVEST */
 harvest:- 
