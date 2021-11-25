@@ -105,23 +105,24 @@ updateInvenOne(Item) :-
 %     countXinInven(_Item, List, Count),
 %     Count =:= 0, 
 %     !, write('Kamu ngga punya item itu!!\n').
-% Untuk membuang satu item
-throw(Item, 1) :-
+% Untuk membuang satu item. Amount cuma buat ngeprint berhasil membuang
+throw(Item, 1, Amount) :-
     inventory(List, Cap),
     retractall(inventory(_,_)),
     NewCap is Cap - 1,
     deleteValinList(Item, List, ListOut),
     asserta(inventory(ListOut, NewCap)), !,
+    format('Kamu berhasil membuang ~d ~w!', [Amount, Item]),
     updateInvenOne(Item).
 % Kalo jumlahnya kelebihan
-throw(Item, Count) :-
+throw(Item, Count, _) :-
     inventory(List, _),
     countXinInven(Item, List, Res),
     Count > Res,
     !,
     write('Jumlahnya kelebihan!!\n').
 % Buang item lebih dari satu
-throw(Item, Count) :-
+throw(Item, Count, Amount) :-
     inventory(List, Cap),
     retractall(inventory(_,_)),
     NewCap is Cap - 1,
@@ -129,7 +130,7 @@ throw(Item, Count) :-
     asserta(inventory(ListOut, NewCap)), 
     !,
     NewCount is Count - 1,
-    throw(Item, NewCount).
+    throw(Item, NewCount, Amount).
 
 /* Command buat inventory */
 % Buat nampilin invent
@@ -159,6 +160,12 @@ inventoryFishing :-
     showInvenType([H1|T1], List, fishing).
 
 throwItem :-
+    inventory(_, _Total),
+    _Total = 0,
+    !,
+    write('Inventory Kosong!').
+
+throwItem :-
     inventory,
     inventory(List, _Total),
     write('Item apa yang ingin kamu buang?\n> '),
@@ -172,9 +179,9 @@ throwItem :-
     inventory(List, _Total),
     countXinInven(Item, List, Count),
     Count > 0,
-    format('Kamu punya ~d ~w Berapa yang ingin kamu buang?\n> ', [Count, Item]),
+    format('Kamu punya ~d ~w! Berapa yang ingin kamu buang?\n> ', [Count, Item]),
     read(Amount),
-    throw(Item, Amount)
+    throw(Item, Amount, Amount)
     )),
     !.
 
