@@ -18,6 +18,7 @@
 :- include('time.pl').
 :- include('level.pl'). % config facts, maxedOut, newLevel, levelUpMessage
 :- include('map.pl').
+:- include('house.pl').
 :- include('items.pl').
 :- include('inventory.pl').
 :- include('farming.pl'). % dig, plant, harvest, checkRipe(X,Y), and other functions.

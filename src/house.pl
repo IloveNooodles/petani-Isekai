@@ -1,11 +1,7 @@
 /* Includes */
 :- include('time.pl').
 :- include('startGame.pl').
-
-startHouse:-
-  asserta(day(99)),
-  retractall(endGame(_)),
-  asserta(endGame(false)).
+:- include('diary.pl').
 
 house:-
   write('What do you want to do?\n'),
@@ -13,14 +9,6 @@ house:-
   write('- writeDiary\n'),
   write('- readDiary\n'),
   write('- exit\n').
-
-bed:-
-  endGame(Game),
-  Game \= true, !,
-  day(Day),
-  write('You have a good sleep\n'),
-  format('Day ~d\n', [Day]),
-  nextDay.
 
 writeDiary:-
   day(Day),
@@ -52,6 +40,12 @@ printListDiary([_|T], Counter, Index):-
   Counter < 2, printListDiary(T, NewCounter, Index).
 
 readDiary:-
+  directory_files('diary', Files),
+  Files = [_, _|T],
+  T = [],
+  write('You haven\'t write a diary!\n'), !. 
+
+readDiary:-
   listDiary,
   directory_files('diary', Files),
   write('Choose which one of the diary you want to read!\n'),
@@ -64,21 +58,44 @@ chooseDiary([_ , _| T], Index):-
 
 processDiary([H|_], 0):-
   write('##############\n'),
-  format('Dear Diary\n~w\n\n', [H]),
+  sub_atom(H, _, _, 4, Y),
+  format(' Dear Diary\n ~w\n\n', [Y]),
   atom_concat('diary/', H, File),
   open(File, read, Out),
   read(Out, W),
   close(Out),
-  write(W), 
+  wrapText(W, 12),
   write('\n##############\n').
-
-processDiary([H], 0):-
-  format('~w', [H]), !.
-
-processDiary([], _):-
-  write('You haven\'t write a diary!\n'), !.
 
 processDiary([_|T], Index):-
   NewIndex is Index - 1,
   processDiary(T, NewIndex).
 
+/* ini gausah di random ya kaya mimpinya buruk apa engga
+tapi bisa aja ketemu peri2 itu kan ya */
+sleep:-
+  printSleep,
+  write('You had a good sleep.\n\n'),
+  sleep(0.75),
+  nextDay,
+  status.
+
+/* ANIMATION */
+printSleep:-
+  write('z'),
+  flush_output,
+  sleep(0.75),
+  write(' z'),
+  flush_output,
+  sleep(0.75),
+  write(' Z'),
+  flush_output,
+  sleep(1),
+  write(' .'),
+  flush_output,
+  sleep(1),
+  write(' .\n'),
+  sleep(1).
+
+exit:-
+  write('You left the house...\n'), nl.

@@ -158,7 +158,6 @@ printChar(X, Y) :- dirt(X, Y), !, write('-').
 map :-
     forall(between(1,22,Y),(
         forall(between(1,22,X), (
-            checkRipe(X,Y),
             printChar(X,Y)
         )),
         nl
