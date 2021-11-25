@@ -29,12 +29,12 @@ writeDiary(Day, Entry):-
 wrapText(Text, CharaPerLine):-
     atom_length(Text, Length),
     Length =< CharaPerLine,
-    write(Text), nl, !.
+    format(' ~w ', [Text]), nl, !.
 
 wrapText(Text, CharaPerLine):-
     atom_length(Text, Length),
     Length > CharaPerLine,
     sub_atom(Text, 0, CharaPerLine, _, X),
-    write(X), nl,
+    format(' ~w ', [X]), nl,
     sub_atom(Text, CharaPerLine, _, 0, Next),
     wrapText(Next, CharaPerLine).
