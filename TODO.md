@@ -20,10 +20,10 @@ Afan
 
 Gare
 
-1. Items (WIP)
-2. House
-3. Endgame
-4. Season and time
+1. Items (WIP ini mungkin masih ada yang belom kaya use item sama katanya bakal ada yang dirubah)
+2. House (done tinggal peri tidur ngapain)
+3. Endgame (Done bisa di check di main )
+4. Season and time (Done)
 
 Changelog:
 
@@ -37,3 +37,5 @@ Changelog:
 - Add farming and farming-related functions (Feli)
 - Add max stamina, random event gold (Feli)
 - Add kappa (Feli)
+- Add writeDiary, readDiary (Gare)
+- Add diary and animation (Feli)

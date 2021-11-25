@@ -60,6 +60,15 @@ earnGold(X):-
     New is Current + X,
     asserta(gold(New)).
 
+goldCollected:-
+  gold(Current),
+  Current >= 20000,
+  retractall(endGame(_)),
+  asserta(endGame(true)),
+  retractall(gameCompleted(_)),
+  asserta(gameCompleted(true)),
+  endgame.
+
 /* RANDOM EVENT */
 randomGold(Minimum, Maximum, Chance):-
     random(0, 100, Result),
