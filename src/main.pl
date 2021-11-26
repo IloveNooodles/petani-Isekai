@@ -21,6 +21,7 @@
 :- include('house.pl').
 :- include('items.pl').
 :- include('inventory.pl').
+:- include('fishing.pl').
 :- include('farming.pl'). % dig, plant, harvest, checkRipe(X,Y), and other functions.
 
 /* SPECIALS */
@@ -60,6 +61,15 @@ earnGold(X):-
     New is Current + X,
     asserta(gold(New)).
 
+goldCollected:-
+  gold(Current),
+  Current >= 20000,
+  retractall(endGame(_)),
+  asserta(endGame(true)),
+  retractall(gameCompleted(_)),
+  asserta(gameCompleted(true)),
+  endgame.
+
 /* RANDOM EVENT */
 randomGold(Minimum, Maximum, Chance):-
     random(0, 100, Result),
@@ -75,13 +85,3 @@ randomGold(Minimum, Maximum, Chance):-
         Result > Chance,
         !
     )).    
-
-/* START GAME */
-lesgo :-
-    asserta(player_name(charlie)),
-    write('Siapa namamu, calon petani?\n'),
-    read(Name),
-    retractall(player_name(_)),
-    setPlayerName(Name),
-    fill_map.
-

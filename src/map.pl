@@ -68,7 +68,7 @@ fill_map :-
     asserta(border(22,_)),
     asserta(border(_,22)),
     % Player
-    assertz(player(17,5)),
+    asserta(player(12,5)),
     % market
     asserta(market_coordinate(18,7)),
     % home

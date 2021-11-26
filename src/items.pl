@@ -59,11 +59,13 @@ item(cowFeed, ranching).
 item(tuna, fishing).
 item(salmon, fishing).
 item(angler, fishing).
+item(rareEel, fishing).
 item(crimsonfish, fishing).
 item(sunfish, fishing).
 item(relicanth, fishing).
 item(kingfish, fishing).
 item(mutant, fishing).
+item(rareMutant, fishing).
 item(lobster, fishing).
 item(sardine, fishing).
 item(catfish, fishing).
@@ -71,7 +73,9 @@ item(octopus, fishing).
 item(eel, fishing).
 item(seacucumber, fishing).
 item(ghostfish, fishing).
+item(rareGhostfish, fishing).
 item(stonefish, fishing).
+item(rareStonefish, fishing).
 item(sashimi, fishing).
 item(sushi, fishing).
 item(bait, fishing).
@@ -145,11 +149,13 @@ itemPrice(cowFeed, 300).
 itemPrice(tuna, 500).
 itemPrice(salmon, 800).
 itemPrice(angler, 1500).
+itemPrice(rareEEl, 700).
 itemPrice(crimsonfish, 1500).
 itemPrice(sunfish, 1500).
 itemPrice(relicanth, 2000).
 itemPrice(kingfish, 1000).
 itemPrice(mutant, 1000).
+itemPrice(rareMutant, 1400).
 itemPrice(lobster, 1000).
 itemPrice(sardine, 500).
 itemPrice(catfish, 600).
@@ -157,7 +163,9 @@ itemPrice(octopus, 650).
 itemPrice(eel, 550).
 itemPrice(seacucumber, 600).
 itemPrice(ghostfish, 900).
+itemPrice(rareGhostfish, 1100).
 itemPrice(stonefish, 600).
+itemPrice(rareStonefish, 800).
 itemPrice(sashimi, 400).
 itemPrice(sushi, 400).
 itemPrice(bait, 250).
