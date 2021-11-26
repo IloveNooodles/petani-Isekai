@@ -21,8 +21,8 @@
 :- include('house.pl').
 :- include('items.pl').
 :- include('inventory.pl').
-:- include('farming.pl'). % dig, plant, harvest, checkRipe(X,Y), and other functions.
 :- include('fishing.pl').
+:- include('farming.pl'). % dig, plant, harvest, checkRipe(X,Y), and other functions.
 
 /* SPECIALS */
 :- include('kappa.pl').
