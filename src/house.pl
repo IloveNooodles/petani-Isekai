@@ -31,7 +31,8 @@ listDiary:-
 printListDiary([], _, _):- !.
 printListDiary([H|T], Counter, Index):-
   Counter >= 2,
-  format('~d. ~w\n',[Index, H]), !,
+  sub_atom(H, _, _, 4, NH),
+  format('~d. ~w\n',[Index, NH]), !,
   NewCounter is Counter + 1,
   printListDiary(T, NewCounter, Index + 1).
 
@@ -75,6 +76,8 @@ processDiary([_|T], Index):-
 tapi bisa aja ketemu peri2 itu kan ya */
 sleep:-
   printSleep,
+  random(1, 10000, Number),
+  dream(Number),
   write('You had a good sleep.\n\n'),
   sleep(0.75),
   nextDay,
@@ -99,3 +102,9 @@ printSleep:-
 
 exit:-
   write('You left the house...\n'), nl.
+
+/* peri tidur */
+dream(Number):-
+  Number < 100,
+  write('You\'ve met fairy in your dream'), nl, write('What do you want for request\n > '),
+  read(_). 
