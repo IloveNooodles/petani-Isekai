@@ -39,3 +39,4 @@ Changelog:
 - Add kappa (Feli)
 - Add writeDiary, readDiary (Gare)
 - Add diary and animation (Feli)
+- Added more functions in inventory. Added fishing(WIP). 
