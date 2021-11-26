@@ -128,6 +128,24 @@ fish :- % kasus ngga bisa mancing karena ngga di pinggir danau
     !,
     write('Ngga ada danau di sekitarmu!!\n').
 
+fish :- % kasus ngga bisa mancing karena musim dingin
+    loc_tile(lake_edge),
+    season(dingin),
+    !,
+    write('Sekarang musim dingin!!\nDanaunya membeku dan kamu ngga bisa mancing!!\n').
+
+fish :- % kasus ngga bisa mancing karena badai
+    loc_tile(lake_edge),
+    weather(badai),
+    !,
+    write('Cuaca lagi badai!!\nIkannya pada masuk ke dasar danau!!\nKamu ngga bisa mancing!!\n').
+
+fish :- % kasus ngga bisa mancing karena hujan
+    loc_tile(lake_edge),
+    weather(ujan),
+    !,
+    write('Cuaca lagi hujan!!\nIkannya pada masuk ke dasar danau!!\nKamu ngga bisa mancing!!\n').
+
 fish :- % kasus ngga bisa mancing karena ngga bawa pancingan
     loc_tile(lake_edge),
     \+ isXinInven(fishingRod),
@@ -140,10 +158,8 @@ fish :-
     \+ isXinInven(bait),
     \+ isXinInven(goodBait),
     \+ isXinInven(greatestBait),
-    job(Job),
     !,
-    random(0, 2, HasilRoll),
-    getFish(1, HasilRoll, Job).
+    write('Kamu ngga punya bait!\n').
 
 % Kasus bawa bait
 fish :-
@@ -157,7 +173,8 @@ fish :-
     write('Bait yang ada di inven kamu: \n'),
     format('1. ~d bait\n', [Countbait]),
     format('2. ~d good bait\n', [Countgoodbait]),
-    format('3. ~d greatest bait\n>> ', [Countgreatbait]),
+    format('3. ~d greatest bait\n', [Countgreatbait]),
+    write('Bait mana yang akan kamu gunakan?\n>> '),
     read(Input),
     baitInput(Input).
 
