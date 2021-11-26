@@ -1,7 +1,4 @@
 /* Includes */
-:- include('time.pl').
-:- include('startGame.pl').
-:- include('diary.pl').
 
 house:-
   write('What do you want to do?\n'),

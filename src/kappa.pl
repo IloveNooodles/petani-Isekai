@@ -21,15 +21,18 @@ kappaEmerge:-
     write('You have summoned the great Kappa.'), nl,
     sleep(1),
     random(1, 3, Action),
-    action(Action).
+    actionKappa(Action).
 
 /* ACTIONS */
 /* Refer to footnote */
 
-action(1):-
-    write('But he is in a bad mood.'), nl.
+actionKappa(1):-
+    /* Blessings of the good harvest */
+    ripenAll,
+    write('You are lucky! You meet a friendly kappa.\n')
+    write('He looks at your crop, blesses them, and goes back to his deep slumber.\n').
 
-action(2):-
+actionKappa(2):-
     write('He loves you.'), nl.
 
 /* ANIMATION */
