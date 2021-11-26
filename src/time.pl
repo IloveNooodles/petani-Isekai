@@ -90,27 +90,27 @@ setSeason(Day):-
 startWeather:-
   asserta(weather(panas)).
 
-setWeather():-
+setWeather :-
   season(Season),
-  season = semi,
+  Season = semi,
   random(1, 101, Number),
   possibleWeatherSemi(Number).
 
-setWeather():-
+setWeather:-
   season(Season),
-  season = panas,
+  Season = panas,
   random(1, 101, Number),
   possibleWeatherPanas(Number).
 
-setWeather():-
+setWeather:-
   season(Season),
-  season = gugur,
+  Season = gugur,
   random(1, 101, Number),
   possibleWeatherGugur(Number).
 
-setWeather():-
+setWeather:-
   season(Season),
-  season = dingin,
+  Season = dingin,
   random(1, 101, Number),
   possibleWeatherDingin(Number).
 
@@ -164,12 +164,12 @@ startTime:-
     setTime(9,0).
 
 endgame:-
-  endGame(Endgame), gameCompleted(Completed)
-  endGame = true, completed = false,
+  endGame(Endgame), gameCompleted(Completed),
+  Endgame = true, Completed = false,
   write('You have worked hard, but in the end result is all that matters.\nMay God bless you in the future with kind people!').
 
 endgame:-
-  endGame(Endgame), gameCompleted(Completed)
-  endGame = true, completed = true,
+  endGame(Endgame), gameCompleted(Completed),
+  Endgame = true, Completed = true,
   write('Congratulations! After all of your hardwork, you have finally collected 20000 golds!'), nl, write('Now you can rest assured and tell those bad guys who\'s the boss!').
 

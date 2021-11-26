@@ -78,7 +78,7 @@ baitInput(1) :-
     asserta(inventory(ListOut, NewTotal)),
     updateInvenOne(bait),
     write('Kamu menggunakan bait!\n'),
-    random(0, 2, Hasil),
+    random(0, 3, Hasil),
     getFish(Level, Hasil, Job), !.
 % buat good bait
 baitInput(2) :-
@@ -98,7 +98,7 @@ baitInput(2) :-
     asserta(inventory(ListOut, NewTotal)),
     updateInvenOne(goodBait),
     write('Kamu menggunakan good bait!\n'),
-    random(1, 3, Hasil),
+    random(1, 4, Hasil),
     getFish(Level, Hasil, Job), !.
 
 % buat great bait
@@ -119,7 +119,7 @@ baitInput(3) :-
     asserta(inventory(ListOut, NewTotal)),
     updateInvenOne(greatestBait),
     write('Kamu menggunakan great bait!\n'),
-    random(2, 4, Hasil),
+    random(2, 5, Hasil),
     getFish(Level, Hasil, Job), !.
 
 % Command fishing
@@ -142,7 +142,7 @@ fish :-
     \+ isXinInven(greatestBait),
     job(Job),
     !,
-    random(0, 1, HasilRoll),
+    random(0, 2, HasilRoll),
     getFish(1, HasilRoll, Job).
 
 % Kasus bawa bait
@@ -155,9 +155,9 @@ fish :-
     countXinInven(greatestBait, List, Countgreatbait),
     !,
     write('Bait yang ada di inven kamu: \n'),
-    format('1. ~d bait', [Countbait]),
-    format('2. ~d good bait', [Countgoodbait]),
-    format('3. ~d greatest bait', [Countgreatbait]),
+    format('1. ~d bait\n', [Countbait]),
+    format('2. ~d good bait\n', [Countgoodbait]),
+    format('3. ~d greatest bait\n>> ', [Countgreatbait]),
     read(Input),
     baitInput(Input).
 
