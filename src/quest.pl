@@ -50,34 +50,48 @@ ranchCompletion(X) :-
     retractall(questStatus(_,_,_)),
     asserta(questStatus(HarvestQuest, FishQuest, NewRQ)).
 
+% kondisi tidak di tile Q
 quest :-
     \+ loc_tile(quest),
     !,
     write('You are not at the Quest tile!\n').
 
+% kondisi quest sudah selesai
 quest :-
     questStatus(0,0,0),
     questonProgress(true),
     !,
     retractall(questonProgress(_)),
     asserta(questonProgress(false)),
-    earnGold(1),
-    earnExp(general, 2),
+    questAwal(HQ, FQ, RQ),
+    level(general, Gen),
+
+    % SCALING UNTUK MENDAPAT GOLD = total items * level general * 5
+    Gold is (HQ+FQ+RQ)*Gen*5,
+    earnGold(Gold),
+
+    % SCALING UNTUK MENDAPAT EXP = total items * 15
+    GenEXP is (HQ+FQ+RQ)*15,
+    earnExp(general, GenEXP),
+
     write('You have completed all your quest!\n'),
-    format('You have earned additional ~w gold, and ~w EXP.\n\n', [1,2]),
+    format('You have earned additional ~w gold, and ~w EXP.\n\n', [Gold,GenEXP]),
     write('Type quest again to start a new quest!\n\n').
 
+% kondisi mendapat quest baru
 quest :-
     questStatus(0,0,0),
     questonProgress(false),
     !,
-    level(general, A),
-    level(fish, B),
-    level(farm, C),
-    level(ranch, D),
-    random(1, 3 + Gen, HarvestQuest),
-    random(1, 3 + Fis, FishQuest),
-    random(1, 3 + Ran, RanchQuest),
+    level(fish, A),
+    Fis is A+3,
+    level(farm, B),
+    Far is B+3,
+    level(ranch, C),
+    Ran is C+3,
+    random(1, Far, HarvestQuest),
+    random(1, Fis, FishQuest),
+    random(1, Ran, RanchQuest),
     retractall(questStatus(_,_,_)),
     asserta(questStatus(HarvestQuest, FishQuest, RanchQuest)),
     retractall(questonProgress(_)),
@@ -89,6 +103,7 @@ quest :-
     format('- ~w fish\n', [FishQuest]),
     format('- ~w ranch items\n', [RanchQuest]).
 
+% kondisi sudah ada quest on-going
 quest :-
     !,
     write('You have an on-going quest!\n'),
