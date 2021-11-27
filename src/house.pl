@@ -1,11 +1,19 @@
 /* Includes */
 
 house:-
+  \+ playerName(_), !,
+  write('Game has not started yet!\n').
+
+house:-
   write('What do you want to do?\n'),
   write('- bed\n'),
   write('- writeDiary\n'),
   write('- readDiary\n'),
   write('- exitHouse\n').
+
+writeDiary:-
+  \+ playerName(_), !,
+  write('Game has not started yet!\n').
 
 writeDiary:-
   day(Day),
@@ -36,6 +44,10 @@ printListDiary([H|T], Counter, Index):-
 printListDiary([_|T], Counter, Index):-
   NewCounter is Counter + 1,
   Counter < 2, printListDiary(T, NewCounter, Index).
+
+readDiary:-
+  \+ playerName(_), !,
+  write('Game has not started yet!\n').
 
 readDiary:-
   directory_files('diary', Files),
@@ -71,6 +83,11 @@ processDiary([_|T], Index):-
 
 /* ini gausah di random ya kaya mimpinya buruk apa engga
 tapi bisa aja ketemu peri2 itu kan ya */
+
+sleep:-
+  \+ playerName(_), !,
+  write('Game has not started yet!\n').
+
 sleep:-
   printSleep,
   random(1, 10000, Number),
@@ -98,10 +115,14 @@ printSleep:-
   sleep(1).
 
 exitHouse:-
+  \+ playerName(_), !,
+  write('Game has not started yet!\n').
+
+exitHouse:-
   write('You left the house...\n'), nl.
 
 /* peri tidur */
 dream(Number):-
   Number < 100,
   write('You\'ve met fairy in your dream'), nl, write('What do you want for request\n > '),
-  read(_). 
+  read(_).
