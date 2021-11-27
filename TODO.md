@@ -10,7 +10,7 @@ Adit
 1. Peta (done kayanya)
 2. Exploration (done kayanya)
 3. Inventory (done kayanya)
-4. MANTAPANJING
+4. MANTAPANJING (done kayanya)
 
 Afan
 

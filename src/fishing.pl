@@ -5,11 +5,16 @@ misal:
 ikan(blueTuna, 4, 3)
 4 itu rarity general, jadi klo uda level 4 misal, dia selalu dapet rarity 4
 rarity tingkat 2 nya itu kalo 3 paling mahal. Jadi ntar yang di random itu rarity tingkat 2
+Lvel fishing rod memengaruhi stamina yang dipake
+bait memengaruhi hasil tangkapan sama level fishing juga
 
 Alur:
 fishing. cek dia di pinggir danau ato engga, trus cek bawa fishing rod ato engga, trus klo ada pilih bait, trus lgsg random
 waktu random klo dapet 0 berarti ndak dapet apa apa
 */
+
+/* DYNAMIC PREDIACTE */
+:- dynamic(fishST/1).
 
 ikan(tuna, 1, 1).
 ikan(sardine, 1, 2).
@@ -31,6 +36,71 @@ ikan(sunfish, 5, 1).
 ikan(crimsonfish, 5, 2).
 ikan(angler, 5, 3).
 ikan(relicanth, 5, 4).
+
+/* ***** ANIMASI MANCING ANJAY ***** */
+fishAnim :-
+    write('  \\\\\n'),
+    write('  |   \\\\\n'),
+    write('  |       \\\\\n'),
+    write('  |           \\\\\n'),
+    write('  |               \\\\\n'),
+    write('  |                   \\\\\n'),
+    write('  |                       \\\\\n'),
+    write('~ | ~                          \\\\\n'),
+    write('~ |  ~                            \\\\\n'),
+    write('~ ~ ~ ~                            \n\n').
+
+fishPrint(1) :-
+    write('.\n').
+fishPrint(2) :-
+    write('.    .\n').
+fishPrint(3) :-
+    write('.    .    .\n').
+
+playFishAnim(4) :-
+    !.
+
+playFishAnim(Frame) :-
+    shell('clear'),
+    fishAnim,
+    fishPrint(Frame),
+    sleep(0.75),
+    NewFrame is Frame + 1,
+    playFishAnim(NewFrame).
+
+% Untuk mengurangi stamina berdasarkan level fishing rod
+reduceST :-
+    stamina(ST),
+    fishST(Cost),
+    NewST is ST - Cost,
+    retractall(stamina(_)),
+    asserta(stamina(NewST)).
+    
+% Untuk mengupdate fishST sesuai level fishingRod
+updateFishST :-
+    item(fishingRod, tools, 1),
+    retractall(fishST(_)),
+    asserta(fishST(20)), !.
+
+updateFishST :-
+    item(fishingRod, tools, 2),
+    retractall(fishST(_)),
+    asserta(fishST(16)), !.
+
+updateFishST :-
+    item(fishingRod, tools, 3),
+    retractall(fishST(_)),
+    asserta(fishST(12)), !.
+
+updateFishST :-
+    item(fishingRod, tools, 4),
+    retractall(fishST(_)),
+    asserta(fishST(8)), !.
+
+updateFishST :-
+    item(fishingRod, tools, 5),
+    retractall(fishST(_)),
+    asserta(fishST(4)), !.
 
 % Untuk mendapatkan ikan
 getFish(_Level, 0, fisherman) :-
@@ -71,15 +141,12 @@ baitInput(1) :-
 baitInput(1) :-
     job(Job),
     level(fish, Level),
-    inventory(List, Total),
-    retractall(inventory(_,_)),
-    NewTotal is Total - 1,
-    deleteValinList(bait, List, ListOut),
-    asserta(inventory(ListOut, NewTotal)),
-    updateInvenOne(bait),
+    throw(bait, 1),
+    playFishAnim(1), % mainkan anim mancing
     write('Kamu menggunakan bait!\n'),
     random(0, 3, Hasil),
-    getFish(Level, Hasil, Job), !.
+    getFish(Level, Hasil, Job), 
+    reduceST, !. % kurangi stamina
 % buat good bait
 baitInput(2) :-
     inventory(List, _),
@@ -91,15 +158,12 @@ baitInput(2) :-
 baitInput(2) :-
     job(Job),
     level(fish, Level),
-    inventory(List, Total),
-    retractall(inventory(_,_)),
-    NewTotal is Total - 1,
-    deleteValinList(goodBait, List, ListOut),
-    asserta(inventory(ListOut, NewTotal)),
-    updateInvenOne(goodBait),
+    throw(goodBait, 1),
+    playFishAnim(1),
     write('Kamu menggunakan good bait!\n'),
     random(1, 4, Hasil),
-    getFish(Level, Hasil, Job), !.
+    getFish(Level, Hasil, Job), 
+    reduceST, !.
 
 % buat great bait
 baitInput(3) :-
@@ -112,15 +176,12 @@ baitInput(3) :-
 baitInput(3) :-
     job(Job),
     level(fish, Level),
-    inventory(List, Total),
-    retractall(inventory(_,_)),
-    NewTotal is Total - 1,
-    deleteValinList(greatestBait, List, ListOut),
-    asserta(inventory(ListOut, NewTotal)),
-    updateInvenOne(greatestBait),
+    throw(greatestBait, 1),
+    playFishAnim(1),
     write('Kamu menggunakan great bait!\n'),
     random(2, 5, Hasil),
-    getFish(Level, Hasil, Job), !.
+    getFish(Level, Hasil, Job), 
+    reduceST, !.
 
 % Command fishing
 fish :- % kasus ngga bisa mancing karena ngga di pinggir danau
@@ -128,11 +189,41 @@ fish :- % kasus ngga bisa mancing karena ngga di pinggir danau
     !,
     write('Ngga ada danau di sekitarmu!!\n').
 
+fish :- % kasus ngga bisa mancing karena musim dingin
+    loc_tile(lake_edge),
+    season(dingin),
+    !,
+    write('Sekarang musim dingin!!\nDanaunya membeku dan kamu ngga bisa mancing!!\n').
+
+fish :- % kasus ngga bisa mancing karena badai
+    loc_tile(lake_edge),
+    weather(badai),
+    !,
+    write('Cuaca lagi badai!!\nIkannya pada masuk ke dasar danau!!\nKamu ngga bisa mancing!!\n').
+
+fish :- % kasus ngga bisa mancing karena hujan
+    loc_tile(lake_edge),
+    weather(ujan),
+    !,
+    write('Cuaca lagi hujan!!\nIkannya pada masuk ke dasar danau!!\nKamu ngga bisa mancing!!\n').
+
 fish :- % kasus ngga bisa mancing karena ngga bawa pancingan
     loc_tile(lake_edge),
     \+ isXinInven(fishingRod),
     !,
     write('Kamu ngga bawa alat mancing!!\n').
+
+% Kasus stamina kurang
+fish :-
+    loc_tile(lake_edge),
+    isXinInven(fishingRod),
+    updateFishST,
+    stamina(ST),
+    fishST(STmin),
+    ST < STmin,
+    !,
+    write('Stamina kamu kurang!!\n').
+
 % Kasus ga bawa bait
 fish :-
     loc_tile(lake_edge),
@@ -140,16 +231,14 @@ fish :-
     \+ isXinInven(bait),
     \+ isXinInven(goodBait),
     \+ isXinInven(greatestBait),
-    job(Job),
     !,
-    random(0, 2, HasilRoll),
-    getFish(1, HasilRoll, Job).
+    write('Kamu ngga bisa mancing karena punya bait!\n').
 
 % Kasus bawa bait
 fish :-
     inventory(List, _Total),
     loc_tile(lake_edge),
-    isXinInven(fishingRod), % belom ngecek level fishing rodnya
+    isXinInven(fishingRod),
     countXinInven(bait, List, Countbait),
     countXinInven(goodBait, List, Countgoodbait),
     countXinInven(greatestBait, List, Countgreatbait),
@@ -157,8 +246,9 @@ fish :-
     write('Bait yang ada di inven kamu: \n'),
     format('1. ~d bait\n', [Countbait]),
     format('2. ~d good bait\n', [Countgoodbait]),
-    format('3. ~d greatest bait\n>> ', [Countgreatbait]),
+    format('3. ~d greatest bait\n', [Countgreatbait]),
+    write('Bait mana yang akan kamu gunakan?\n>> '),
     read(Input),
-    baitInput(Input).
-
+    baitInput(Input),
+    !.
 % fungsi proses input bait, kek klo bait nya 0 gabisa, dll, trus
