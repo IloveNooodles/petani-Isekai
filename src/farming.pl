@@ -37,7 +37,7 @@ dig:-
     addTime(H, M, PlusTime, HNew, MNew),
     setTime(HNew, MNew),
     write('You digged the tile.\n'),
-    randomGold(1,20,15).
+    randomGold(1,20,20).
 
 digTile(X, Y):-
     asserta(digged_coordinate(X, Y)).
@@ -66,6 +66,8 @@ plant:-
     earnExp(farm, Exp),
     earnExp(general, Exp),
     minStamina(Smin),
+    retractall(loc_tile(_)),
+    asserta(loc_tile(planted)),
     time(H, M),
     plantTime(PlusTime),
     addTime(H, M, PlusTime, HNew, MNew),
@@ -132,7 +134,10 @@ harvest:-
     ripe_coordinate(X, Y, Seed),
     retract(ripe_coordinate(X, Y, Seed)),
     sub_atom(Seed, 0, _, 4, SeedRipe),
-    addInven(SeedRipe),
+    level(farm, LevelFarm),
+    Top is LevelFarm + 1,
+    random(1, Top, Amount),
+    addInven(SeedRipe, Amount),
     harvestExp(Exp),
     earnExp(farm, Exp),
     earnExp(general, Exp),
@@ -143,7 +148,7 @@ harvest:-
     harvestTime(PlusTime),
     addTime(H, M, PlusTime, HNew, MNew),
     setTime(HNew, MNew),
-    format('You harvested ~w.\n', [SeedRipe]).
+    format('You harvested ~d ~w(s).\n', [Amount, SeedRipe]).
 
 notYetRipe:-
     loc_tile(planted),
