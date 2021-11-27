@@ -23,6 +23,8 @@
 :- include('inventory.pl').
 :- include('fishing.pl').
 :- include('farming.pl'). % dig, plant, harvest, checkRipe(X,Y), and other functions.
+:- include('ranching.pl').
+:- include('quest.pl').
 
 /* SPECIALS */
 :- include('kappa.pl').
