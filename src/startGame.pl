@@ -169,6 +169,3 @@ greeting:-
     time(Hour, _),
     Hour > 18, Hour =< 23,
     format('Good evening, ~w!\n', [Name]).
-
-exit:-
-  halt.

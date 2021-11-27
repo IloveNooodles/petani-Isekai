@@ -5,7 +5,7 @@ house:-
   write('- bed\n'),
   write('- writeDiary\n'),
   write('- readDiary\n'),
-  write('- exit\n').
+  write('- exitHouse\n').
 
 writeDiary:-
   day(Day),
@@ -97,7 +97,7 @@ printSleep:-
   write(' .\n'),
   sleep(1).
 
-exit:-
+exitHouse:-
   write('You left the house...\n'), nl.
 
 /* peri tidur */

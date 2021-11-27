@@ -27,6 +27,11 @@
 /* SPECIALS */
 :- include('kappa.pl').
 
+/* EXIT */
+exit:-
+    write('Thank you for playing, see you later!\n'),
+    halt.
+
 /* SISTEM STAMINA */
 minStamina(Smin):-
     /* Mengurangi stamina player sebanyak Smin */
