@@ -137,6 +137,8 @@ harvest:-
     earnExp(farm, Exp),
     earnExp(general, Exp),
     minStamina(Smin),
+    retract(loc_tile(ripe)),
+    asserta(loc_tile(digged)),
     time(H, M),
     harvestTime(PlusTime),
     addTime(H, M, PlusTime, HNew, MNew),
