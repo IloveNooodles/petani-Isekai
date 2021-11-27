@@ -5,11 +5,13 @@ callKappa(Cucumber):-
     Cucumber = cucumber,
     loc_tile(lake_edge),
     weather(hujan),
-    time(0, 0),
+    time(H, _),
+    H >= 18,
+    H =< 23,
     kappaEmerge,
     !.
 
-callKappa:- !.
+callKappa(_):- !.
 
 kappaEmerge:-
     kappaAnimate(0),
@@ -53,16 +55,14 @@ hostile(2):-
 
 hostile(3):-
     write('You run away. The kappa catches up to you and attacks you. You died.\n'),
-    asserta(endGame(true)),
-    write('GAME OVER').
+    endgame.
 
 fight(1):-
     write('You attack his head, spilling the water in its sara, making him weak.\nYou leave unharmed.\n').
 
 fight(2):-
     write('You attack his body. You are too weak to tackle him. You died.\n'),
-    asserta(endGame(true)),
-    write('GAME OVER').
+    endgame.
 
 fight(3):-
     write('You detach his arms and he will do anything to get it back. What will you ask? (1-2)\n1. Good harvest\n2. A bounty of fish\n> '),
@@ -133,6 +133,13 @@ writeCucumber(9):-
 
 writeCucumber(10):-
     write('C U C U M B E R . . .'), nl, !.
+
+/* CHEAT */
+kappaConfig:-
+    addInven(cucumber),
+    retractall(weather(_)),
+    asserta(weather(hujan)),
+    setTime(18,0).
 
 /* Footnote: Kappa legends
 (src: https://en.wikipedia.org/wiki/Kappa_(folklore) )

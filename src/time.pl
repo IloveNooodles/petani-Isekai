@@ -6,6 +6,9 @@
 :- dynamic(endGame/1).
 :- dynamic(gameCompleted/1).
 
+endGame(false).
+gameCompleted(false).
+
 /* Time and Season */
 resetTime:-
     retractall(day(_)),
@@ -19,19 +22,20 @@ startDay:-
 
 /* dicek kalo lebih dari 365 end game nya jadi true */
 /* harus di cek kalo day nya udah masuk season baru sm randomize weather */
-
-nextDay:-
-    day(X),
+end(X):-
     X >= 365, !,
     retractall(endGame(_)),
     asserta(endGame(true)),
-    write('Year have passed...\n'),
+    write('A year has passed...\n'),
     endgame.
+
+end(_):- !.
 
 nextDay:-
     day(X),
     X < 365, !,
     Y is X + 1,
+    end(Y),
     setDay(Y),
     setWeather,
     setSeason(Y).
@@ -194,11 +198,11 @@ wrapHour(H, HNew):-
   !.
 
 endgame:-
-  endGame(Endgame), gameCompleted(Completed),
-  Endgame = true, Completed = false,
-  write('You have worked hard, but in the end result is all that matters.\nMay God bless you in the future with kind people!').
+  endGame(true), gameCompleted(false),
+  write('You have worked hard, but in the end result is all that matters.\nMay God bless you in the future with kind people!\n'),
+  halt.
 
 endgame:-
-  endGame(Endgame), gameCompleted(Completed),
-  Endgame = true, Completed = true,
-  write('Congratulations! After all of your hardwork, you have finally collected 20000 golds!'), nl, write('Now you can rest assured and tell those bad guys who\'s the boss!').
+  endGame(true), gameCompleted(true),
+  write('Congratulations! After all of your hardwork, you have finally collected 20,000 gold!'), nl, write('Now you can rest assured and tell those bad guys who\'s the boss!\n'),
+  halt.
