@@ -28,7 +28,7 @@ startGame:-
 
 /* START */
 start:-
-    \+ playerName(_), !,
+    playerName(_), !,
     write('Game has not started yet!\n').
 
 start:-
@@ -37,6 +37,8 @@ start:-
     resetTime,
     retractall(endGame(_)),
     asserta(endGame(false)),
+    retractall(gameCompleted(_)),
+    asserta(gameCompleted(false)),
     startTime,
     startDay,
     startSeason,

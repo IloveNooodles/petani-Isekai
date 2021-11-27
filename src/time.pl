@@ -196,7 +196,10 @@ wrapHour(H, HNew):-
 endgame:-
   endGame(Endgame), gameCompleted(Completed),
   Endgame = true, Completed = false,
-  write('You have worked hard, but in the end result is all that matters.\nMay God bless you in the future with kind people!').
+  write('You have worked hard, but in the end result is all that matters.\nMay God bless you in the future with kind people!'),
+  write('Congratulations for finishing the game.\nHere\'s your last status: '),
+  status,
+  halt.
 
 endgame:-
   endGame(Endgame), gameCompleted(Completed),
