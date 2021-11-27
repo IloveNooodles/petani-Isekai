@@ -86,8 +86,6 @@ item(greatestBait, fishing).
 item(shovel, tools, 1).
 item(shear, tools, 1).
 item(fishingRod, tools, 1).
-item(wateringcan, tools, 1).
-item(catchingNet, tools, 1).
 
 /* Item price bakal ada 2 arity isinya <nama, harga> possibly ini bisa dipake buat beli/jual */
 /* Kayaknya bakal dibedain sama waktu panennya aja sih */

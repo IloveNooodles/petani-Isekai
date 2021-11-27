@@ -155,6 +155,10 @@ printChar(X, Y) :- water_coordinate(X, Y), !, write('o').
 printChar(X, Y) :- dirt(X, Y), !, write('-').
 
 % kayanya harus liat state gamenya
+map:-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
 map :-
     forall(between(1,22,Y),(
         forall(between(1,22,X), (
@@ -296,6 +300,10 @@ loc_check(X,Y) :-
 
 % Buat gerak gerak
 % Buat w
+w :-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
 w :- 
     playerName(Name),
     player(X,Y),
@@ -323,6 +331,10 @@ w :-
     setTime(HNew, MNew),
     !, format('~w bergerak ke utara satu langkah!', [Name]), nl, loc_check(X,Ynow), print_loc_now.
 % Buat a
+a :-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
 a :- 
     playerName(Name),
     player(X,Y),
@@ -351,6 +363,9 @@ a :-
     !, format('~w bergerak ke barat satu langkah!', [Name]), nl, loc_check(Xnow,Y).
 
 % Buat s
+s :-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
 s :- 
     playerName(Name),
     player(X,Y),
@@ -379,6 +394,10 @@ s :-
     !, format('~w bergerak ke selatan satu langkah!', [Name]), nl, loc_check(X,Ynow).
 
 % Buat d
+d :-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
 d :- 
     playerName(Name),
     player(X,Y),

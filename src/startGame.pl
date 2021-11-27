@@ -28,6 +28,10 @@ startGame:-
 
 /* START */
 start:-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
+start:-
     % Clear all stats
     resetStat,
     resetTime,
@@ -114,6 +118,10 @@ resetStat:-
     retractall(gold(_)).
 
 /* STATUS */
+status :-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
 status:-
     day(Day),
     weather(Weather),

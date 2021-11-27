@@ -184,6 +184,10 @@ baitInput(3) :-
     reduceST, !.
 
 % Command fishing
+fish :-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
 fish :- % kasus ngga bisa mancing karena ngga di pinggir danau
     \+ loc_tile(lake_edge),
     !,

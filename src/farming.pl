@@ -18,6 +18,10 @@ fertilizeTime(15).
 
 /* DIG */
 dig:-
+  \+ playerName(_), !,
+  write('Game has not started yet!\n').
+
+dig:-
     /* Cek prekondisi */
     % loc_tile == dirt
     player(X, Y),
@@ -43,6 +47,10 @@ digTile(X, Y):-
     asserta(digged_coordinate(X, Y)).
 
 /* PLANT */
+plant:-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
 plant:-
     /* Cek prekondisi */
     % loc_tile == digged
@@ -124,6 +132,10 @@ ripenAll:-
     retractall(planted_coordinate(_, _, _, _)).
 
 /* HARVEST */
+harvest:-
+  \+ playerName(_), !,
+  write('Game has not started yet!\n').
+
 harvest:- 
     \+notYetRipe,
     loc_tile(ripe),
@@ -159,6 +171,10 @@ noFertilizer:-
     \+isXinInven(fertilizer),
     write('You do not own a fertilizer.\n'),
     !.
+
+fertilize:-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
 
 fertilize:-
     loc_tile(planted),

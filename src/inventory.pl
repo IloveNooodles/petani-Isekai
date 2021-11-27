@@ -147,6 +147,10 @@ throw(Item, 1) :-
     updateInvenOne(Item).
 
 /* Command buat inventory */
+inventory :-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
 % Buat nampilin invent
 inventory :-
     inventory(_, Cap),
@@ -190,6 +194,10 @@ inventoryFishing :-
     inventoryOneItem([H1|T1]),
     write('Inventory fishing kamu:\n'),
     showInvenType([H1|T1], List, fishing).
+
+throwItem:-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
 
 throwItem :-
     inventory(_, _Total),
