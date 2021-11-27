@@ -1,7 +1,7 @@
 /* The great kappa will rise when a user throws a cucumber to the lake when it is rainy at exactly 12 A.M. */
 
 /* Behold, here comes the kappa */
-% loc_tile(lake_edge).
+loc_tile(lake_edge).
 weather(hujan).
 time(0).
 
@@ -29,7 +29,7 @@ kappaEmerge:-
 actionKappa(1):-
     /* Blessings of the good harvest */
     ripenAll,
-    write('You are lucky! You meet a friendly kappa.\n')
+    write('You are lucky! You meet a friendly kappa.\n'),
     write('He looks at your crop, blesses them, and goes back to his deep slumber.\n').
 
 actionKappa(2):-
