@@ -1,14 +1,10 @@
 /* The great kappa will rise when a user throws a cucumber to the lake when it is rainy at exactly 12 A.M. */
 
 /* Behold, here comes the kappa */
-loc_tile(lake_edge).
-weather(hujan).
-time(0).
-
 callKappa:-
     loc_tile(lake_edge),
     weather(hujan),
-    time(0),
+    time(0, 0),
     kappaEmerge,
     !.
 
@@ -20,7 +16,7 @@ kappaEmerge:-
     sleep(0.25),
     write('You have summoned the great Kappa.'), nl,
     sleep(1),
-    random(1, 3, Action),
+    random(1, 4, Action),
     actionKappa(Action).
 
 /* ACTIONS */
@@ -29,11 +25,48 @@ kappaEmerge:-
 actionKappa(1):-
     /* Blessings of the good harvest */
     ripenAll,
-    write('You are lucky! You meet a friendly kappa.\n'),
-    write('He looks at your crop, blesses them, and goes back to his deep slumber.\n').
+    write('He looks at your crop, blesses them, and goes back to his deep slumber.\nCheck your crops!'),
+    !.
 
 actionKappa(2):-
-    write('He loves you.'), nl.
+    /* Bounty of the sea */
+    addInven(tuna, 3),
+    addInven(sardine, 2),
+    addInven(eel, 1),
+    write('Surfacing from the lake, he brings you a bounty of fish.\nCheck your inventory!\n'),
+    !.
+
+actionKappa(3):-
+    /* Hostile kappa */
+    write('You see that the kappa is hostile. What do you do? (1-3)\n1. Bow\n2. Fight\n3. Run\n> '),
+    read(Action),
+    hostile(Action).
+
+hostile(1):-
+    write('The kappa bows back and spills the water on its sara, making him weak.\nYou leave unharmed.\n').
+
+hostile(2):-
+    write('You try to fight the kappa. Where do you attack? (1-3)\n1. Head\n2. Body\n3. Arm\n> '),
+    read(Action),
+    fight(Action).
+
+hostile(3):-
+    write('You run away. The kappa catches up to you and attacks you. You died.\n'),
+    asserta(endGame(true)),
+    write('GAME OVER').
+
+fight(1):-
+    write('You attack his head, spilling the water in its sara, making him weak.\nYou leave unharmed.\n').
+
+fight(2):-
+    write('You attack his body. You are too weak to tackle him. You died.\n'),
+    asserta(endGame(true)),
+    write('GAME OVER').
+
+fight(3):-
+    write('You detach his arms and he will do anything to get it back. What will you ask? (1-2)\n1. Good harvest\n2. A bounty of fish\n> '),
+    read(Action),
+    actionKappa(Action).
 
 /* ANIMATION */
 kappaAnimate(11):-
