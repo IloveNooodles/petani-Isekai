@@ -118,6 +118,7 @@ throw(Item, 1, Amount) :-
     deleteValinList(Item, List, ListOut),
     asserta(inventory(ListOut, NewCap)), !,
     format('Kamu berhasil membuang ~d ~w!', [Amount, Item]),
+    callKappa(Item),
     updateInvenOne(Item).
 % Kalo jumlahnya kelebihan
 throw(Item, Count, _) :-

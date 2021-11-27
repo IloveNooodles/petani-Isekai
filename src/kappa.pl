@@ -1,7 +1,8 @@
 /* The great kappa will rise when a user throws a cucumber to the lake when it is rainy at exactly 12 A.M. */
 
 /* Behold, here comes the kappa */
-callKappa:-
+callKappa(Cucumber):-
+    Cucumber = cucumber,
     loc_tile(lake_edge),
     weather(hujan),
     time(0, 0),

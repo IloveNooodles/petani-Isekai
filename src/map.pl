@@ -318,6 +318,9 @@ w :-
     Ynow is Y - 1,
     retractall(player(_,_)),
     asserta(player(X, Ynow)),
+    time(H, M),
+    addTime(H, M, 1, HNew, MNew),
+    setTime(HNew, MNew),
     !, format('~w bergerak ke utara satu langkah!', [Name]), nl, loc_check(X,Ynow), print_loc_now.
 % Buat a
 a :- 
@@ -342,6 +345,9 @@ a :-
     Xnow is X - 1,
     retractall(player(_,_)),
     asserta(player(Xnow, Y)),
+    time(H, M),
+    addTime(H, M, 1, HNew, MNew),
+    setTime(HNew, MNew),
     !, format('~w bergerak ke barat satu langkah!', [Name]), nl, loc_check(Xnow,Y).
 
 % Buat s
@@ -367,6 +373,9 @@ s :-
     Ynow is Y + 1,
     retractall(player(_,_)),
     asserta(player(X, Ynow)),
+    time(H, M),
+    addTime(H, M, 1, HNew, MNew),
+    setTime(HNew, MNew),
     !, format('~w bergerak ke selatan satu langkah!', [Name]), nl, loc_check(X,Ynow).
 
 % Buat d
@@ -392,4 +401,7 @@ d :-
     Xnow is X + 1,
     retractall(player(_,_)),
     asserta(player(Xnow, Y)),
+    time(H, M),
+    addTime(H, M, 1, HNew, MNew),
+    setTime(HNew, MNew),
     !, format('~w bergerak ke timur satu langkah!', [Name]), nl, loc_check(Xnow,Y).
