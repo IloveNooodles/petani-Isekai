@@ -1,9 +1,11 @@
 Feli
 
 1. Pemain (done kayanya)
-2. Farming (kurang lebih done, tinggal mindahin checkRipe ke tiap nambah day)
+2. Farming (done kayanya)
 3. Stamina (done kayanya)
 4. Exp dan Level (done kayanya)
+5. Kappa (done)
+6. Implement time
 
 Adit
 

@@ -16,22 +16,24 @@ item(steak, consumable).
 item(potion, consumable).
 
 /* Farming */
-item(padi, farming).
-item(benihSurga, farming).
-item(bibitMisterius, farming).
-item(cocoaSeeds, farming).
-item(cucumberSeeds, farming).
-item(tomatoSeeds, farming).
-item(carrotSeeds, farming).
-item(coffeeSeeds, farming).
-item(garlicSeeds, farming).
-item(bijiKopi, farming).
+item(appleSeed, farming).
+item(misteriousSeed, farming).
+item(cucumberSeed, farming).
+item(garlicSeed, farming).
+item(pumpkinSeed, farming).
+item(sunflowerSeed, farming).
+item(tomatoSeed, farming).
+item(wheatSeed, farming).
+item(apple, farming).
+item(misterious, farming).
+item(pumpkin, farming).
+item(sunflower, farming).
+item(wheat, farming).
 item(carrot, farming).
 item(cokelat, farming).
 item(cucumber, farming).
 item(tomato, farming).
 item(garlic, farming).
-item(bibitDunia, farming).
 item(herb, farming).
 item(fertilizer, farming).
 
@@ -82,17 +84,6 @@ item(bait, fishing).
 item(goodBait, fishing).
 item(greatestBait, fishing).
 
-/* Seeds */
-ripeTime(padi, 2).
-ripeTime(benihSurga, 10).
-ripeTime(bibitMisterius, 10).
-ripeTime(cocoaSeeds, 5).
-ripeTime(cucumberSeeds, 7).
-ripeTime(tomatoSeeds, 2).
-ripeTime(carrotSeeds, 2).
-ripeTime(coffeeSeeds, 5).
-ripeTime(garlicSeeds, 7).
-
 /* Tools */
 /* Buat bagian tools ini bakal ada nama, tipe, sama level */
 asserta(item(shovel, tools, 1)).
@@ -110,24 +101,25 @@ itemPrice(milkshake, 300).
 itemPrice(crisbar, 500).
 itemPrice(steak, 1000).
 itemPrice(potion, 2000).
-itemPrice(padi, 50).
-itemPrice(benihSurga, 5000).
-itemPrice(bibitMisterius, 0).
-itemPrice(cocoaSeeds, 100).
-itemPrice(cucumberSeeds, 50).
-itemPrice(tomatoSeeds, 75).
-itemPrice(carrotSeeds, 75).
-itemPrice(garlicSeeds, 75).
-itemPrice(coffeeSeeds, 100).
-itemPrice(bijiKopi, 300).
+itemPrice(appleSeed, 50).
+itemPrice(misteriousSeed, 0).
+itemPrice(cucumberSeed, 50).
+itemPrice(garlicSeed, 75).
+itemPrice(pumpkinSeed, 50).
+itemPrice(sunflowerSeed, 25).
+itemPrice(tomatoSeed, 75).
+itemPrice(wheatSeed, 50).
+itemPrice(apple, 200).
+itemPrice(pumpkin, 300).
+itemPrice(sunflower, 100).
+itemPrice(wheat, 250).
 itemPrice(carrot, 250).
 itemPrice(cokelat, 300).
 itemPrice(cucumber, 200).
 itemPrice(tomato, 200).
 itemPrice(garlic, 250).
-itemPrice(bibitDunia, 2500).
 itemPrice(herb, 100).
-itemPrice(fertilizer, 250).
+itemPrice(fertilizer, 500).
 itemPrice(chicken, 1000).
 itemPrice(goldenChicken, 2000).
 itemPrice(sheep, 1500).

@@ -161,7 +161,31 @@ possibleWeatherDingin(Number):-
 
 /* bisa aja tambahin status effect kaya kalo dingin gimana kalo panas gimana */
 startTime:-
-    setTime(9,0).
+  setTime(9,0).
+
+addTime(H, M, Plus, H, MNew):-
+  MNew is M + Plus,
+  MNew < 60,
+  H =< 23,
+  !.
+
+addTime(H, M, Plus, HNew, MNew):-
+  New is M + Plus,
+  New >= 60,
+  NewMinute is New - 60,
+  NewH is H + 1,
+  wrapHour(NewH, NewHour),
+  addTime(NewHour, NewMinute, 0, HNew, MNew).
+
+wrapHour(H, H):-
+  H < 24,
+  !.
+
+wrapHour(H, HNew):-
+  H >= 24,
+  nextDay,
+  HNew is 0,
+  !.
 
 endgame:-
   endGame(Endgame), gameCompleted(Completed),

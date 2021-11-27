@@ -165,6 +165,24 @@ inventoryFarm :-
     write('Inventory farming kamu:\n'),
     showInvenType([H1|T1], List, farming).
 
+% nampilin inven seed
+inventorySeed :-
+    inventory(List, _),
+    inventoryOneItem([H1|T1]),
+    write('You have:\n'),
+    showInvenSeed([H1|T1], List).
+
+showInvenSeed([], _) :- !.
+showInvenSeed([H|T], InvenLengkap) :-
+    \+ seed(H, _),
+    !,
+    showInvenSeed(T, InvenLengkap).
+showInvenSeed([H|T], InvenLengkap) :-
+    seed(H, _), 
+    countXinInven(H, InvenLengkap, Count),
+    format('>> ~d ~w\n', [Count, H]),
+    showInvenSeed(T, InvenLengkap).
+
 % nampilin inven fish
 inventoryFishing :-
     inventory(List, _),
