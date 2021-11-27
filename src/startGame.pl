@@ -74,13 +74,19 @@ setStat(fisherman):-
     asserta(job(fisherman)),
     asserta(exp(fish, 20)),
     asserta(exp(farm, 0)),
-    asserta(exp(ranch, 0)).
+    asserta(exp(ranch, 0)),
+    addInven(fishingRod),
+    addInven(bait, 3).
 
 setStat(farmer):-
     asserta(job(farmer)),
     asserta(exp(fish, 0)),
     asserta(exp(farm, 20)),
-    asserta(exp(ranch, 0)).
+    asserta(exp(ranch, 0)),
+    addInven(fertilizer),
+    addInven(appleSeed),
+    addInven(wheatSeed),
+    addInven(tomatoSeed).
 
 setStat(rancher):-
     asserta(job(rancher)),
