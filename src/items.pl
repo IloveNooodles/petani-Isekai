@@ -1,8 +1,5 @@
 :- dynamic(item/3).
 
-/* Testing buat farming */
-item(testSeed, farming, 10).
-
 /* Item bakal ada ada 2 arity nama sama tipe */
 
 /* Consumable */
@@ -86,11 +83,11 @@ item(greatestBait, fishing).
 
 /* Tools */
 /* Buat bagian tools ini bakal ada nama, tipe, sama level */
-asserta(item(shovel, tools, 1)).
-asserta(item(shear, tools, 1)).
-asserta(item(fishingRod, tools, 1)).
-asserta(item(wateringcan, tools, 1)).
-asserta(item(catchingNet, tools, 1)).
+item(shovel, tools, 1).
+item(shear, tools, 1).
+item(fishingRod, tools, 1).
+item(wateringcan, tools, 1).
+item(catchingNet, tools, 1).
 
 /* Item price bakal ada 2 arity isinya <nama, harga> possibly ini bisa dipake buat beli/jual */
 /* Kayaknya bakal dibedain sama waktu panennya aja sih */
@@ -169,9 +166,6 @@ itemPrice(fishingRod, 1000).
 itemPrice(wateringcan, 1000).
 itemPrice(catchingNet, 1000).
 
-/* item effect */
-/* nama item, apa yang berubah, jumlah perubahan */
-
 /* consumables */
 itemEffect(kopiCampur, stamina, 5).
 itemEffect(energyDrink, stamina, 10).
@@ -181,43 +175,5 @@ itemEffect(crisbar, stamina, 70).
 itemEffect(steak, stamina, 100).
 itemEffect(potion, exp, 1000).
 
-
-/* farming + shovel + wateringcan*/
-itemEffect(padi, exp, 2).
-itemEffect(benihSurga, exp, 50).
-itemEffect(bibitMisterius, exp, 500).
-itemEffect(cocoaSeeds, exp, 5).
-itemEffect(cucumberSeeds, exp, 3).
-itemEffect(tomatoSeeds, exp, 3).
-itemEffect(carrotSeeds, exp, 3).
-itemEffect(coffeeSeeds, exp, 5).
-itemEffect(garlicSeeds, exp, 3).
-
-/* fishing  yang punya efek cuma fishing rod sm catching net*/
-itemEffect(bait, exp, 5).
-itemEffect(goodBait, exp, 20).
-itemEffect(greatestBait, exp, 50).
-
-/* ranching */
-itemEffect(chickenFeed, exp, 20).
-itemEffect(cowFeed, exp, 20).
-itemEffect(sheepFeed, exp, 20).
-
 levelUpItem(ToolsName):-
   item(ToolsName, tools, Level), ! , Newlevel is Level + 1, retractall(item(_,_,_)), asserta(item(ToolsName, tools, Newlevel)).
-
-use(ItemName):-
-  item(ItemName, Category), Category = consumable, !, efek.
-
-use(ItemName):-
-  item(ItemName, Category), Category = farming, !, efek.
-
-use(ItemName):-
-  item(ItemName, Category), Category = ranching, !, efek.
-
-use(ItemName):-
-  item(ItemName, Category), Category = fishing, !, efek.
-
-use(ItemName):-
-  item(ItemName, Category), Category = tools, !, efek.
-
