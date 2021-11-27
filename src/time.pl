@@ -30,7 +30,7 @@ nextDay:-
 
 nextDay:-
     day(X),
-    X < 365,
+    X < 365, !,
     Y is X + 1,
     setDay(Y),
     setWeather,
@@ -82,9 +82,9 @@ setSeason(Day):-
 
 /* tergantung mau mulai dari cuaca kaya gimana */
 /* cuaca harus bisa dirandom belom kepikiran */
-/* Buat musim semi: panas, ujan jarang bgt, angin*/
-/* Buat musim panas: panas, ujan, angin */
-/* Buat musim Gugur: panas, ujan, angin, daun jatuh2 gatau namanya apa */
+/* Buat musim semi: panas, hujan jarang bgt, angin*/
+/* Buat musim panas: panas, hujan, angin */
+/* Buat musim Gugur: panas, hujan, angin, daun jatuh2 gatau namanya apa */
 /* Buat musim Dingin: snow, cold, freeze */
 
 startWeather:-
@@ -119,12 +119,12 @@ possibleWeatherSemi(Number):-
   Number < 3, retractall(weather(_)), asserta(weather(badai)).
 
 possibleWeatherSemi(Number):-
-  Number < 10, retractall(weather(_)), asserta(weather(ujan)).
+  Number < 10, retractall(weather(_)), asserta(weather(hujan)).
 
 possibleWeatherSemi(Number):-
   Number < 40, retractall(weather(_)), asserta(weather(panas)).
 
-possibleWeatherSemi(Number):-
+possibleWeatherSemi(_):-
   retractall(weather(_)), asserta(weather(berawan)).
 
 /*Musim panas*/
@@ -135,9 +135,12 @@ possibleWeatherPanas(Number):-
   Number < 10, retractall(weather(_)), asserta(weather(berawan)).
 
 possibleWeatherPanas(Number):-
-  Number < 40, retractall(weather(_)), asserta(weather(sangatPanas)).
+  Number < 20, retractall(weather(_)), asserta(weather(hujan)).
 
 possibleWeatherPanas(Number):-
+  Number < 40, retractall(weather(_)), asserta(weather(sangatPanas)).
+
+possibleWeatherPanas(_):-
   retractall(weather(_)), asserta(weather(panas)).
 
 /*Musim gugur*/
@@ -149,13 +152,16 @@ possibleWeatherGugur(Number):-
   Number < 20, retractall(weather(_)), asserta(weather(berangin)).
 
 possibleWeatherGugur(Number):-
+  Number < 40, retractall(weather(_)), asserta(weather(hujan)).
+
+possibleWeatherGugur(_):-
   retractall(weather(_)), asserta(weather(berawan)).
 
 /*Musim dingin*/
 possibleWeatherDingin(Number):-
   Number < 5, retractall(weather(_)), asserta(weather(badaiSalju)).
 
-possibleWeatherDingin(Number):-
+possibleWeatherDingin(_):-
   retractall(weather(_)), asserta(weather(salju)).
 
 
@@ -196,4 +202,3 @@ endgame:-
   endGame(Endgame), gameCompleted(Completed),
   Endgame = true, Completed = true,
   write('Congratulations! After all of your hardwork, you have finally collected 20000 golds!'), nl, write('Now you can rest assured and tell those bad guys who\'s the boss!').
-
