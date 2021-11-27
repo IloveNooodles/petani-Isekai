@@ -22,10 +22,11 @@ Afan
 
 Gare
 
-1. Items (WIP ini mungkin masih ada yang belom kaya use item sama katanya bakal ada yang dirubah)
-2. House (done tinggal peri tidur ngapain)
-3. Endgame (Done bisa di check di main )
+1. Items (WIP, Use consumables sm display )
+2. House (Done)
+3. Endgame (Done)
 4. Season and time (Done)
+5. alchemist (WIP)
 
 Changelog:
 
@@ -41,4 +42,6 @@ Changelog:
 - Add kappa (Feli)
 - Add writeDiary, readDiary (Gare)
 - Add diary and animation (Feli)
-- Added more functions in inventory. Added fishing(WIP). 
+- Added more functions in inventory. Added fishing(WIP).
+- adding alchemist, implement dream (peri tidur), adding checking function at the start  
+  , adding checking function at the start, edit house, adding shop implement in alchemist, adding some states in some files. (Gare)

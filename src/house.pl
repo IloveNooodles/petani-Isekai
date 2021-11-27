@@ -5,6 +5,7 @@ house:-
   write('Game has not started yet!\n').
 
 house:-
+  loc_tile(X), !, X = home,
   write('What do you want to do?\n'),
   write('- bed\n'),
   write('- writeDiary\n'),
@@ -16,12 +17,13 @@ writeDiary:-
   write('Game has not started yet!\n').
 
 writeDiary:-
+  loc_tile(X), !, X = home,
   day(Day),
   number_atom(Day, X),
   atom_concat('diary/Day', X , Day2),
   atom_concat(Day2, '.txt', Daytxt),
   write('You open your diary and grab a pen\n'),
-  write('What are you want to tell to the diary today?\n'),
+  write('What are you want to tell to the diary today? (wrap the text with \'\')\n'),
   open(Daytxt, write, In),
   read(Word),
   atom_concat('\'', Word, NewWord1),
@@ -50,12 +52,14 @@ readDiary:-
   write('Game has not started yet!\n').
 
 readDiary:-
+  loc_tile(X), !, X = home,
   directory_files('diary', Files),
   Files = [_, _|T],
   T = [],
   write('You haven\'t write a diary!\n'), !. 
 
 readDiary:-
+  loc_tile(X), !, X = home,
   listDiary,
   directory_files('diary', Files),
   write('Choose which one of the diary you want to read!\n'),
@@ -89,12 +93,14 @@ sleep:-
   write('Game has not started yet!\n').
 
 sleep:-
+  loc_tile(X), !, X = home,
   printSleep,
   random(1, 10000, Number),
-  dream(Number),
   write('You had a good sleep.\n\n'),
   sleep(0.75),
+  doneAlchemist,
   nextDay,
+  dream(Number),
   status.
 
 /* ANIMATION */
@@ -124,5 +130,11 @@ exitHouse:-
 /* peri tidur */
 dream(Number):-
   Number < 100,
-  write('You\'ve met fairy in your dream'), nl, write('What do you want for request\n > '),
-  read(_).
+  write('You\'ve met fairy in your dream'), nl, write('She says that she can teleport you to anyplace you want to go!\n'),
+  write('Enter X coordinate (2-21)'),
+  read(X),
+  write('Enter Y coordinate (2-21)'),
+  read(Y),
+  retractall(player(_, _)),
+  asserta(player(X, Y)),
+  write('You woke up and realize that you have teleported to selected location'), nl.

@@ -19,6 +19,7 @@ kolom(22).
 :- dynamic(ripe_coordinate/3).
 :- dynamic(planted_coordinate/4). /* koordinat border */
 :- dynamic(water_coordinate/2). /* koordinat border */
+:- dynamic(wizard_coordinate/2). /* koordinat border */
 :- dynamic(loc_tile/1).
 :- dynamic(playerName/1). /* ini sementara */
 
@@ -32,6 +33,7 @@ quest = Q
 dirt = -
 digged = =
 water = o
+wizard = W
 */
 
 /*
@@ -46,7 +48,6 @@ ripe_corn: player di tanaman corn yang sudah matang
 lake_edge: player di pinggir danau
 dirt: player di tanah kosong
 */
-
 /* Map */
 fill_map :- 
     /* hapus dulu map sebelomnya */
@@ -61,12 +62,14 @@ fill_map :-
     retractall(planted_coordinate(_,_)),
     retractall(ripe_coordinate(_,_,_)),
     retractall(water_coordinate(_,_,_)),
+    retractall(wizard_coordinate(_,_)),
     /* buat map */
     % Border map
     asserta(border(1,_)),
     asserta(border(_,1)),
     asserta(border(22,_)),
     asserta(border(_,22)),
+    asserta(wizard_coordinate(18,18)),
     % Player
     asserta(player(12,5)),
     % market
@@ -131,10 +134,12 @@ print_loc_now :- playerName(Name), loc_tile(digged), !, format('~w sedang mengec
 print_loc_now :- playerName(Name), loc_tile(planted), !, format('~w sedang mengecek kebun!', [Name]), nl.
 print_loc_now :- playerName(Name), loc_tile(ripe), !, format('~w sedang mengecek kebun! Wah kayanya udah mateng!', [Name]), nl.
 print_loc_now :- playerName(Name), loc_tile(lake_edge), !, format('~w di pinggir danau!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(wizard), !, format('~w masuk ke tempat wizard!', [Name]), nl.
 
 /* print karakter */
 printChar(X, Y) :- border(X, Y), !, write('#').
 printChar(X, Y) :- player(X, Y), !, write('P').
+printChar(X, Y) :- hasAlchemist(Z), !, Z = true, wizard_coordinate(X, Y), !, write('W').
 printChar(X, Y) :- market_coordinate(X, Y), !, write('M').
 printChar(X, Y) :- home_coordinate(X, Y), !, write('H').
 printChar(X, Y) :- ranch_coordinate(X, Y), !, write('R').
@@ -190,7 +195,15 @@ loc_check(X,Y) :-
     retractall(loc_tile(_)),
     asserta(loc_tile(ranch)),
     print_loc_now.
-    
+
+% cek di wizard
+loc_check(X,Y) :- 
+    wizard_coordinate(X,Y),
+    !,
+    retractall(loc_tile(_)),
+    asserta(loc_tile(wizard)),
+    print_loc_now.
+
 % cek di Quest
 loc_check(X,Y) :- 
     quest_coordinate(X,Y),

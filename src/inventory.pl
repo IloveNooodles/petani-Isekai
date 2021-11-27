@@ -6,9 +6,11 @@ Buat predikat inventory([], 100). [] menyatakan list kosong di awal, 100 menyata
 
 :- dynamic(inventory/2).
 :- dynamic(inventoryOneItem/1).
+:- dynamic(isInventoryFull/1).
 
 inventory([], 0).
 inventoryOneItem([]).
+isInventoryFull(false).
 
 /* ***********Fungsi buat manipulasi list biasa*********** */
 % concat Val di List
@@ -26,6 +28,21 @@ isXinList(X, [X|_T]) :- !.
 isXinList(X, [_H|T]) :- isXinList(X, T).
 
 /* ***********Fungsi-fungsi buat operasi list inven*********** */
+% checkUdahPenuhApaBelum
+checkInventory:-
+  inventory(_ListIn, Total),
+  NewTotal is Total + 1,
+  NewTotal > 100,
+  retractall(isInventoryFull(_)),
+  asserta(isInventoryFull(true)).
+
+checkInventory:-
+  inventory(_ListIn, Total),
+  NewTotal is Total + 1,
+  NewTotal <= 100,
+  retractall(isInventoryFull(_)),
+  asserta(isInventoryFull(false)).
+
 % Menghitung kemunculan X di inven
 countXinInven(_X, [], 0) :- !.
 countXinInven(X, [Y], 0) :- X \== Y, !.
@@ -34,6 +51,7 @@ countXinInven(X, [H|T], Count) :-
     countXinInven(X, T, Count2),
     (X == H, Count is Count2 + 1 ; X \== H, Count is Count2), !.
 % Menambah sebuah item X di inventory
+
 addInven(_X) :-
     inventory(_ListIn, Total),
     Total = 100,

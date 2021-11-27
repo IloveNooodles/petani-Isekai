@@ -38,6 +38,7 @@ nextDay:-
     end(Y),
     setDay(Y),
     setWeather,
+    startAlchemist,
     setSeason(Y).
 
 setDay(Day):-
@@ -200,12 +201,44 @@ wrapHour(H, HNew):-
 endgame:-
   endGame(Endgame), gameCompleted(Completed),
   Endgame = true, Completed = false,
-  write('You have worked hard, but in the end result is all that matters.\nMay God bless you in the future with kind people!'),
-  write('Congratulations for finishing the game.\nHere\'s your last status: '),
-  status,
-  halt.
+  write('You have worked hard, but in the end result is all that matters.\nMay God bless you in the future with kind people!\n'),
+  endGameMessage, halt.
 
 endgame:-
   endGame(true), gameCompleted(true),
   write('Congratulations! After all of your hardwork, you have finally collected 20,000 gold!'), nl, write('Now you can rest assured and tell those bad guys who\'s the boss!\n'),
-  halt.
+  endGameMessage, halt.
+
+endGameMessage:-
+    day(Day),
+    weather(Weather),
+    season(Season),
+    job(Job),
+    level(general, Level),
+    naikLevel(Level, NextExp, general),
+    level(fish, LevelFish),
+    exp(fish, ExpFish),
+    naikLevel(LevelFish, NextExpFish, fish),
+    level(farm, LevelFarm),
+    exp(farm, ExpFarm),
+    naikLevel(LevelFarm, NextExpFarm, farm),
+    level(ranch, LevelRanch),
+    exp(ranch, ExpRanch),
+    naikLevel(LevelRanch, NextExpRanch, ranch),
+    exp(general, Exp),
+    stamina(Stamina),
+    maxStamina(MaxStamina),
+    gold(Gold),
+    % Print
+    printTime,
+    write('Here\'s your last status: \n'),
+    write('-------------------------\n'),
+    format('   📆 ~d   ⛅️ ~w   🌲 ~w\n\n', [Day, Weather, Season]),
+    format('Job      : ~w\n', [Job]),
+    format('Level    : ~d (~d/~d exp)\n', [Level, Exp, NextExp]),
+    format('Fishing  : ~d (~d/~d exp)\n', [LevelFish, ExpFish, NextExpFish]),
+    format('Farming  : ~d (~d/~d exp)\n', [LevelFarm, ExpFarm, NextExpFarm]),
+    format('Ranching : ~d (~d/~d exp)\n', [LevelRanch, ExpRanch, NextExpRanch]),
+    format('Stamina  : ~d/~d\n', [Stamina, MaxStamina]),
+    format('Gold     : ~d/20000\n', [Gold]),
+    !.

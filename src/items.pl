@@ -14,7 +14,7 @@ item(potion, consumable).
 
 /* Farming */
 item(appleSeed, farming).
-item(misteriousSeed, farming).
+item(mysteriousSeed, farming).
 item(cucumberSeed, farming).
 item(garlicSeed, farming).
 item(pumpkinSeed, farming).
@@ -22,7 +22,7 @@ item(sunflowerSeed, farming).
 item(tomatoSeed, farming).
 item(wheatSeed, farming).
 item(apple, farming).
-item(misterious, farming).
+item(mysteriousItem, farming).
 item(pumpkin, farming).
 item(sunflower, farming).
 item(wheat, farming).
@@ -89,15 +89,23 @@ item(fishingRod, tools, 1).
 
 /* Item price bakal ada 2 arity isinya <nama, harga> possibly ini bisa dipake buat beli/jual */
 /* Kayaknya bakal dibedain sama waktu panennya aja sih */
+
+/* Wizard */
+itemPrice(mysteriousSeed, 100).
+itemPrice(greatestBait, 500).
+itemPrice(potion, 2000).
+itemPrice(goldenChicken, 2000).
+itemPrice(pinkSheep, 3000).
+itemPrice(cowWagyu, 5000).
+
+/* harga item biasa */
 itemPrice(energyDrink, 250).
 itemPrice(kopiCampur, 100).
 itemPrice(susuSegar, 150).
 itemPrice(milkshake, 300).
 itemPrice(crisbar, 500).
 itemPrice(steak, 1000).
-itemPrice(potion, 2000).
 itemPrice(appleSeed, 50).
-itemPrice(misteriousSeed, 0).
 itemPrice(cucumberSeed, 50).
 itemPrice(garlicSeed, 75).
 itemPrice(pumpkinSeed, 50).
@@ -116,11 +124,8 @@ itemPrice(garlic, 250).
 itemPrice(herb, 100).
 itemPrice(fertilizer, 500).
 itemPrice(chicken, 1000).
-itemPrice(goldenChicken, 2000).
 itemPrice(sheep, 1500).
-itemPrice(pinkSheep, 3000).
 itemPrice(cow, 2500).
-itemPrice(cowWagyu, 5000).
 itemPrice(wool, 400).
 itemPrice(egg, 350).
 itemPrice(goldenEgg, 700).
@@ -157,12 +162,9 @@ itemPrice(sashimi, 400).
 itemPrice(sushi, 400).
 itemPrice(bait, 250).
 itemPrice(goodBait, 350).
-itemPrice(greatestBait, 500).
 itemPrice(shovel, 1000).
 itemPrice(shear, 1500).
 itemPrice(fishingRod, 1000).
-itemPrice(wateringcan, 1000).
-itemPrice(catchingNet, 1000).
 
 /* consumables */
 itemEffect(kopiCampur, stamina, 5).
@@ -175,3 +177,13 @@ itemEffect(potion, exp, 1000).
 
 levelUpItem(ToolsName):-
   item(ToolsName, tools, Level), ! , Newlevel is Level + 1, retractall(item(_,_,_)), asserta(item(ToolsName, tools, Newlevel)).
+
+checkGold(X, CurrentGold):-
+  itemPrice(X, Y), !
+  CurrentGold < Y, 
+  write('You don\'t have that much money!\n').
+
+checkGold(X, CurrentGold):-
+  itemPrice(X, Y), !
+  CurrentGold >= Y, 
+  format('Thank you for buying ~w!', [X]).
