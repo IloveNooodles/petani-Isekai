@@ -92,6 +92,11 @@ showInvenType([H|T], InvenLengkap, Tipe) :-
 % Update di invenOneItem
 updateInvenOne(Item) :-
     inventory(List, _),
+    inventoryOneItem(_),
+    countXinInven(Item, List, Res),
+    Res \== 0.
+updateInvenOne(Item) :-
+    inventory(List, _),
     inventoryOneItem(ListOne),
     countXinInven(Item, List, Res),
     Res =:= 0,
@@ -131,6 +136,14 @@ throw(Item, Count, Amount) :-
     !,
     NewCount is Count - 1,
     throw(Item, NewCount, Amount).
+% membuang tanpa print
+throw(Item, 1) :-
+    inventory(List, Cap),
+    retractall(inventory(_,_)),
+    NewCap is Cap - 1,
+    deleteValinList(Item, List, ListOut),
+    asserta(inventory(ListOut, NewCap)), !,
+    updateInvenOne(Item).
 
 /* Command buat inventory */
 % Buat nampilin invent

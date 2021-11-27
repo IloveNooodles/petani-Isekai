@@ -29,7 +29,7 @@ kappaEmerge:-
 actionKappa(1):-
     /* Blessings of the good harvest */
     ripenAll,
-    write('You are lucky! You meet a friendly kappa.\n')
+    write('You are lucky! You meet a friendly kappa.\n'),
     write('He looks at your crop, blesses them, and goes back to his deep slumber.\n').
 
 actionKappa(2):-
