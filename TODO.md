@@ -46,3 +46,4 @@ Changelog:
 - adding alchemist, implement dream (peri tidur), adding checking function at the start  
   , adding checking function at the start, edit house, adding shop implement in alchemist, adding some states in some files. (Gare)
 - add tutorial and backstory (Feli)
+- add quests and ranching (Afan)
