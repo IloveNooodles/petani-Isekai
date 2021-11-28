@@ -39,9 +39,14 @@ prosesInput(start) :-
 
 prosesInput(help) :-
     help,
-    write('Masukkan command (start/help/exit):\n> '), !,
+    repeat,
+    write('Masukkan command (start/help/exit):\n> '),
     read(Input),
-    prosesInput(Input).
+        (Input = start, prosesInput(start), !
+        ;
+        prosesInput(Input),
+        fail
+    ).
 
 prosesInput(exit) :-
     exit.
@@ -78,15 +83,15 @@ start:-
     read(Job),
     ((
         Job = 1,
-        setStat(fisherman),
+        setStat(fisherman), !,
         write('You chose fisherman. ')
     );(
         Job = 2,
-        setStat(farmer),
+        setStat(farmer), !,
         write('You chose farmer. ')
     );(
         Job = 3,
-        setStat(rancher),
+        setStat(rancher), !,
         write('You chose rancher. ')
     )),
     % Assert level one stats

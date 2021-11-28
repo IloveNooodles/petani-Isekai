@@ -343,7 +343,7 @@ w :-
     time(H, M),
     addTime(H, M, 1, HNew, MNew),
     setTime(HNew, MNew),
-    !, format('~w bergerak ke utara satu langkah!', [Name]), nl, loc_check(X,Ynow), print_loc_now.
+    !, format('~w bergerak ke utara satu langkah!', [Name]), nl, loc_check(X,Ynow).
 % Buat a
 a :-
     \+ playerName(_), !,

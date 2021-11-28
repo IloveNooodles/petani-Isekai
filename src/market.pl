@@ -24,7 +24,7 @@ availItems(shear).
 availItems(fishingRod).
 
 market:-
-    \+ playerName(_), !,
+  \+ playerName(_), !,
   write('Game has not started yet!\n').
 
 market:-
@@ -36,7 +36,7 @@ market:-
   write('Welcome to marketplace\n'),
   write('What do you want to do?\n'),
   write('1. buy\n'),
-  write('2. sell\n'),
+  write('2. sell\n> '),
   read(Input),
   processInputMarket(Input).
 
@@ -51,7 +51,7 @@ processInputMarket(X):-
 processInputMarket(_):-
   write('Please input the correct option!\n'),
   write('1. buy\n'),
-  write('2. sell\n'),
+  write('2. sell\n> '),
   read(Input),
   processInputMarket(Input).
 
@@ -108,7 +108,7 @@ listCategory(ranching):-
 
 listCategory(tools):-
   write('------- tools ------\n'),
-  write('Select the tools that you wanna level up!\n')
+  write('Select the tools that you wanna level up!\n'),
   write('1. shear - 1500G\n'),
   write('2. shovel - 1000G\n'),
   write('3. fishingRod - 1000G\n').
@@ -117,15 +117,36 @@ buy:-
   readCategory,
   read(Items), 
   availItems(Items),
-  gold(Current)
+  gold(Current),
   checkGold(Items, Current),
   hasMoney(M), M = true,
   itemPrice(Items, Price),
   NewGold is Current - Price,
   retractall(gold(_)),
   asserta(gold(NewGold)),
-  addInven(X).
+  addInven(Items).
 
-/*
 sell :-
-  write('What')  adit */ 
+  inventory,
+  inventory(List, _Total),
+  write('What item do you wanna sell?\n> '),
+  read(Item),
+  ((
+  countXinInven(Item, List, Count),
+  Count =:= 0,
+  write('You don\'t have that item!\n')
+  );
+  (
+  inventory(List, _Total),
+  countXinInven(Item, List, Count),
+  Count > 0,
+  itemPrice(Item, Value),
+  gold(Gold),
+  format('You have ~d ~w! How many do you want to sell?\n> ', [Count, Item]),
+  read(Amount),
+  retractall(gold(_)),
+  NewGold is (Gold + Value * Amount),
+  asserta(gold(NewGold)),
+  throw(Item, Amount)
+  )),
+  !.

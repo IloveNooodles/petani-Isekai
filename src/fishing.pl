@@ -118,29 +118,49 @@ updateFishST :-
 % Untuk mendapatkan ikan
 getFish(_Level, 0, fisherman) :-
     write('Kamu tidak mendapatkan apa-apa!\n'),
-    earnExp(fish, 10), !,
-    write('Kamu mendapatkan 10 exp fishing!\n').
+    earnExp(fish, 10),
+    earnExp(general, 20),
+    time(H, M),
+    addTime(H, M, 15, HNew, MNew),
+    setTime(HNew, MNew), !,
+    write('Kamu mendapatkan 10 exp fishing!\n'),
+    write('Kamu mendapatkan 20 exp!\n').
 
 getFish(_Level, 0, _Job) :-
     write('Kamu tidak mendapatkan apa-apa!\n'),
-    earnExp(fish, 5), !,
-    write('Kamu mendapatkan 5 exp fishing!\n').
+    earnExp(fish, 5),
+    earnExp(general, 20),
+    time(H, M),
+    addTime(H, M, 15, HNew, MNew),
+    setTime(HNew, MNew), !,
+    write('Kamu mendapatkan 5 exp fishing!\n'),
+    write('Kamu mendapatkan 20 exp!\n').
 
 getFish(Level, Rare, fisherman) :-
     ikan(Nama, Level, Rare),
     format('Kamu mendapatkan ~w!\n', [Nama]),
     earnExp(fish, 20), 
+    earnExp(general, 20), 
     addInven(Nama),
+    time(H, M),
+    addTime(H, M, 15, HNew, MNew),
+    setTime(HNew, MNew),
     !,
-    write('Kamu mendapatkan 20 exp fishing!\n').
+    write('Kamu mendapatkan 20 exp fishing!\n'),
+    write('Kamu mendapatkan 20 exp!\n').
 
 getFish(Level, Rare, _Job) :-
     ikan(Nama, Level, Rare),
     format('Kamu mendapatkan ~w!\n', [Nama]),
     earnExp(fish, 10), 
     addInven(Nama),
+    earnExp(general, 20),
+    time(H, M),
+    addTime(H, M, 15, HNew, MNew),
+    setTime(HNew, MNew),
     !,
-    write('Kamu mendapatkan 10 exp fishing!\n').
+    write('Kamu mendapatkan 10 exp fishing!\n'),
+    write('Kamu mendapatkan 20 exp!\n').
 
 % Buat ngeproses input bait
 % buat bait
@@ -255,7 +275,7 @@ fish :-
     \+ isXinInven(goodBait),
     \+ isXinInven(greatestBait),
     !,
-    write('Kamu ngga bisa mancing karena punya bait!\n').
+    write('Kamu ngga bisa mancing karena ngga punya bait!\n').
 
 % Kasus bawa bait
 fish :-

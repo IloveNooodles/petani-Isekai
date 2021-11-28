@@ -164,6 +164,23 @@ throw(Item, 1) :-
     asserta(inventory(ListOut, NewCap)), !,
     updateInvenOne(Item).
 
+throw(Item, Count) :-
+    inventory(List, _),
+    countXinInven(Item, List, Res),
+    Count > Res,
+    !,
+    write('Jumlahnya kelebihan!!\n').
+
+throw(Item, Count) :-
+    inventory(List, Cap),
+    retractall(inventory(_,_)),
+    NewCap is Cap - 1,
+    deleteValinList(Item, List, ListOut),
+    asserta(inventory(ListOut, NewCap)), 
+    !,
+    NewCount is Count - 1,
+    throw(Item, NewCount).
+
 /* Command buat inventory */
 inventory :-
     \+ playerName(_), !,
