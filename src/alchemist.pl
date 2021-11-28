@@ -12,14 +12,15 @@ hasCowWagyu(0).
 
 startAlchemist:-
   random(1, 1000, Number),
-  Number < 10, !, retractall(hasAlchemist(_)), asserta(hasAlchemist(true)),
-  write('An alchemist has appeared in the city. Go check it and don\'t miss a chance!').
+  Number < 100, !, retractall(hasAlchemist(_)), asserta(hasAlchemist(true)),
+  write('An alchemist has appeared in the city. Go check it and don\'t miss a chance!\n\n').
 
 startAlchemist:-
   !, retractall(hasAlchemist(_)), asserta(hasAlchemist(false)).
 
 doneAlchemist:-
-  hasAlchemist(true), retractall(hasAlchemist(_)), asserta(hasAlchemist(false)).
+  hasAlchemist(true), retractall(hasAlchemist(_)), asserta(hasAlchemist(false)),
+  write('An alchemist has left in the city.\n\n'), !.
 
 doneAlchemist:- !.
 
