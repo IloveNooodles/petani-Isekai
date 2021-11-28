@@ -236,7 +236,8 @@ ranch :-
     animalQuantity(total, 0),
     !,
     write('Welcome to the ranch!\n'),
-    write('You currently have no animals, get some at the market!\n').
+    write('You currently have no animals, get some at the market!\n'),
+    checkTutorial(12).
 
 % kasus di ranch ada animal
 ranch :-
@@ -246,7 +247,8 @@ ranch :-
     QtyTotal > 0,
     write('Welcome to the ranch! You have:\n'),
     forall(animalQuantity(Animal,Qty), ((Qty>0, Animal\==total, format('- ~w ~w\n', [Qty, Animal]));true)),
-    write('\nWhat do you want to do?\n').
+    write('\nWhat do you want to do?\n'),
+    checkTutorial(12).
 
 % Command chicken
 chicken:-
@@ -425,7 +427,7 @@ kill :-
     write('So you have decided to kill off one of your animals to get some juicy meat, ey?\n'),
     write('Well here are your selections:\n'),
     forall(animalQuantity(Animal,Qty), ((Qty>0, Animal\==total, format('- ~w ~w\n', [Qty, Animal]));true)),
-    write('\nWhich animal do you choose to do the sacrifice?\n'),
+    write('\nWhich animal do you choose to do the sacrifice?\n> '),
     reduceST(9),
     read(Input),
     removeAnimal(Input, Removed),

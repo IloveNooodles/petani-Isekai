@@ -12,10 +12,11 @@ house:-
 house:-
   loc_tile(X), !, X = home,
   write('What do you want to do?\n'),
-  write('- bed\n'),
+  write('- sleep\n'),
   write('- writeDiary\n'),
   write('- readDiary\n'),
-  write('- exitHouse\n').
+  write('- exitHouse\n'),
+  checkTutorial(16).
 
 writeDiary:-
   \+ playerName(_), !,
@@ -121,7 +122,8 @@ sleep:-
   doneAlchemist,
   nextDay,
   dream(Number),
-  status.
+  status,
+  checkTutorial(17).
 
 /* ANIMATION */
 printSleep:-

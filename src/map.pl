@@ -126,14 +126,14 @@ fill_map :-
     asserta(loc_tile(dirt)).
 
 % Debugging loc_check
-print_loc_now :- playerName(Name), loc_tile(quest), !, format('~w bisa mengambil quest!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(quest), !, format('~w bisa mengambil quest!', [Name]), nl, checkTutorial(18).
 print_loc_now :- playerName(Name), loc_tile(market), !, format('~w masuk ke Marketplace!', [Name]), nl, checkTutorial(5).
-print_loc_now :- playerName(Name), loc_tile(home), !, format('~w masuk ke Home!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(home), !, format('~w masuk ke Home!', [Name]), nl, checkTutorial(15).
 print_loc_now :- playerName(Name), loc_tile(ranch), !, format('~w masuk ke Ranch!', [Name]), nl, checkTutorial(11).
 print_loc_now :- playerName(Name), loc_tile(digged), !, format('~w sedang mengecek kebun!', [Name]), nl.
 print_loc_now :- playerName(Name), loc_tile(planted), !, format('~w sedang mengecek kebun!', [Name]), nl.
 print_loc_now :- playerName(Name), loc_tile(ripe), !, format('~w sedang mengecek kebun! Wah kayanya udah mateng!', [Name]), nl.
-print_loc_now :- playerName(Name), loc_tile(lake_edge), !, format('~w di pinggir danau!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(lake_edge), !, format('~w di pinggir danau!', [Name]), nl, checkTutorial(13).
 print_loc_now :- playerName(Name), loc_tile(wizard), !, format('~w masuk ke tempat wizard!', [Name]), nl.
 
 /* print karakter */
