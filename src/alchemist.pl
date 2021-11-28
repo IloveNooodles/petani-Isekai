@@ -39,6 +39,7 @@ shopAlchemist:-
   write('I read an old book in this town library, it said that this town has some mysterious being in the lake\n'),
   write('Some people have seen it only in rain, i wonder if that is true...\n'),
   write('Anyway while I\'m still here, you can check some wonderful items that i got from travelling...\n'),
+  write('------- Alchemist ------\n'),
   write('1. mysteriousSeed - 100G\n'),
   write('2. greatestBait - 500G\n'),
   write('3. potion - 2000G\n'),

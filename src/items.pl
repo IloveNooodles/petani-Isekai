@@ -85,7 +85,6 @@ item(greatestBait, fishing).
 
 /* Tools */
 /* Buat bagian tools ini bakal ada nama, tipe, sama level */
-item(shovel, tools, 1).
 item(shear, tools, 1).
 item(fishingRod, tools, 1).
 
