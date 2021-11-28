@@ -97,9 +97,9 @@ listCategory(farming):-
 
 listCategory(ranching):-
   write('------- Ranching ------\n'),
-  write('1. chicken - 50G\n'),
-  write('2. sheep - 100G\n'),
-  write('3. cow - 750G\n> ').
+  write('1. chicken - 300G\n'),
+  write('2. sheep - 800G\n'),
+  write('3. cow - 1500G\n> ').
 
 listCategory(tools):-
   item(fishingRod, tools, Level), !,

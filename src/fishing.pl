@@ -145,6 +145,7 @@ getFish(Level, Rare, fisherman) :-
     time(H, M),
     addTime(H, M, 15, HNew, MNew),
     setTime(HNew, MNew),
+    fishCompletion(1),
     !,
     write('Kamu mendapatkan 20 exp fishing!\n'),
     write('Kamu mendapatkan 20 exp!\n').
@@ -158,6 +159,7 @@ getFish(Level, Rare, _Job) :-
     time(H, M),
     addTime(H, M, 15, HNew, MNew),
     setTime(HNew, MNew),
+    fishCompletion(1),
     !,
     write('Kamu mendapatkan 10 exp fishing!\n'),
     write('Kamu mendapatkan 20 exp!\n').

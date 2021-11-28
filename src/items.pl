@@ -124,9 +124,9 @@ itemPrice(tomato, 200).
 itemPrice(garlic, 250).
 itemPrice(herb, 100).
 itemPrice(fertilizer, 250).
-itemPrice(chicken, 50).
-itemPrice(sheep, 100).
-itemPrice(cow, 750).
+itemPrice(chicken, 300).
+itemPrice(sheep, 800).
+itemPrice(cow, 1500).
 itemPrice(wool, 400).
 itemPrice(egg, 350).
 itemPrice(goldenEgg, 700).
