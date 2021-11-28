@@ -194,4 +194,5 @@ tutorialStep(20):-
     write('\nCongratulations on the completion of your first quest!\n'),
     write('Now you are ready to face the world\n'),
     write('Go get those 20,000 gold!\n'),
+    write('\nIf you need help later, just type \'help.\'\n'),
     setTutorial(21).
