@@ -99,27 +99,27 @@ fill_map :-
     asserta(water_coordinate(5,12)),
     asserta(water_coordinate(6,12)),
     asserta(water_coordinate(7,12)),
-    % water pojok kiri bawah
-    asserta(water_coordinate(4,18)),
-    asserta(water_coordinate(5,18)),
-    asserta(water_coordinate(6,18)),
-    asserta(water_coordinate(7,18)),
-    asserta(water_coordinate(3,19)),
-    asserta(water_coordinate(4,19)),
-    asserta(water_coordinate(5,19)),
-    asserta(water_coordinate(6,19)),
-    asserta(water_coordinate(7,19)),
-    asserta(water_coordinate(8,19)),
-    asserta(water_coordinate(3,20)),
-    asserta(water_coordinate(4,20)),
-    asserta(water_coordinate(5,20)),
-    asserta(water_coordinate(6,20)),
-    asserta(water_coordinate(7,20)),
-    asserta(water_coordinate(8,20)),
-    asserta(water_coordinate(4,21)),
-    asserta(water_coordinate(5,21)),
-    asserta(water_coordinate(6,21)),
-    asserta(water_coordinate(7,21)),
+    % water pojok kanan bawah
+    asserta(water_coordinate(16,18)),
+    asserta(water_coordinate(17,18)),
+    asserta(water_coordinate(18,18)),
+    asserta(water_coordinate(19,18)),
+    asserta(water_coordinate(15,19)),
+    asserta(water_coordinate(16,19)),
+    asserta(water_coordinate(17,19)),
+    asserta(water_coordinate(18,19)),
+    asserta(water_coordinate(19,19)),
+    asserta(water_coordinate(20,19)),
+    asserta(water_coordinate(15,20)),
+    asserta(water_coordinate(16,20)),
+    asserta(water_coordinate(17,20)),
+    asserta(water_coordinate(18,20)),
+    asserta(water_coordinate(19,20)),
+    asserta(water_coordinate(20,20)),
+    asserta(water_coordinate(16,21)),
+    asserta(water_coordinate(17,21)),
+    asserta(water_coordinate(18,21)),
+    asserta(water_coordinate(19,21)),
     % isi dengan dirt
     asserta(dirt(_,_)),
     % deklarasi loc tile
@@ -139,7 +139,6 @@ print_loc_now :- playerName(Name), loc_tile(wizard), !, format('~w masuk ke temp
 /* print karakter */
 printChar(X, Y) :- border(X, Y), !, write('#').
 printChar(X, Y) :- player(X, Y), !, write('P').
-printChar(X, Y) :- hasAlchemist(Z), !, Z = true, wizard_coordinate(X, Y), !, write('W').
 printChar(X, Y) :- market_coordinate(X, Y), !, write('M').
 printChar(X, Y) :- home_coordinate(X, Y), !, write('H').
 printChar(X, Y) :- ranch_coordinate(X, Y), !, write('R').
@@ -158,6 +157,8 @@ printChar(X, Y) :-
 printChar(X, Y) :- digged_coordinate(X, Y), !, write('=').
 printChar(X, Y) :- water_coordinate(X, Y), !, write('o').
 printChar(X, Y) :- dirt(X, Y), !, write('-').
+printChar(_, _) :- hasAlchemist(Z), Z = false, !.
+printChar(X, Y) :- hasAlchemist(Z), !, Z = true, wizard_coordinate(X, Y), !, write('W').
 
 % kayanya harus liat state gamenya
 map:-
@@ -165,6 +166,7 @@ map:-
     write('Game has not started yet!\n').
 
 map :-
+    playerName(_),
     forall(between(1,22,Y),(
         forall(between(1,22,X), (
             printChar(X,Y)

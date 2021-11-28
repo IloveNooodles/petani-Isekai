@@ -5,10 +5,10 @@
 :- dynamic(hasPinkSheep/1).
 :- dynamic(hasCowWagyu/1).
 
-asserta(hasAlchemist(false)).
-asserta(hasGoldenChicken(false)).
-asserta(hasPinkSheep(false)).
-asserta(hasCowWagyu(false)).
+hasAlchemist(false).
+hasGoldenChicken(false).
+hasPinkSheep(false).
+hasCowWagyu(false).
 
 startAlchemist:-
   random(1, 1000, Number),
@@ -16,7 +16,7 @@ startAlchemist:-
   write('An alchemist has appear in the city go check it and don\'t miss a chance!').
 
 doneAlchemist:-
-  hasAlchemist(X), X = true, retractall(hasAlchemist(_)), asserta(hasAlchemist(false)),
+  hasAlchemist(X), X = true, retractall(hasAlchemist(_)), asserta(hasAlchemist(false)).
 
 alchemist:-
   \+ playerName(_), !,
@@ -24,7 +24,7 @@ alchemist:-
 
 alchemist:-
   loc_tile(X), !, X = wizard,
-  shopAlchemist,
+  shopAlchemist.
 
 shopAlchemist:-
   write('I travel to many unknown place, searching for something that was never meant to be found!...\n'),
@@ -34,7 +34,7 @@ shopAlchemist:-
   write('3. potion - 2000G\n'),
   write('4. goldenChicken - 2000G\n'),
   write('5. pinkSheep - 3000G\n'),
-  write('6. cowWagyu - 5000G\n\n').
+  write('6. cowWagyu - 5000G\n\n'),
   read(X),
   buyAlchemist(X).
 

@@ -29,7 +29,7 @@ startGame:-
 /* START */
 start:-
     playerName(_), !,
-    write('Game has not started yet!\n').
+    write('You\' already started the game!\n').
 
 start:-
     % Clear all stats

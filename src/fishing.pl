@@ -38,17 +38,29 @@ ikan(angler, 5, 3).
 ikan(relicanth, 5, 4).
 
 /* ***** ANIMASI MANCING ANJAY ***** */
-fishAnim :-
-    write('  \\\\\n'),
-    write('  |   \\\\\n'),
-    write('  |       \\\\\n'),
-    write('  |           \\\\\n'),
-    write('  |               \\\\\n'),
-    write('  |                   \\\\\n'),
-    write('  |                       \\\\\n'),
-    write('~ | ~                          \\\\\n'),
-    write('~ |  ~                            \\\\\n'),
-    write('~ ~ ~ ~                            \n\n').
+fishAnim(1) :-
+    write('   \\\\\n'),
+    write('   |   \\\\\n'),
+    write('   |       \\\\\n'),
+    write('   |           \\\\\n'),
+    write('   |               \\\\\n'),
+    write('   |                   \\\\\n'),
+    write('   |                       \\\\\n'),
+    write(' ~ | ~                          \\\\\n'),
+    write(' ~ |  ~                            \\\\\n'),
+    write(' ~ ~ ~ ~                            \n\n').
+
+fishAnim(2) :-
+    write('   \\\\\n'),
+    write('   |   \\\\\n'),
+    write('   |       \\\\\n'),
+    write('   |           \\\\\n'),
+    write('   |               \\\\\n'),
+    write('   |                   \\\\\n'),
+    write('   |                       \\\\\n'),
+    write('  ~|~ ~                        \\\\\n'),
+    write(' ~ |  ~                           \\\\\n'),
+    write('  ~ ~ ~                            \n\n').
 
 fishPrint(1) :-
     write('.\n').
@@ -62,7 +74,8 @@ playFishAnim(4) :-
 
 playFishAnim(Frame) :-
     shell('clear'),
-    fishAnim,
+    AnimFrame is (Frame mod 2 + 1),
+    fishAnim(AnimFrame),
     fishPrint(Frame),
     sleep(0.75),
     NewFrame is Frame + 1,
@@ -144,8 +157,10 @@ baitInput(1) :-
     throw(bait, 1),
     playFishAnim(1), % mainkan anim mancing
     write('Kamu menggunakan bait!\n'),
-    random(0, 3, Hasil),
-    getFish(Level, Hasil, Job), 
+    random(0, 3, Hasil), % random rarity
+    LevelRndm is Level + 1,
+    random(1, LevelRndm, RndmLvl), % random level
+    getFish(RndmLvl, Hasil, Job), 
     reduceST, !. % kurangi stamina
 % buat good bait
 baitInput(2) :-
@@ -162,7 +177,9 @@ baitInput(2) :-
     playFishAnim(1),
     write('Kamu menggunakan good bait!\n'),
     random(1, 4, Hasil),
-    getFish(Level, Hasil, Job), 
+    LevelRndm is Level + 1,
+    random(1, LevelRndm, RndmLvl), % random level
+    getFish(RndmLvl, Hasil, Job),  
     reduceST, !.
 
 % buat great bait
@@ -180,7 +197,9 @@ baitInput(3) :-
     playFishAnim(1),
     write('Kamu menggunakan great bait!\n'),
     random(2, 5, Hasil),
-    getFish(Level, Hasil, Job), 
+    LevelRndm is Level + 1,
+    random(1, LevelRndm, RndmLvl), % random level
+    getFish(RndmLvl, Hasil, Job), 
     reduceST, !.
 
 % Command fishing
@@ -207,7 +226,7 @@ fish :- % kasus ngga bisa mancing karena badai
 
 fish :- % kasus ngga bisa mancing karena hujan
     loc_tile(lake_edge),
-    weather(ujan),
+    weather(hujan),
     !,
     write('Cuaca lagi hujan!!\nIkannya pada masuk ke dasar danau!!\nKamu ngga bisa mancing!!\n').
 

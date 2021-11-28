@@ -25,6 +25,7 @@
 :- include('farming.pl'). % dig, plant, harvest, checkRipe(X,Y), and other functions.
 :- include('ranching.pl').
 :- include('quest.pl').
+:- include('alchemist.pl').
 
 /* SPECIALS */
 :- include('kappa.pl').

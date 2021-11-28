@@ -39,7 +39,7 @@ checkInventory:-
 checkInventory:-
   inventory(_ListIn, Total),
   NewTotal is Total + 1,
-  NewTotal <= 100,
+  NewTotal =< 100,
   retractall(isInventoryFull(_)),
   asserta(isInventoryFull(false)).
 

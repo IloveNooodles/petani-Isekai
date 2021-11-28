@@ -179,11 +179,11 @@ levelUpItem(ToolsName):-
   item(ToolsName, tools, Level), ! , Newlevel is Level + 1, retractall(item(_,_,_)), asserta(item(ToolsName, tools, Newlevel)).
 
 checkGold(X, CurrentGold):-
-  itemPrice(X, Y), !
+  itemPrice(X, Y), !,
   CurrentGold < Y, 
   write('You don\'t have that much money!\n').
 
 checkGold(X, CurrentGold):-
-  itemPrice(X, Y), !
+  itemPrice(X, Y), !,
   CurrentGold >= Y, 
   format('Thank you for buying ~w!', [X]).
