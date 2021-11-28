@@ -41,6 +41,9 @@ nextDay:-
     retractall(time(_,_)),
     asserta(time(9,0)), !,
     startAlchemist,
+    maxStamina(MX),
+    retractall(stamina(_)),
+    asserta(stamina(MX)),
     end(Y).
 
 setDay(Day):-
