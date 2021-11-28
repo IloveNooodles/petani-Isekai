@@ -5,7 +5,7 @@ Feli
 3. Stamina (done kayanya)
 4. Exp dan Level (done kayanya)
 5. Kappa (done)
-6. Implement time
+6. Tutorial (WIP)
 
 Adit
 
@@ -45,3 +45,4 @@ Changelog:
 - Added more functions in inventory. Added fishing(WIP).
 - adding alchemist, implement dream (peri tidur), adding checking function at the start  
   , adding checking function at the start, edit house, adding shop implement in alchemist, adding some states in some files. (Gare)
+- add tutorial and backstory (Feli)
