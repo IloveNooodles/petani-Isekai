@@ -44,6 +44,7 @@ nextDay:-
     maxStamina(MX),
     retractall(stamina(_)),
     asserta(stamina(MX)),
+    updateDayRanch,
     end(Y).
 
 setDay(Day):-
