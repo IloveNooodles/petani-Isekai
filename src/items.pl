@@ -80,6 +80,7 @@ item(sushi, fishing).
 item(bait, fishing).
 item(goodBait, fishing).
 item(greatestBait, fishing).
+item(fishingRod, fishing).
 
 /* Tools */
 /* Buat bagian tools ini bakal ada nama, tipe, sama level */
