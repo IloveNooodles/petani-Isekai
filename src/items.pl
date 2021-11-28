@@ -52,7 +52,7 @@ item(sheepMeat, ranching).
 item(cowRib, ranching).
 item(cowLoin, ranching).
 item(cowBrisket, ranching).
-item(ranchFeed, ranching).
+item(ranchFood, ranching).
 
 /* Fishing */
 item(tuna, fishing).
@@ -134,7 +134,7 @@ itemPrice(sheepMeat, 800).
 itemPrice(cowRib, 900).
 itemPrice(cowLoin, 900).
 itemPrice(cowBrisket, 800).
-itemPrice(ranchFeed, 250).
+itemPrice(ranchFood, 350).
 itemPrice(tuna, 500).
 itemPrice(salmon, 800).
 itemPrice(angler, 1500).
