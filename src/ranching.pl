@@ -451,11 +451,12 @@ kill :-
 
 % fungsi rekursif pemberi ranchFood ke hewan
 giveRF(Animal, 1) :-
-    updateDayOne(Animal),
+    (updateDayOne(Animal);true),
     !.
 
 giveRF(Animal, X) :-
-    updateDayOne(Animal),
+    X > 1,
+    (updateDayOne(Animal);true),
     X1 is X-1,
     giveRF(Animal, X1).
 
