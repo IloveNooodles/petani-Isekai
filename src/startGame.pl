@@ -100,8 +100,8 @@ start:-
     % Assert level one stats
     levelOne,
     fill_map,
-    write('Let\'s start farming!\n').
-    % tutorial.
+    write('Let\'s start farming!\n'),
+    tutorial.
 
 /* PLAYER NAME AND BASE STATS */
 setPlayerName(Name) :-

@@ -35,13 +35,13 @@ nextDay:-
     day(X),
     X < 365, !,
     Y is X + 1,
-    end(Y),
     setDay(Y),
     setWeather,
     setSeason(Y),
     retractall(time(_,_)),
     asserta(time(9,0)), !,
-    startAlchemist.
+    startAlchemist,
+    end(Y).
 
 setDay(Day):-
     retractall(day(_)),
@@ -232,9 +232,9 @@ endGameMessage:-
     maxStamina(MaxStamina),
     gold(Gold),
     % Print
-    printTime,
     write('Here\'s your last status: \n'),
     write('-------------------------\n'),
+    printTime,
     format('   📆 ~d   ⛅️ ~w   🌲 ~w\n\n', [Day, Weather, Season]),
     format('Job      : ~w\n', [Job]),
     format('Level    : ~d (~d/~d exp)\n', [Level, Exp, NextExp]),
