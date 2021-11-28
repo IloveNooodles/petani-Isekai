@@ -239,7 +239,8 @@ ranch :-
     animalQuantity(total, 0),
     !,
     write('Welcome to the ranch!\n'),
-    write('You currently have no animals, get some at the market!\n').
+    write('You currently have no animals, get some at the market!\n'),
+    checkTutorial(12).
 
 % kasus di ranch ada animal
 ranch :-

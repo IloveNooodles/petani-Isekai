@@ -293,5 +293,6 @@ fish :-
     write('Bait mana yang akan kamu gunakan?(Masukkan berupa angka)\n>> '),
     read(Input),
     baitInput(Input),
+    checkTutorial(14),
     !.
 % fungsi proses input bait, kek klo bait nya 0 gabisa, dll, trus
