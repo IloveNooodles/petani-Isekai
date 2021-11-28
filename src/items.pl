@@ -122,7 +122,7 @@ itemPrice(cucumber, 200).
 itemPrice(tomato, 200).
 itemPrice(garlic, 250).
 itemPrice(herb, 100).
-itemPrice(fertilizer, 500).
+itemPrice(fertilizer, 250).
 itemPrice(chicken, 1000).
 itemPrice(sheep, 1500).
 itemPrice(cow, 2500).

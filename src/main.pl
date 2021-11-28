@@ -20,6 +20,7 @@
 :- include('level.pl'). % config facts, maxedOut, newLevel, levelUpMessage
 :- include('map.pl').
 :- include('house.pl').
+:- include('diary.pl').
 :- include('items.pl').
 :- include('inventory.pl').
 :- include('fishing.pl').

@@ -3,8 +3,6 @@
 /* DYNAMICS */
 :- dynamic(diary/2).
 
-day(1).
-
 diary:-
     day(Day),
     diary(Day, Entry),
