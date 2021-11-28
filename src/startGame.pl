@@ -20,9 +20,9 @@ startGame:-
     write('Let\'s play and pay our debts together!\n\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     write('%                           ~Harvest Galaxy S22~                               %\n'),
-    write('% 1. start.  : untuk memulai petualanganmu                                     %\n'),
+    write('% 1. start.  : memulai petualanganmu                                           %\n'),
     write('% 2. help.   : menampilkan bantuan                                             %\n'),
-    write('% 3. exit.   : keluar dari game                                               %\n'),
+    write('% 3. exit.   : keluar dari game                                                %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n'),
     write('PENTING!!! Akhiri semua perintah atau inputmu dengan titik (.)\n'), !.
 
