@@ -1,8 +1,17 @@
 /* SISTEM EXP FARMING */
-digExp(10).
-plantExp(15).
-harvestExp(50).
-fertilizeExp(10).
+digExp(2).
+plantExp(10).
+harvestExp(15).
+fertilizeExp(5).
+
+multiplier(Mul):-
+    job(farmer),
+    !,
+    Mul is 2.
+
+multiplier(Mul):-
+    job(_),
+    Mul is 1.
 
 /* SISTEM STAMINA FARMING */
 digStamina(10).
@@ -18,8 +27,8 @@ fertilizeTime(15).
 
 /* DIG */
 dig:-
-  \+ playerName(_), !,
-  write('Game has not started yet!\n').
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
 
 dig:-
     /* Cek prekondisi */
@@ -32,7 +41,9 @@ dig:-
     digTile(X, Y),
     retract(loc_tile(_)),
     asserta(loc_tile(digged)),
-    digExp(Exp),
+    digExp(ExpRaw),
+    multiplier(Mul),
+    Exp is ExpRaw*Mul,
     earnExp(farm, Exp),
     earnExp(general, Exp),
     minStamina(Smin),
@@ -71,7 +82,9 @@ plant:-
     % plant if valid
     plantTile(X, Y, Seed),
     throw(Seed, 1),
-    plantExp(Exp),
+    plantExp(ExpRaw),
+    multiplier(Mul),
+    Exp is ExpRaw*Mul,
     earnExp(farm, Exp),
     earnExp(general, Exp),
     minStamina(Smin),
@@ -135,8 +148,8 @@ ripenAll:-
 
 /* HARVEST */
 harvest:-
-  \+ playerName(_), !,
-  write('Game has not started yet!\n').
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
 
 harvest:- 
     \+notYetRipe,
@@ -152,7 +165,9 @@ harvest:-
     Top is LevelFarm + 1,
     random(1, Top, Amount),
     addInven(SeedRipe, Amount),
-    harvestExp(Exp),
+    harvestExp(ExpRaw),
+    multiplier(Mul),
+    Exp is ExpRaw*Mul,
     earnExp(farm, Exp),
     earnExp(general, Exp),
     minStamina(Smin),
