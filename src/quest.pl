@@ -80,7 +80,8 @@ quest :-
 
     write('You have completed all your quest!\n'),
     format('You have earned additional ~w gold, and ~w EXP.\n\n', [Gold,GenEXP]),
-    write('Type quest again to start a new quest!\n\n').
+    write('Type quest again to start a new quest!\n'),
+    checkTutorial(20).
 
 % kondisi mendapat quest baru
 quest :-
@@ -105,7 +106,8 @@ quest :-
     write('You got a new quest!\n\n'),
     format('- ~w harvest items\n', [HarvestQuest]),
     format('- ~w fish\n', [FishQuest]),
-    format('- ~w ranch items\n', [RanchQuest]).
+    format('- ~w ranch items\n', [RanchQuest]),
+    checkTutorial(19).
 
 % kondisi sudah ada quest on-going
 quest :-

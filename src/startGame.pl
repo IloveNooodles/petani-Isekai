@@ -130,7 +130,11 @@ setStat(rancher):-
     asserta(job(rancher)),
     asserta(exp(fish, 0)),
     asserta(exp(farm, 0)),
-    asserta(exp(ranch, 20)).
+    asserta(exp(ranch, 20)),
+    addAnimal(chicken),
+    addAnimal(chicken),
+    addAnimal(chicken),
+    addInven(ranchFood).
 
 levelOne:-
     asserta(exp(general, 0)),

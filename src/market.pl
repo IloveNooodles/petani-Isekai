@@ -260,12 +260,10 @@ sell :-
   countXinInven(Item, List, Count),
   Count > 0,
   itemPrice(Item, Value),
-  gold(Gold),
   format('You have ~d ~w! How many do you want to sell?\n> ', [Count, Item]),
   read(Amount),
-  retractall(gold(_)),
-  NewGold is (Gold + Value * Amount),
-  asserta(gold(NewGold)),
+  NewValue is Value * Amount,
+  earnGold(NewValue),
   throw(Item, Amount)
   )),
   !.

@@ -132,22 +132,67 @@ tutorialStep(10):-
 tutorialStep(11):-
     % ranching
     write('\nHere is the ranch.\n'),
+    write('To interact with it, type \'ranch.\'\n'),
     setTutorial(12).
 
 tutorialStep(12):-
-    % fishing
-    write('\nYou can fish whenever you stand by a lake\n'),
-    write('For the sake of tutorial, we have lent you a fishingRod and a bait,\n'),
-    addInven(fishingRod),
-    addInven(bait),
-    write('but you will have to buy them yourself from the market if you are not a fisherman.\n'),
-    write('To start fishing, type \'fish.\'\n'),
+    % ranch
+    write('\nThis is where you can check all your farm animals.\n'),
+    write('When you decide to buy some animals, they will go directly to your ranch.\n'),
+    write('To check on your animals, you can type \'chicken.\', \'cow.\', or \'sheep.\'\n'),
+    write('To make them produce faster, you can give some food by typing \'givefood.\'\n'),
+    write('You can also kill your animals to get some meat by typing \'kill.\'\n'),
+    write('Next, we will go fishing! Head over to the nearest lake!\n'),
     setTutorial(13).
 
 tutorialStep(13):-
+    % fishing
+    write('\nYou can fish whenever you stand by a lake\n'),
+    ((\+job(fisherman),
+    write('For the sake of tutorial, we have lent you a fishingRod and a bait,\n'),
+    addInven(fishingRod),
+    addInven(bait),
+    write('but you will have to buy them yourself from the market if you are not a fisherman.\n'));(job(fisherman))),
+    write('To start fishing, type \'fish.\'\n'),
+    setTutorial(14).
+
+tutorialStep(14):-
     write('\nNice catch!\n'),
     ((job(fisherman),!); (job(_),throw(fishingRod, 1))),
     write('All the work has been tiring, hasn\'t it?\n'),
     write('When you run out of stamina, you will have to sleep to replenish it.\n'),
     write('Head over to your house (H)!\n'),
-    setTutorial(14).
+    setTutorial(15).
+
+tutorialStep(15):-
+    write('\nHome sweet home! To interact with your house, type \'house.\'\n'),
+    setTutorial(16).
+
+tutorialStep(16):-
+    write('\nWow, you can do a lot of things here.\n'),
+    write('To replenish your stamina, type \'sleep.\'\n'),
+    setTutorial(17).
+
+tutorialStep(17):-
+    write('\nWake up, wake up! Here is the last step of the tutorial.\n'),
+    write('Today, we will learn about quests.\n'),
+    write('Bring up your map and find the quest tile (Q).\n'),
+    write('I\'ll be waiting there!\n'),
+    setTutorial(18).
+
+tutorialStep(18):-
+    write('\nWelcome to the quest tile!\n'),
+    write('To interact with it, type \'quest.\'\n'),
+    setTutorial(19).
+
+tutorialStep(19):-
+    write('\nFor every quest, you will have to collect a number of harvest items, fish, and ranch items.\n'),
+    write('Complete the quests to get extra gold!\n'),
+    setTutorial(20).
+
+tutorialStep(20):-
+    write('\nCongratulations on the completion of your first quest!\n'),
+    write('Now you are ready to face the world\n'),
+    write('Go get those 20,000 gold!\n'),
+    write('\nIf you need help later, just type \'help.\'\n'),
+    setTutorial(21).

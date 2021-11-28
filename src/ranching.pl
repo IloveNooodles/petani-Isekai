@@ -64,7 +64,7 @@ updateDayRanch :-
 % update satu animal dengan ranchFood menjadi 0 day
 updateDayOne(Animal) :-
     animal(Animal, Index, Time),
-    Time > 0,
+    (Time > 0; Time < 0),
     retract(animal(Animal,Index,Time)),
     assertz(animal(Animal,Index,0)),
     !.
@@ -186,29 +186,35 @@ cowWagyuTime(Y) :-
 % what you get for killing an animal
 loot(chicken) :-
     addInven(chickenMeat),
+    ranchCompletion(1),
     write('Hmm, you\'ve got some chicken meat.\n').
 
 loot(goldenChicken) :-
     addInven(chickenMeat, 3),
+    ranchCompletion(3),
     write('Hmm, more special golden chicken meat.\n').
 
 loot(sheep) :-
     addInven(sheepMeat),
+    ranchCompletion(1),
     write('Hmm, you\'ve got some sheep meat.\n').
 
 loot(pinkSheep) :-
     addInven(sheepMeat, 4),
+    ranchCompletion(4),
     write('Hmm, you\'ve got more special pink sheep meat.\n').
 
 loot(cow) :-
     addInven(cowRib),
     addInven(cowLoin),
+    ranchCompletion(2),
     write('Yum, yum. Some cow ribs and loins.\n').
 
 loot(cowWagyu) :-
     addInven(cowRib, 2),
     addInven(cowLoin, 2),
     addInven(cowBrisket, 3),
+    ranchCompletion(7),
     write('Yum, yum. Some more special wagyu ribs and loins.\n').
 
 % get meat, if false does not get meat
@@ -239,7 +245,8 @@ ranch :-
     animalQuantity(total, 0),
     !,
     write('Welcome to the ranch!\n'),
-    write('You currently have no animals, get some at the market!\n').
+    write('You currently have no animals, get some at the market!\n'),
+    checkTutorial(12).
 
 % kasus di ranch ada animal
 ranch :-
@@ -288,6 +295,7 @@ chicken :-
     inventory(List1, _),
     countXinInven(egg, List1, Countegg1),
     DiffEgg is Countegg1-Countegg,
+    ranchCompletion(DiffEgg),
     printChicken(DiffEgg),
 
     inventory(List2, _),
@@ -298,6 +306,7 @@ chicken :-
     inventory(List3, _),
     countXinInven(goldenEgg, List3, CountGegg1),
     DiffGEgg is CountGegg1-CountGegg,
+    ranchCompletion(DiffGEgg),
     printGChicken(DiffGEgg),
     reduceST(5),
 
@@ -343,6 +352,7 @@ sheep :-
     inventory(List1, _),
     countXinInven(wool, List1, Countwool1),
     Diffwool is Countwool1-Countwool,
+    ranchCompletion(Diffwool),
     printSheep(Diffwool),
     reduceST(6),
 
@@ -388,6 +398,7 @@ cow :-
     inventory(List1, _),
     countXinInven(milk, List1, Countmilk1),
     Diffmilk is Countmilk1-Countmilk,
+    ranchCompletion(Diffmilk),
     printCow(Diffmilk),
     reduceST(7),
 
