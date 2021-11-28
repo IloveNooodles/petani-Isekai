@@ -99,7 +99,7 @@ listCategory(ranching):-
   write('------- Ranching ------\n'),
   write('1. chicken - 50G\n'),
   write('2. sheep - 100G\n'),
-  write('3. cow - 75G\n> ').
+  write('3. cow - 750G\n> ').
 
 listCategory(tools):-
   item(fishingRod, tools, Level), !,

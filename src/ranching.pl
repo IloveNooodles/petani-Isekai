@@ -64,7 +64,7 @@ updateDayRanch :-
 % update satu animal dengan ranchFood menjadi 0 day
 updateDayOne(Animal) :-
     animal(Animal, Index, Time),
-    Time > 0,
+    (Time > 0; Time < 0),
     retract(animal(Animal,Index,Time)),
     assertz(animal(Animal,Index,0)),
     !.

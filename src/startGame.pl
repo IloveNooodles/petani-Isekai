@@ -241,5 +241,6 @@ backStory:-
     write('You decide to go back to your village and raise enough money by farming.\n'),
     sleep(3),
     write('By the end of the year, hopefully you can get yourself out of debt and live freely again.\n'),
+    sleep(3),
     write('-------------------------------------------------------------------------------------------------------------\n\n'),
     sleep(2).
