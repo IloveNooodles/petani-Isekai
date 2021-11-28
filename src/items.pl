@@ -254,6 +254,12 @@ checkConsuminInven([H|T], Bool) :-
   checkConsuminInven(T, Bool).
 
 consume :-
+  inventory(_, Count),
+  Count = 0,
+  !,
+  write('Kamu ngga punya consumable!!\n').
+
+consume :-
   inventoryOneItem(List),
   checkConsuminInven(List, false),
   !,

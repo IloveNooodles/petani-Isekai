@@ -131,6 +131,12 @@ checkTutorialMarket(sunflowerSeed):-
 checkTutorialMarket(_):- !.
 
 sell :-
+  inventory(_, Count),
+  Count = 0,
+  !,
+  write('You don\'t have any item to sell!').
+
+sell :-
   inventory,
   inventory(List, _Total),
   write('What item do you wanna sell?\n> '),

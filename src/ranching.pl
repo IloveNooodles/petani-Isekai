@@ -16,7 +16,7 @@ animalQuantity(pinkSheep, 0).
 % animal(chicken, 1, 24).
 % animal(chicken, 2, 12).
 
-animalQuantity
+% animalQuantity
 
 addAnimal(Animal) :-
     animalQuantity(Animal,Qty),
