@@ -103,7 +103,7 @@ quest :-
     asserta(questonProgress(true)),
     retractall(questAwal(_,_,_)),
     asserta(questAwal(HarvestQuest, FishQuest, RanchQuest)),
-    write('You got a new quest!\n\n'),
+    write('You got a new quest!\n'),
     format('- ~w harvest items\n', [HarvestQuest]),
     format('- ~w fish\n', [FishQuest]),
     format('- ~w ranch items\n', [RanchQuest]),
