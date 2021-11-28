@@ -219,6 +219,9 @@ getsomeloot(Animal, true) :-
     !,
     loot(Animal).
 
+% display list of animals
+displayAnimal :-
+    forall(animalQuantity(Animal,Qty), ((Qty>0, Animal\==total, format('- ~w ~w\n', [Qty, Animal]));true)), !.
 % Command ranching
 ranch:-
       \+ playerName(_), !,
@@ -245,7 +248,7 @@ ranch :-
     !,
     QtyTotal > 0,
     write('Welcome to the ranch! You have:\n'),
-    forall(animalQuantity(Animal,Qty), ((Qty>0, Animal\==total, format('- ~w ~w\n', [Qty, Animal]));true)),
+    displayAnimal,
     write('\nWhat do you want to do?\n').
 
 % Command chicken
@@ -424,7 +427,7 @@ kill :-
     QtyTotal > 0,
     write('So you have decided to kill off one of your animals to get some juicy meat, ey?\n'),
     write('Well here are your selections:\n'),
-    forall(animalQuantity(Animal,Qty), ((Qty>0, Animal\==total, format('- ~w ~w\n', [Qty, Animal]));true)),
+    displayAnimal,
     write('\nWhich animal do you choose to do the sacrifice?\n'),
     reduceST(9),
     read(Input),
@@ -466,7 +469,7 @@ givemefood(Count) :-
     Count > 0,
     !,
     format('You have ~w ranchFood!\n',[Count]),
-    forall(animalQuantity(Animal,Qty), ((Qty>0, Animal\==total, format('- ~w ~w\n', [Qty, Animal]));true)),
+    displayAnimal,
     write('\nWhich animals do you choose to give the ranchFood?\n'),
     read(Input),
     animalQuantity(Input,Qty),
