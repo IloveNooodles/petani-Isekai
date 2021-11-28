@@ -449,6 +449,7 @@ kill :-
     removeAnimal(Input, Removed),
     getsomeloot(Input, Removed).
 
+% fungsi rekursif pemberi ranchFood ke hewan
 giveRF(Animal, 1) :-
     updateDayOne(Animal),
     !.
@@ -458,7 +459,7 @@ giveRF(Animal, X) :-
     X1 is X-1,
     giveRF(Animal, X1).
 
-% give ranchFood to 
+% memvalidasi jumlah ranchFood untuk diberikan ke hewan
 countRF(CountInv, _, _, CountUsed) :-
     CountUsed > CountInv,
     !,
