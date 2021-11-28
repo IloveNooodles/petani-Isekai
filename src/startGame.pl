@@ -14,6 +14,10 @@
 :- dynamic(playerName/1).
 
 /* START GAME (WELCOME SCREEN) */
+startGame:-
+    playerName(_), !,
+    write('You\'ve already started the game!\n').
+
 startGame:- 
     write('             x\n  .-. _______|\n  |=|/     /  \\ \n  | |_____|_""_|\n  |_|_[X]_|____|\n\n'), /* ASCII ART */
     write('Harvest Galaxy S22!!!\n'),
@@ -24,12 +28,31 @@ startGame:-
     write('% 2. help.   : menampilkan bantuan                                             %\n'),
     write('% 3. exit.   : keluar dari game                                               %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n'),
-    write('PENTING!!! Akhiri semua perintah atau inputmu dengan titik (.)\n'), !.
+    write('PENTING!!! Akhiri semua perintah atau inputmu dengan titik (.)\n'), !,
+    write('Masukkan command:\n> '),
+    read(Input),
+    prosesInput(Input).
+
+/* PROSES INPUT STARTGAME */
+prosesInput(start) :-
+    start.
+
+prosesInput(help) :-
+    help,
+    write('Masukkan command:\n> '), !,
+    read(Input),
+    prosesInput(Input).
+
+prosesInput(exit) :-
+    exit.
+
+prosesInput(_) :-
+    write('Command engga valid!!\n'), fail.
 
 /* START */
 start:-
     playerName(_), !,
-    write('You\' already started the game!\n').
+    write('You\'ve already started the game!\n').
 
 start:-
     % Clear all stats
