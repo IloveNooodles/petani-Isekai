@@ -15,9 +15,7 @@ availItems(fertilizer).
 availItems(chicken).
 availItems(sheep).
 availItems(cow).
-availItems(chickenFeed).
-availItems(sheepFeed).
-availItems(cowFeed).
+availItems(ranchFood).
 availItems(bait).
 availItems(goodBait).
 availItems(shear).
@@ -98,7 +96,7 @@ listCategory(farming):-
   write('5. sunflowerSeed - 25G\n'),
   write('6. tomatoSeed - 75G\n'),
   write('7. wheatSeed - 50G\n'),
-  write('8. Fertilizer - 500G\n').
+  write('8. fertilizer - 500G\n').
 
 listCategory(ranching):-
   write('------- Ranching ------\n'),
@@ -131,6 +129,12 @@ checkTutorialMarket(sunflowerSeed):-
   checkTutorial(6).
 
 checkTutorialMarket(_):- !.
+
+sell :-
+  inventory(_, Count),
+  Count = 0,
+  !,
+  write('You don\'t have any item to sell!').
 
 sell :-
   inventory,

@@ -52,9 +52,7 @@ item(sheepMeat, ranching).
 item(cowRib, ranching).
 item(cowLoin, ranching).
 item(cowBrisket, ranching).
-item(chickenFeed, ranching).
-item(sheepFeed, ranching).
-item(cowFeed, ranching).
+item(ranchFood, ranching).
 
 /* Fishing */
 item(tuna, fishing).
@@ -136,9 +134,7 @@ itemPrice(sheepMeat, 800).
 itemPrice(cowRib, 900).
 itemPrice(cowLoin, 900).
 itemPrice(cowBrisket, 800).
-itemPrice(chickenFeed, 250).
-itemPrice(sheepFeed, 300).
-itemPrice(cowFeed, 300).
+itemPrice(ranchFood, 350).
 itemPrice(tuna, 500).
 itemPrice(salmon, 800).
 itemPrice(angler, 1500).
@@ -190,3 +186,101 @@ checkGold(X, CurrentGold):-
   CurrentGold >= Y, !,
   retractall(hasMoney(_)), asserta(hasMoney(true)),
   format('Thank you for buying ~w!', [X]).
+
+/* Buat consume */
+% Buat apply item effect
+applyEffect(exp, Value) :-
+  !,
+  earnExp(general, Value),
+  format('Kamu mendapatkan ~d exp!!\n', [Value]).
+
+applyEffect(stamina, Value) :- % kasus nambahnya lebih dari max
+  stamina(ST),
+  maxStamina(Max),
+  NewST is ST + Value,
+  NewST > Max,
+  retractall(stamina(_)),
+  asserta(stamina(Max)),
+  !,
+  format('Stamina kamu bertambah sebanyak ~d!!\n', [Value]).
+
+applyEffect(stamina, Value) :- % kasus nambahnya normal
+  stamina(ST),
+  NewST is ST + Value,
+  retractall(stamina(_)),
+  asserta(stamina(NewST)),
+  !,
+  format('Stamina kamu bertambah sebanyak ~d!!\n', [Value]).
+
+% Buat memakai consumable
+use(Item, 1) :-
+  inventory(List, Cap),
+  retractall(inventory(_,_)),
+  NewCap is Cap - 1,
+  deleteValinList(Item, List, ListOut),
+  itemEffect(Item, Stat, Value),
+  applyEffect(Stat, Value),
+  asserta(inventory(ListOut, NewCap)), !,
+  updateInvenOne(Item).
+
+use(Item, Count) :-
+  inventory(List, _),
+  countXinInven(Item, List, Res),
+  Count > Res,
+  !,
+  write('Jumlahnya kelebihan!!\n').
+
+use(Item, Count) :-
+  inventory(List, Cap),
+  retractall(inventory(_,_)),
+  NewCap is Cap - 1,
+  deleteValinList(Item, List, ListOut),
+  itemEffect(Item, Stat, Value),
+  applyEffect(Stat, Value),
+  asserta(inventory(ListOut, NewCap)), 
+  !,
+  NewCount is Count - 1,
+  use(Item, NewCount).
+
+% Buat ngecek ada consumable ato engga
+checkConsuminInven([H|_], true) :-
+  item(H, consumable), !.
+
+checkConsuminInven([H], false) :-
+  \+ item(H, consumable), !.
+
+checkConsuminInven([H|T], Bool) :-
+  \+ item(H, consumable), !,
+  checkConsuminInven(T, Bool).
+
+consume :-
+  inventory(_, Count),
+  Count = 0,
+  !,
+  write('Kamu ngga punya consumable!!\n').
+
+consume :-
+  inventoryOneItem(List),
+  checkConsuminInven(List, false),
+  !,
+  write('Kamu ngga punya consumable!!\n').
+
+consume :-
+  inventory(List, _),
+  checkConsuminInven(List, true),
+  inventoryConsum,
+  write('Consumable apa yang akan kamu consume?\n> '),
+  read(Item),
+  ((
+  countXinInven(Item, List, Count),
+  Count =:= 0,
+  write('Kamu ngga punya consumable itu!!\n')
+  );
+  (
+  countXinInven(Item, List, Count),
+  Count > 0,
+  format('Kamu punya ~d ~w! Berapa yang ingin kamu consume?\n> ', [Count, Item]),
+  read(Amount),
+  use(Item, Amount)
+  )),
+  !.

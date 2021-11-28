@@ -200,12 +200,20 @@ inventory :-
     format('Inventory kamu:  (~d/100)\n', [TotalInven]),
     showInven([H1|T1], List),
     checkTutorial(2).
+
 % nampilin inven farm
 inventoryFarm :-
     inventory(List, _),
     inventoryOneItem([H1|T1]),
     write('Inventory farming kamu:\n'),
     showInvenType([H1|T1], List, farming).
+
+% Nampilin consumables
+inventoryConsum :-
+    inventory(List, _),
+    inventoryOneItem([H1|T1]),
+    write('Consumable yang ada di inventory:\n'),
+    showInvenType([H1|T1], List, consumable).
 
 % nampilin inven seed
 inventorySeed :-
