@@ -290,7 +290,7 @@ fish :-
     format('1. ~d bait\n', [Countbait]),
     format('2. ~d good bait\n', [Countgoodbait]),
     format('3. ~d greatest bait\n', [Countgreatbait]),
-    write('Bait mana yang akan kamu gunakan?\n>> '),
+    write('Bait mana yang akan kamu gunakan?(Masukkan berupa angka)\n>> '),
     read(Input),
     baitInput(Input),
     checkTutorial(14),
