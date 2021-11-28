@@ -113,7 +113,8 @@ readCategory(Category):-
   listCategory(Category),
   write('What do you want to buy?\n> '),
   read(Items),
-  buy(Category, Items).
+  buy(Category, Items),
+  checkTutorialMarket(Items).
 
 readCategory(Category):-
   \+ listCategory(Category), 

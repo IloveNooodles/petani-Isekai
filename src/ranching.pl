@@ -81,6 +81,10 @@ printChicken(X) :-
 
 % to print golden eggs from golden chicken
 printGChicken(0) :-
+    animalQuantity(goldenChicken, 0),
+    !.
+
+printGChicken(0) :-
     animalQuantity(goldenChicken, Qty),
     Qty > 0,
     !,
