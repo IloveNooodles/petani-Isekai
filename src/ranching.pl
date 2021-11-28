@@ -12,6 +12,13 @@ animalQuantity(cowWagyu, 0).
 animalQuantity(sheep, 0).
 animalQuantity(pinkSheep, 0).
 
+% mengurangi stamina
+reduceST(Cost) :-
+    stamina(ST),
+    NewST is ST - Cost,
+    retractall(stamina(_)),
+    asserta(stamina(NewST)).
+
 % menambah animal
 addAnimal(Animal) :-
     animalQuantity(Animal,Qty),
@@ -51,7 +58,7 @@ removeAnimal(Animal, Cond) :-
     format('\nSo long, ~w :(\n',[Animal]).
 
 % update animal untuk esok hari
-updateDayAll :-
+updateDayRanch :-
     forall(animal(Animal,Index,Time), (Time > 0, Time1 is Time - 1, retract(animal(Animal,Index,Time)), assertz(animal(Animal,Index,Time1));true)).
 
 % update satu animal dengan ranchFood menjadi 0 day
@@ -252,6 +259,14 @@ chicken :-
     !,
     write('You are currently not at the ranch!\n').
 
+% kasus kurang stamina
+chicken :-
+    loc_tile(ranch),
+    stamina(ST),
+    ST < 5,
+    !,
+    write('You don\'t have enough stamina!\n').
+
 % kasus di ranch tidak ada chicken
 chicken :-
     loc_tile(ranch),
@@ -281,6 +296,7 @@ chicken :-
     countXinInven(goldenEgg, List3, CountGegg1),
     DiffGEgg is CountGegg1-CountGegg,
     printGChicken(DiffGEgg),
+    reduceST(5),
 
     chickenEXP(DiffEgg, DiffGEgg).
 
@@ -294,6 +310,14 @@ sheep :-
     \+ loc_tile(ranch),
     !,
     write('You are currently not at the ranch!\n').
+
+% kasus kurang stamina
+sheep :-
+    loc_tile(ranch),
+    stamina(ST),
+    ST < 6,
+    !,
+    write('You don\'t have enough stamina!\n').
 
 % kasus di ranch tidak ada sheep
 sheep :-
@@ -317,6 +341,7 @@ sheep :-
     countXinInven(wool, List1, Countwool1),
     Diffwool is Countwool1-Countwool,
     printSheep(Diffwool),
+    reduceST(6),
 
     ranchEXP(Diffwool).
 
@@ -330,6 +355,14 @@ cow :-
     \+ loc_tile(ranch),
     !,
     write('You are currently not at the ranch!\n').
+
+% kasus kurang stamina
+cow :-
+    loc_tile(ranch),
+    stamina(ST),
+    ST < 7,
+    !,
+    write('You don\'t have enough stamina!\n').
 
 % kasus di ranch tidak ada cow
 cow :-
@@ -353,12 +386,13 @@ cow :-
     countXinInven(milk, List1, Countmilk1),
     Diffmilk is Countmilk1-Countmilk,
     printCow(Diffmilk),
+    reduceST(7),
 
     ranchEXP(Diffmilk).
 
 % Command kill
 kill:-
-      \+ playerName(_), !,
+    \+ playerName(_), !,
     write('Game has not started yet!\n').
 
 % kasus tidak di ranch
@@ -366,6 +400,14 @@ kill :-
     \+ loc_tile(ranch),
     !,
     write('You are currently not at the ranch!\n').
+
+% kasus kurang stamina
+kill :-
+    loc_tile(ranch),
+    stamina(ST),
+    ST < 9,
+    !,
+    write('You don\'t have enough stamina!\n').
 
 % kasus di ranch tidak ada animal
 kill :-
@@ -384,7 +426,85 @@ kill :-
     write('Well here are your selections:\n'),
     forall(animalQuantity(Animal,Qty), ((Qty>0, Animal\==total, format('- ~w ~w\n', [Qty, Animal]));true)),
     write('\nWhich animal do you choose to do the sacrifice?\n'),
+    reduceST(9),
     read(Input),
     removeAnimal(Input, Removed),
     getsomeloot(Input, Removed).
 
+giveRF(Animal, 1) :-
+    updateDayOne(Animal),
+    !.
+
+giveRF(Animal, X) :-
+    updateDayOne(Animal),
+    X1 is X-1,
+    giveRF(Animal, X1).
+
+% give ranchFood to 
+countRF(CountInv, _, _, CountUsed) :-
+    CountUsed > CountInv,
+    !,
+    format('\nInvalid! You only have ~w ranchFood.\n',[CountInv]).
+
+countRF(_, AnimalQty, Animal, CountUsed) :-
+    CountUsed > AnimalQty,
+    !,
+    format('\nInvalid! You only have ~w ~w to give ranchFood to.\n',[AnimalQty, Animal]).
+
+countRF(_, _, Animal, CountUsed) :-
+    !,
+    giveRF(Animal, CountUsed),
+    reduceST(1),
+    format('\nCongrats, you\'ve given ~w ranchFood to your ~w.\n',[CountUsed, Animal]).
+
+% fungsi pembantu givefood
+givemefood(0) :-
+    !,
+    write('You have no ranchFood to feed your animals!\n').
+
+givemefood(Count) :-
+    Count > 0,
+    !,
+    format('You have ~w ranchFood!\n',[Count]),
+    forall(animalQuantity(Animal,Qty), ((Qty>0, Animal\==total, format('- ~w ~w\n', [Qty, Animal]));true)),
+    write('\nWhich animals do you choose to give the ranchFood?\n'),
+    read(Input),
+    animalQuantity(Input,Qty),
+    format('How much ranchFood would you like to use to feed your ~w?\n',[Input]),
+    read(CountUsed),
+    countRF(Count, Qty, Input, CountUsed).
+
+% Command givefood
+givefood :-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
+% kasus tidak di ranch
+givefood :- 
+    \+ loc_tile(ranch),
+    !,
+    write('You are currently not at the ranch!\n').
+
+% kasus kurang stamina
+givefood :-
+    loc_tile(ranch),
+    stamina(ST),
+    ST < 1,
+    !,
+    write('You don\'t have enough stamina!\n').
+
+% kasus di ranch tidak ada animal
+givefood :-
+    loc_tile(ranch),
+    animalQuantity(total, 0),
+    !,
+    write('You have no animals!\n').
+
+givefood :-
+    loc_tile(ranch),
+    animalQuantity(total, QtyTotal),
+    !,
+    QtyTotal > 0,
+    inventory(List, _),
+    countXinInven(ranchFood, List, CountRF),
+    givemefood(CountRF).
