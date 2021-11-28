@@ -200,6 +200,15 @@ buy(_, _) :-
   write('The item is not found in this category!\n').
 
 buy:-
+  \+ playerName(_), !,
+  write('Game has not started yet!\n').
+
+buy:-
+  \+ loc_tile(market),
+  !,
+  write('You are not at the Market tile!\n').
+
+buy:-
   category,
   write('> '),
   read(Category),
@@ -220,6 +229,15 @@ checkTutorialMarket(sunflowerSeed):-
   checkTutorial(6).
 
 checkTutorialMarket(_):- !.
+
+sell:-
+  \+ playerName(_), !,
+  write('Game has not started yet!\n').
+
+sell:-
+  \+ loc_tile(market),
+  !,
+  write('You are not at the Market tile!\n').
 
 sell :-
   inventory(_, Count),
