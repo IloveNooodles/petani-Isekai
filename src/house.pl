@@ -5,6 +5,11 @@ house:-
   write('Game has not started yet!\n').
 
 house:-
+  \+ loc_tile(home),
+  !,
+  write('You are not at the House tile!\n').
+
+house:-
   loc_tile(X), !, X = home,
   write('What do you want to do?\n'),
   write('- bed\n'),
@@ -15,6 +20,11 @@ house:-
 writeDiary:-
   \+ playerName(_), !,
   write('Game has not started yet!\n').
+
+writeDiary:-
+  \+ loc_tile(home),
+  !,
+  write('You are not at the House tile!\n').
 
 writeDiary:-
   loc_tile(X), !, X = home,
@@ -50,6 +60,11 @@ printListDiary([_|T], Counter, Index):-
 readDiary:-
   \+ playerName(_), !,
   write('Game has not started yet!\n').
+
+readDiary:-
+  \+ loc_tile(home),
+  !,
+  write('You are not at the House tile!\n').
 
 readDiary:-
   loc_tile(X), !, X = home,
@@ -93,6 +108,11 @@ sleep:-
   write('Game has not started yet!\n').
 
 sleep:-
+  \+ loc_tile(home),
+  !,
+  write('You are not at the House tile!\n').
+
+sleep:-
   loc_tile(X), !, X = home,
   printSleep,
   random(1, 10000, Number),
@@ -123,6 +143,11 @@ printSleep:-
 exitHouse:-
   \+ playerName(_), !,
   write('Game has not started yet!\n').
+
+exitHouse:-
+  \+ loc_tile(home),
+  !,
+  write('You are not at the House tile!\n').
 
 exitHouse:-
   write('You left the house...\n'), nl.

@@ -50,6 +50,10 @@ ranchCompletion(X) :-
     retractall(questStatus(_,_,_)),
     asserta(questStatus(HarvestQuest, FishQuest, NewRQ)).
 
+quest :-
+    \+ playerName(_), !,
+    write('Game has not started yet!\n').
+
 % kondisi tidak di tile Q
 quest :-
     \+ loc_tile(quest),

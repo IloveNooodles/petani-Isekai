@@ -1,6 +1,8 @@
 :- dynamic(item/3).
+:- dynamic(hasMoney/1).
 
 /* Item bakal ada ada 2 arity nama sama tipe */
+hasMoney(false).
 
 /* Consumable */
 /* ini bisa dimakan dan buat nambah stamina possibly, dan bakal ada restoran */
@@ -179,11 +181,13 @@ levelUpItem(ToolsName):-
   item(ToolsName, tools, Level), ! , Newlevel is Level + 1, retractall(item(_,_,_)), asserta(item(ToolsName, tools, Newlevel)).
 
 checkGold(X, CurrentGold):-
-  itemPrice(X, Y), !,
-  CurrentGold < Y, 
+  itemPrice(X, Y),
+  CurrentGold < Y, !,
+  retractall(hasMoney(_)),  asserta(hasMoney(false)),
   write('You don\'t have that much money!\n').
 
 checkGold(X, CurrentGold):-
-  itemPrice(X, Y), !,
-  CurrentGold >= Y, 
+  itemPrice(X, Y),
+  CurrentGold >= Y, !,
+  retractall(hasMoney(_)), asserta(hasMoney(true)),
   format('Thank you for buying ~w!', [X]).

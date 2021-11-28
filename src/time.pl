@@ -38,8 +38,10 @@ nextDay:-
     end(Y),
     setDay(Y),
     setWeather,
-    startAlchemist,
-    setSeason(Y).
+    setSeason(Y),
+    retractall(time(_,_)),
+    asserta(time(9,0)), !,
+    startAlchemist.
 
 setDay(Day):-
     retractall(day(_)),
