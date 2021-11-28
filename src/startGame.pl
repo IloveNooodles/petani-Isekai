@@ -74,7 +74,7 @@ start:-
     startWeather,
     % Choose job
     shell('clear'),
-    % backStory,
+    backStory,
     write('Welcome to Harvest Galaxy S22! What\'s your name?\n(begin with a lowercase letter and end with period (.))\n> '),
     read(Name),
     setPlayerName(Name),
@@ -100,8 +100,8 @@ start:-
     % Assert level one stats
     levelOne,
     fill_map,
-    write('Let\'s start farming!\n').
-    % tutorial.
+    write('Let\'s start farming!\n'),
+    tutorial.
 
 /* PLAYER NAME AND BASE STATS */
 setPlayerName(Name) :-
@@ -241,5 +241,6 @@ backStory:-
     write('You decide to go back to your village and raise enough money by farming.\n'),
     sleep(3),
     write('By the end of the year, hopefully you can get yourself out of debt and live freely again.\n'),
+    sleep(3),
     write('-------------------------------------------------------------------------------------------------------------\n\n'),
     sleep(2).

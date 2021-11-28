@@ -80,6 +80,7 @@ item(sushi, fishing).
 item(bait, fishing).
 item(goodBait, fishing).
 item(greatestBait, fishing).
+item(fishingRod, fishing).
 
 /* Tools */
 /* Buat bagian tools ini bakal ada nama, tipe, sama level */
@@ -123,9 +124,9 @@ itemPrice(tomato, 200).
 itemPrice(garlic, 250).
 itemPrice(herb, 100).
 itemPrice(fertilizer, 250).
-itemPrice(chicken, 1000).
-itemPrice(sheep, 1500).
-itemPrice(cow, 2500).
+itemPrice(chicken, 50).
+itemPrice(sheep, 100).
+itemPrice(cow, 750).
 itemPrice(wool, 400).
 itemPrice(egg, 350).
 itemPrice(goldenEgg, 700).
