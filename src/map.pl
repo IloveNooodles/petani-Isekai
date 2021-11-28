@@ -69,7 +69,7 @@ fill_map :-
     asserta(border(_,1)),
     asserta(border(22,_)),
     asserta(border(_,22)),
-    asserta(wizard_coordinate(18,18)),
+    asserta(wizard_coordinate(5,18)),
     % Player
     asserta(player(12,5)),
     % market
@@ -143,6 +143,7 @@ printChar(X, Y) :- market_coordinate(X, Y), !, write('M').
 printChar(X, Y) :- home_coordinate(X, Y), !, write('H').
 printChar(X, Y) :- ranch_coordinate(X, Y), !, write('R').
 printChar(X, Y) :- quest_coordinate(X, Y), !, write('Q').
+printChar(X, Y) :- hasAlchemist(Z), Z = true, wizard_coordinate(X, Y), !, write('W').
 printChar(X, Y) :- 
     planted_coordinate(X, Y, Seed, _),
     !, 
@@ -157,8 +158,6 @@ printChar(X, Y) :-
 printChar(X, Y) :- digged_coordinate(X, Y), !, write('=').
 printChar(X, Y) :- water_coordinate(X, Y), !, write('o').
 printChar(X, Y) :- dirt(X, Y), !, write('-').
-printChar(_, _) :- hasAlchemist(Z), Z = false, !.
-printChar(X, Y) :- hasAlchemist(Z), !, Z = true, wizard_coordinate(X, Y), !, write('W').
 
 % kayanya harus liat state gamenya
 map:-
