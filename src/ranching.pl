@@ -144,44 +144,44 @@ ranchEXP(X) :-
     earnExp(general, GenEXP).
 
 % int div to help with set wait
-intdivTwo(X, Y) :-
+intdivThree(X, Y) :-
     Y is X//2.
 
 % set wait time for chicken
 chickenTime(Y) :-
     level(ranch, Lev),
-    intdivTwo(Lev, LevDiv),
-    Y is 8-LevDiv.
+    intdivThree(Lev, LevDiv),
+    Y is 4-LevDiv.
 
 % set wait time for golden chicken
 goldenChickenTime(Y) :-
     level(ranch, Lev),
-    intdivTwo(Lev, LevDiv),
-    Y is 11-LevDiv.
+    intdivThree(Lev, LevDiv),
+    Y is 5-LevDiv.
 
 % set wait time for sheep
 sheepTime(Y) :-
     level(ranch, Lev),
-    intdivTwo(Lev, LevDiv),
-    Y is 9-LevDiv.
+    intdivThree(Lev, LevDiv),
+    Y is 5-LevDiv.
 
 % set wait time for pink sheep
 pinkSheepTime(Y) :-
     level(ranch, Lev),
-    intdivTwo(Lev, LevDiv),
-    Y is 12-LevDiv.
+    intdivThree(Lev, LevDiv),
+    Y is 6-LevDiv.
 
 % set wait time for sheep
 cowTime(Y) :-
     level(ranch, Lev),
-    intdivTwo(Lev, LevDiv),
-    Y is 10-LevDiv.
+    intdivThree(Lev, LevDiv),
+    Y is 6-LevDiv.
 
 % set wait time for pink sheep
 cowWagyuTime(Y) :-
     level(ranch, Lev),
-    intdivTwo(Lev, LevDiv),
-    Y is 14-LevDiv.
+    intdivThree(Lev, LevDiv),
+    Y is 7-LevDiv.
 
 % what you get for killing an animal
 loot(chicken) :-
