@@ -24,7 +24,7 @@ item(sunflowerSeed, farming).
 item(tomatoSeed, farming).
 item(wheatSeed, farming).
 item(apple, farming).
-item(mysteriousItem, farming).
+item(mysterious, farming).
 item(pumpkin, farming).
 item(sunflower, farming).
 item(wheat, farming).
@@ -96,6 +96,7 @@ itemPrice(potion, 2000).
 itemPrice(goldenChicken, 2000).
 itemPrice(pinkSheep, 3000).
 itemPrice(cowWagyu, 5000).
+itemPrice(oldBook, 1000).
 
 /* harga item biasa */
 itemPrice(energyDrink, 250).

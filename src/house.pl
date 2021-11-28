@@ -163,3 +163,5 @@ dream(Number):-
   retractall(player(_, _)),
   asserta(player(X, Y)),
   write('You woke up and realize that you have teleported to selected location'), nl.
+
+dream(_):- !.
