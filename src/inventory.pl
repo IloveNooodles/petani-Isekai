@@ -137,7 +137,8 @@ throw(Item, 1, Amount) :-
     asserta(inventory(ListOut, NewCap)), !,
     format('Kamu berhasil membuang ~d ~w!', [Amount, Item]),
     callKappa(Item),
-    updateInvenOne(Item).
+    updateInvenOne(Item),
+    checkTutorial(3).
 % Kalo jumlahnya kelebihan
 throw(Item, Count, _) :-
     inventory(List, _),
@@ -180,7 +181,8 @@ inventory :-
     inventory(List, TotalInven),
     inventoryOneItem([H1|T1]),
     format('Inventory kamu:  (~d/100)\n', [TotalInven]),
-    showInven([H1|T1], List).
+    showInven([H1|T1], List),
+    checkTutorial(2).
 % nampilin inven farm
 inventoryFarm :-
     inventory(List, _),

@@ -1,6 +1,7 @@
 /* TO DO */
 
 /* DYNAMICS */
+:- dynamic(tutorial/1).
 :- dynamic(job/1).
 
 /* exp(type: [general, fish, farm, ranch], value) */
@@ -51,8 +52,8 @@ prosesInput(_) :-
 
 /* START */
 start:-
-    playerName(_), !,
-    write('You\'ve already started the game!\n').
+    playerName(_),
+    write('You\'ve already started the game!\n'), !, fail.
 
 start:-
     % Clear all stats
@@ -67,7 +68,9 @@ start:-
     startSeason,
     startWeather,
     % Choose job
-    write('Welcome to Harvest Galaxy S22! What\'s your name?\n> '),
+    shell('clear'),
+    backStory,
+    write('Welcome to Harvest Galaxy S22! What\'s your name?\n(begin with a lowercase letter and end with period (.))\n> '),
     read(Name),
     setPlayerName(Name),
     format('Hello, ~w! Please choose your specialty (1-3):\n', [Name]),
@@ -92,7 +95,8 @@ start:-
     % Assert level one stats
     levelOne,
     fill_map,
-    write('Let\'s start farming!\nHint: you can now check your status ;)\n').
+    write('Let\'s start farming!\n'),
+    tutorial.
 
 /* PLAYER NAME AND BASE STATS */
 setPlayerName(Name) :-
@@ -179,6 +183,7 @@ status:-
     format('Ranching : ~d (~d/~d exp)\n', [LevelRanch, ExpRanch, NextExpRanch]),
     format('Stamina  : ~d/~d\n', [Stamina, MaxStamina]),
     format('Gold     : ~d\n', [Gold]),
+    checkTutorial(1),
     !.
 
 printTime:-
@@ -208,3 +213,29 @@ greeting:-
     time(Hour, _),
     Hour > 18, Hour =< 23,
     format('Good evening, ~w!\n', [Name]).
+
+backStory:-
+    write('.'),
+    flush_output,
+    sleep(0.75),
+    write(' .'),
+    flush_output,
+    sleep(0.75),
+    write(' .\n'),
+    sleep(0.75),
+    write('He\'s gone.\n'),
+    sleep(2),
+    write('For the past few months, you have been painstakingly working on a project worth a lot of gold, and today is the day you get paid.\n'),
+    sleep(3),
+    write('But as you look at your computer screen, you realise that you are never going to get paid.\n\n'),
+    sleep(3),
+    write('You have been scammed.\n'),
+    sleep(3),
+    write('And now you are in a huge debt of 20,000 gold that you have to pay back within a year.\n'),
+    sleep(3),
+    write('You decide to go back to your village and raise enough money by farming.\n'),
+    sleep(3),
+    write('By the end of the year, hopefully you can get yourself out of debt and live freely again.\n'),
+    sleep(3),
+    write('-------------------------------------------------------------------------------------------------------------\n\n'),
+    sleep(2).

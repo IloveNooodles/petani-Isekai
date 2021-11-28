@@ -41,7 +41,8 @@ dig:-
     addTime(H, M, PlusTime, HNew, MNew),
     setTime(HNew, MNew),
     write('You digged the tile.\n'),
-    randomGold(1,20,20).
+    randomGold(1,20,20),
+    checkTutorial(7).
 
 digTile(X, Y):-
     asserta(digged_coordinate(X, Y)).
@@ -80,7 +81,8 @@ plant:-
     plantTime(PlusTime),
     addTime(H, M, PlusTime, HNew, MNew),
     setTime(HNew, MNew),
-    format('You planted ~w.\n', [Seed]).
+    format('You planted ~w.\n', [Seed]),
+    checkTutorial(8).
 
 notDiggedTile:-
     \+loc_tile(digged),
@@ -160,7 +162,8 @@ harvest:-
     harvestTime(PlusTime),
     addTime(H, M, PlusTime, HNew, MNew),
     setTime(HNew, MNew),
-    format('You harvested ~d ~w(s).\n', [Amount, SeedRipe]).
+    format('You harvested ~d ~w(s).\n', [Amount, SeedRipe]),
+    checkTutorial(10).
 
 notYetRipe:-
     loc_tile(planted),
@@ -203,6 +206,8 @@ calculateNewRipeDay(X, Y):-
     asserta(planted_coordinate(X, Y, Seed, NewRipe)),
     sub_atom(Seed, 0, _, 4, Name),
     format('Nice. You can harvest your ~w 2 days faster!\n', [Name]),
+    checkTutorialRipe,
+    checkTutorial(8),
     !.
 
 calculateNewRipeDay(X, Y):-
@@ -216,6 +221,7 @@ calculateNewRipeDay(X, Y):-
     asserta(loc_tile(ripe)),
     sub_atom(Seed, 0, _, 4, Name),
     format('Great! Your ~w is ripe!\n', [Name]),
+    checkTutorial(9),
     !.
 
 /* SEEDS */
