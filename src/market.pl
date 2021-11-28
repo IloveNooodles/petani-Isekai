@@ -124,7 +124,13 @@ buy:-
   NewGold is Current - Price,
   retractall(gold(_)),
   asserta(gold(NewGold)),
-  addInven(Items).
+  addInven(Items),
+  checkTutorialMarket(Items).
+
+checkTutorialMarket(sunflowerSeed):-
+  checkTutorial(6).
+
+checkTutorialMarket(_):- !.
 
 sell :-
   inventory,

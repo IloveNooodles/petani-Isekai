@@ -85,11 +85,16 @@ tutorialStep(4):-
 tutorialStep(5):-
     % market
     write('\nThis is the marketplace.\n'),
+    write('To interact with it, type \'market.\'\n'),
+    earnGold(25),
+    write('And then, try to buy 1 sunflowerSeed (farming item).\n'),
+    write('Don\'t worry about the money, we have lent you 25 gold for this purchase.\n'),
     setTutorial(6).
 
 tutorialStep(6):-
     % buy and sell
-    write('aaaa'),
+    write('\n\nYou have bought a sunflowerSeed, let\'s plant it!\n'),
+    write('Get outside to any dirt tile, then type \'dig.\' to dig the tile.'),
     setTutorial(7).
 
 tutorialStep(7):-
