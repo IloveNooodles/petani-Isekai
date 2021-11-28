@@ -29,7 +29,7 @@ startGame:-
     write('% 3. exit.   : keluar dari game                                               %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n'),
     write('PENTING!!! Akhiri semua perintah atau inputmu dengan titik (.)\n'), !,
-    write('Masukkan command:\n> '),
+    write('Masukkan command (start/help/exit):\n> '),
     read(Input),
     prosesInput(Input).
 
@@ -39,7 +39,7 @@ prosesInput(start) :-
 
 prosesInput(help) :-
     help,
-    write('Masukkan command:\n> '), !,
+    write('Masukkan command (start/help/exit):\n> '), !,
     read(Input),
     prosesInput(Input).
 
