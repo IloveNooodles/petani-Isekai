@@ -12,14 +12,17 @@ hasCowWagyu(0).
 
 startAlchemist:-
   random(1, 1000, Number),
-  Number < 10, !, retractall(hasAlchemist(_)), asserta(hasAlchemist(true)),
-  write('An alchemist has appear in the city go check it and don\'t miss a chance!').
+  Number < 100, !, retractall(hasAlchemist(_)), asserta(hasAlchemist(true)),
+  write('An alchemist has appeared in the city. Go check it and don\'t miss a chance!\n\n').
 
 startAlchemist:-
   !, retractall(hasAlchemist(_)), asserta(hasAlchemist(false)).
 
 doneAlchemist:-
-  hasAlchemist(X), X = true, retractall(hasAlchemist(_)), asserta(hasAlchemist(false)).
+  hasAlchemist(true), retractall(hasAlchemist(_)), asserta(hasAlchemist(false)),
+  write('An alchemist has left in the city.\n\n'), !.
+
+doneAlchemist:- !.
 
 wizard:-
   \+ playerName(_), !,
@@ -37,7 +40,7 @@ wizard:-
 shopAlchemist:-
   write('I travel to many unknown place, searching for something that was never meant to be found!...\n'),
   write('I read an old book in this town library, it said that this town has some mysterious being in the lake\n'),
-  write('Some people have seen it only in rain, i wonder if that is true...\n'),
+  write('Some people have seen it only in rain, I wonder if that is true...\n'),
   write('Anyway while I\'m still here, you can check some wonderful items that i got from travelling...\n'),
   write('------- Alchemist ------\n'),
   write('1. mysteriousSeed - 100G\n'),
@@ -46,6 +49,7 @@ shopAlchemist:-
   write('4. goldenChicken - 2000G\n'),
   write('5. pinkSheep - 3000G\n'),
   write('6. cowWagyu - 5000G\n'),
+  write('7. oldBook - 1000G\n'),
   write('write the name of the items that you wanna buy!\n\n> '),
   read(X),
   buyAlchemist(X).
@@ -131,3 +135,15 @@ buyAlchemist(X):-
   retractall(hasCowWagyu(_)),
   asserta(hasCowWagyu(Z)),
   addInven(X).
+
+buyAlchemist(X):-
+  X = oldBook,
+  gold(Current), !, 
+  checkGold(X, Current),
+  hasMoney(M), M = true,
+  itemPrice(X, Price),
+  NewGold is Current - Price,
+  retractall(gold(_)),
+  asserta(gold(NewGold)),
+  addInven(X),
+  write('\nTo read the old book, type \'oldBook.\'\n').

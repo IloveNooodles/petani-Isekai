@@ -134,6 +134,42 @@ writeCucumber(9):-
 writeCucumber(10):-
     write('C U C U M B E R . . .'), nl, !.
 
+/* GUIDE */
+oldBook:-
+    \+isXinInven(oldBook),
+    write('You do not own the old book!\n'),
+    !,
+    fail.
+
+oldBook:-
+    isXinInven(oldBook),
+    write('---------------------------------------\n'),
+    write('|      Legend of the Great Kappa      |\n'),
+    write('|                                     |\n'),
+    write('| "I saw a huge turtle at the lake!   |\n'),
+    write('| I swear!" The story was recounted   |\n'),
+    write('| by a young man after he threw a cu- |\n'),
+    write('| cumber into the lake at night after |\n'),
+    write('| dusk when it was raining. The crea- |\n'),
+    write('| ture was believed to be a kappa.    |\n'),
+    write('| Some says that when a kappa is kind |\n'),
+    write('| to you, it will bless you with good |\n'),
+    write('| harvest. Sometimes, a kappa can also|\n'),
+    write('| bring fish to a human. However,     |\n'),
+    write('| kappa can be hostile. It was be-    |\n'),
+    write('| lieved that there were a few means  |\n'),
+    write('| of escape if one was confronted with|\n'),
+    write('| a kappa. Kappa are obsessed with    |\n'),
+    write('| politeness, so if a person makes a  |\n'),
+    write('| deep bow, it will return the ges-   |\n'),
+    write('| ture. This results in the kappa     |\n'),
+    write('| spilling the water held in the      |\n'),
+    write('| "dish" (sara) on its head, making   |\n'),
+    write('| it weak. One can also detach its    |\n'),
+    write('| arms, and it will do anything to get|\n'),
+    write('| them back.                          |\n'),
+    write('---------------------------------------\n').
+
 /* CHEAT */
 kappaConfig:-
     addInven(cucumber),

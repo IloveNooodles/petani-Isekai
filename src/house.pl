@@ -27,7 +27,7 @@ writeDiary:-
   write('You are not at the House tile!\n').
 
 writeDiary:-
-  loc_tile(X), !, X = home,
+  loc_tile(Z), !, Z = home,
   day(Day),
   number_atom(Day, X),
   atom_concat('diary/Day', X , Day2),
@@ -67,14 +67,14 @@ readDiary:-
   write('You are not at the House tile!\n').
 
 readDiary:-
-  loc_tile(X), !, X = home,
+  loc_tile(X), X = home,
   directory_files('diary', Files),
   Files = [_, _|T],
   T = [],
   write('You haven\'t write a diary!\n'), !. 
 
 readDiary:-
-  loc_tile(X), !, X = home,
+  loc_tile(Z), !, Z = home,
   listDiary,
   directory_files('diary', Files),
   write('Choose which one of the diary you want to read!\n'),
@@ -163,3 +163,5 @@ dream(Number):-
   retractall(player(_, _)),
   asserta(player(X, Y)),
   write('You woke up and realize that you have teleported to selected location'), nl.
+
+dream(_):- !.
