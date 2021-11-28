@@ -31,6 +31,8 @@ help:-
     write('% 1. chicken.        : Start budidaya chicken                                          %\n'),
     write('% 2. sheep.          : Start budidaya sheep                                            %\n'),
     write('% 3. cow.            : Start budidaya cow                                              %\n'),
+    write('% 4. kill.           : Kill salah satu hewanmu                                         %\n'),
+    write('% 5. givefood.       : Percepat budidaya hewan dengan ranchFood                        %\n'),
     write('%                                    ~Marketplace~                                     %\n'),
     write('% 1. buy.            : buy items from the market place                                 %\n'),
     write('% 2. sell.           : sell items from your inventory                                  %\n'),
