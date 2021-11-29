@@ -11,10 +11,11 @@ Tugas Besar Logika Komputasi IF2121. Pada tugas besar ini kita diminta untuk mem
 | Aditya Prawira Nugroho         | 13520049 |
 | Felicia Sutandijo              | 13520050 |
 
-## Spesifikasi
+## Spesifikasi Lingkungan
 
 - GNU Prolog (Windows GUI program or UNIX CLI program)
-- Menggunakan WSL (Windows Subsystem for Linux)
+- Menggunakan WSL (Windows Subsystem for Linux) untuk Windows
+- Menggunakan terminal untuk UNIX-based system
 
 ## Cara Menjalankan Program
 
