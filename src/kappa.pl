@@ -170,13 +170,6 @@ oldBook:-
     write('| them back.                          |\n'),
     write('---------------------------------------\n').
 
-/* CHEAT */
-kappaConfig:-
-    addInven(cucumber),
-    retractall(weather(_)),
-    asserta(weather(hujan)),
-    setTime(18,0).
-
 /* Footnote: Kappa legends
 (src: https://en.wikipedia.org/wiki/Kappa_(folklore) )
 
