@@ -19,7 +19,7 @@ help:-
     write('%                                    ~Inventory~                                       %\n'),
     write('% 1. inventory.      : Display your inventory                                          %\n'),
     write('% 2. throwItem.      : Throw one or more item from your inventory                      %\n'),
-    write('% 3. use.            : Use consumable item in your inventory                           %\n'),
+    write('% 3. consume.        : Use consumable item in your inventory                           %\n'),
     write('%                                    ~Farming~                                         %\n'),
     write('% 1. dig.            : dig tiles to start planting (iff you are on dirtTile)           %\n'),
     write('% 2. plant.          : Plant crops in your inventory (iff you are on diggedTile)       %\n'),
