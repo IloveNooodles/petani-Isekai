@@ -93,7 +93,7 @@ tutorialStep(5):-
 
 tutorialStep(6):-
     % buy and sell
-    write('\n\nYou have bought a sunflowerSeed, let\'s plant it!\n'),
+    write('\nYou have bought a sunflowerSeed, let\'s plant it!\n'),
     write('Get outside to any dirt tile, then type \'dig.\' to dig the tile.'),
     setTutorial(7).
 
@@ -116,7 +116,7 @@ tutorialStep(8):-
 
 tutorialStep(9):-
     % farming (fertilize)
-    write('\nGreat, now you can harvest your crops.\n'),
+    write('\nNow you can harvest your crops.\n'),
     write('Type \'harvest.\'\n'),
     setTutorial(10).
 
@@ -171,6 +171,7 @@ tutorialStep(15):-
 tutorialStep(16):-
     write('\nWow, you can do a lot of things here.\n'),
     write('To replenish your stamina, type \'sleep.\'\n'),
+    write('You will wake up the next day.\n'),
     setTutorial(17).
 
 tutorialStep(17):-
@@ -194,5 +195,6 @@ tutorialStep(20):-
     write('\nCongratulations on the completion of your first quest!\n'),
     write('Now you are ready to face the world\n'),
     write('Go get those 20,000 gold!\n'),
-    write('\nIf you need help later, just type \'help.\'\n'),
+    write('\nIf you need help later, just type \'help.\'\n\n'),
+    write('END OF TUTORIAL\n'),
     setTutorial(21).

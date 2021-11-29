@@ -260,7 +260,8 @@ ranch :-
     QtyTotal > 0,
     write('Welcome to the ranch! You have:\n'),
     displayAnimal,
-    write('\nWhat do you want to do?\n').
+    write('\nWhat do you want to do?\n'),
+    checkTutorial(12).
 
 % Command chicken
 chicken:-

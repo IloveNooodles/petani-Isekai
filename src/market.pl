@@ -67,7 +67,7 @@ category:-
   write('2. farming\n'),
   write('3. ranching\n'),
   write('4. fishing\n'),
-  write('5. tools\n> ').
+  write('5. tools\n').
 
 listCategory(consumable):- 
   write('------- Consumable ------\n'),
@@ -76,7 +76,7 @@ listCategory(consumable):-
   write('3. susuSegar - 150G\n'),
   write('4. milkshake - 300G\n'),
   write('5. crisbar - 500G\n'),
-  write('6. steak - 1000G\n> ').
+  write('6. steak - 1000G\n').
 
 listCategory(fishing):- 
   write('------- Fishing ------\n'),
@@ -87,19 +87,19 @@ listCategory(fishing):-
 listCategory(farming):-
   write('------- Farming ------\n'),
   write('1. appleSeed - 50G\n'),
-  write('2. cucumberSeed - 100G\n'),
+  write('2. cucumberSeed - 75G\n'),
   write('3. garlicSeed - 75G\n'),
   write('4. pumkinSeed - 50G\n'),
-  write('5. sunflowerSeed - 25G\n'),
-  write('6. tomatoSeed - 75G\n'),
-  write('7. wheatSeed - 50G\n'),
-  write('8. fertilizer - 250G\n> ').
+  write('5. sunflowerSeed - 10G\n'),
+  write('6. tomatoSeed - 25G\n'),
+  write('7. wheatSeed - 25G\n'),
+  write('8. fertilizer - 250G\n').
 
 listCategory(ranching):-
   write('------- Ranching ------\n'),
   write('1. chicken - 300G\n'),
   write('2. sheep - 800G\n'),
-  write('3. cow - 1500G\n> ').
+  write('3. cow - 1500G\n').
 
 listCategory(tools):-
   item(fishingRod, tools, Level), !,
@@ -185,7 +185,7 @@ buy(Category, Items) :-
   TotalPrice is Price * Amount,
   ((
     CurGold < TotalPrice,
-    write('You dont\'t have enough money!!\n')
+    write('You don\'t have enough money!!\n')
     )
     ;
   (
@@ -261,7 +261,7 @@ sell :-
   countXinInven(Item, List, Count),
   Count > 0,
   itemPrice(Item, Value),
-  format('You have ~d ~w! How many do you want to sell?\n> ', [Count, Item]),
+  format('You have ~d ~w (worth ~d gold each)! How many do you want to sell?\n> ', [Count, Item, Value]),
   read(Amount),
   NewValue is Value * Amount,
   earnGold(NewValue),
