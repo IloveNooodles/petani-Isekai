@@ -1,36 +1,24 @@
-/* DYNAMICS */
-:- dynamic(state/1).
-/* FROM STARTGAME.PL
-:- dynamic(job/1).
-   % exp(type: [general, fish, farm, ranch], value) 
-:- dynamic(exp/2). 
-   % level(type: [general, fish, farm, ranch], value)
-:- dynamic(level/2).
-:- dynamic(stamina/1).
-:- dynamic(maxStamina/1).
-:- dynamic(gold/1).
-:- dynamic(playerName/1).
-*/
+:- include('cheat.pl').
 
 /* INCLUDES */
 :- include('startGame.pl'). % startGame, start, setPlayerName(X), setStat(X), levelOne, resetStat, status
 :- include('tutorial.pl'). % tutorial
 :- include('help.pl'). % help
-:- include('time.pl').
+:- include('time.pl'). % setDay(X), nextDay, addTime(H, M, AddMinute, HNew, MNew), and other time-related functions
 :- include('level.pl'). % config facts, maxedOut, newLevel, levelUpMessage
-:- include('map.pl').
-:- include('house.pl').
-:- include('diary.pl').
-:- include('items.pl').
-:- include('inventory.pl').
-:- include('fishing.pl').
+:- include('map.pl'). % map, a, s, w, d, and other map-related functions
+:- include('house.pl'). % house, sleep, etc
+:- include('items.pl'). % facts about items
+:- include('inventory.pl'). % inventory, throwItem, etc
+:- include('fishing.pl'). % fish
 :- include('farming.pl'). % dig, plant, harvest, checkRipe(X,Y), and other functions.
-:- include('ranching.pl').
-:- include('quest.pl').
-:- include('market.pl').
-:- include('alchemist.pl').
+:- include('ranching.pl'). % ranch, chicken, sheep, cow, etc
+:- include('quest.pl'). % quest
+:- include('market.pl'). % market, buy, sell
 
 /* SPECIALS */
+:- include('diary.pl').
+:- include('alchemist.pl').
 :- include('kappa.pl').
 
 /* EXIT */
