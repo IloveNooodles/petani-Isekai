@@ -79,7 +79,7 @@ quest :-
     earnExp(general, GenEXP),
 
     write('You have completed all your quest!\n'),
-    format('You have earned additional ~w gold, and ~w EXP.\n\n', [Gold,GenEXP]),
+    format('You have earned an additional ~w gold, and ~w EXP.\n\n', [Gold,GenEXP]),
     write('Type quest again to start a new quest!\n'),
     checkTutorial(20).
 

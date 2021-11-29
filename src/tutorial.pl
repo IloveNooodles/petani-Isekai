@@ -188,7 +188,7 @@ tutorialStep(18):-
 
 tutorialStep(19):-
     write('\nFor every quest, you will have to collect a number of harvest items, fish, and ranch items.\n'),
-    write('Complete the quests to get extra gold!\n'),
+    write('Complete the quests to get extra gold and exp!\n'),
     setTutorial(20).
 
 tutorialStep(20):-

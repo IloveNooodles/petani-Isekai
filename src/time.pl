@@ -208,12 +208,26 @@ endgame:-
   endGame(Endgame), gameCompleted(Completed),
   Endgame = true, Completed = false,
   write('You have worked hard, but in the end result is all that matters.\nMay God bless you in the future with kind people!\n'),
-  endGameMessage, halt.
+  endGameMessage,
+  write('\nPlay again? (y/n)\n> '),
+  read(Action),
+  replay(Action).
 
 endgame:-
   endGame(true), gameCompleted(true),
   write('Congratulations! After all of your hardwork, you have finally collected 20,000 gold!'), nl, write('Now you can rest assured and tell those bad guys who\'s the boss!\n'),
-  endGameMessage, halt.
+  endGameMessage, 
+  write('\nPlay again? (y/n)\n> '),
+  read(Action),
+  replay(Action).
+
+replay(y):-
+  consult('main.pl'),
+  startGame.
+
+replay(n):-
+  write('Thank you for playing!\n'),
+  halt.
 
 endGameMessage:-
     day(Day),
@@ -236,7 +250,7 @@ endGameMessage:-
     maxStamina(MaxStamina),
     gold(Gold),
     % Print
-    write('Here\'s your last status: \n'),
+    write('\nHere\'s your last status: \n'),
     write('-------------------------\n'),
     printTime,
     format('   📆 ~d   ⛅️ ~w   🌲 ~w\n\n', [Day, Weather, Season]),

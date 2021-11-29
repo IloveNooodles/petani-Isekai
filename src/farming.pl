@@ -1,7 +1,7 @@
 /* SISTEM EXP FARMING */
 digExp(2).
-plantExp(10).
-harvestExp(15).
+plantExp(5).
+harvestExp(10).
 fertilizeExp(5).
 
 multiplier(Mul):-
