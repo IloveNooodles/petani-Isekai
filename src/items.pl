@@ -256,6 +256,10 @@ checkConsuminInven([H|T], Bool) :-
   checkConsuminInven(T, Bool).
 
 consume :-
+  \+ playerName(_), !,
+  write('Game has not started yet!\n').
+
+consume :-
   inventory(_, Count),
   Count = 0,
   !,
