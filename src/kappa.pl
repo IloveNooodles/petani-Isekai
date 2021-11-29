@@ -55,6 +55,7 @@ hostile(2):-
 
 hostile(3):-
     write('You run away. The kappa catches up to you and attacks you. You died.\n'),
+    retractall(endGame(_)), asserta(endGame(true)),
     endgame.
 
 fight(1):-
@@ -62,6 +63,7 @@ fight(1):-
 
 fight(2):-
     write('You attack his body. You are too weak to tackle him. You died.\n'),
+    retractall(endGame(_)), asserta(endGame(true)),
     endgame.
 
 fight(3):-
