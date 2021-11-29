@@ -78,7 +78,7 @@ start:-
     startWeather,
     % Choose job
     shell('clear'),
-    % backStory,
+    backStory,
     write('Welcome to Harvest Galaxy S22! What\'s your name?\n(begin with a lowercase letter and end with period (.))\n> '),
     read(Name),
     setPlayerName(Name),
