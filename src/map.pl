@@ -134,7 +134,7 @@ print_loc_now :- playerName(Name), loc_tile(digged), !, format('~w sedang mengec
 print_loc_now :- playerName(Name), loc_tile(planted), !, format('~w sedang mengecek kebun!', [Name]), nl.
 print_loc_now :- playerName(Name), loc_tile(ripe), !, format('~w sedang mengecek kebun! Wah kayanya udah mateng!', [Name]), nl.
 print_loc_now :- playerName(Name), loc_tile(lake_edge), !, format('~w di pinggir danau!', [Name]), nl, checkTutorial(13).
-print_loc_now :- playerName(Name), loc_tile(wizard), !, format('~w masuk ke tempat wizard!', [Name]), nl.
+print_loc_now :- playerName(Name), loc_tile(wizard), !, format('~w masuk ke tempat wizard! Ketik \'wizard.\' untuk berinteraksi!', [Name]), nl.
 
 /* print karakter */
 printChar(X, Y) :- border(X, Y), !, write('#').
@@ -143,7 +143,7 @@ printChar(X, Y) :- market_coordinate(X, Y), !, write('M').
 printChar(X, Y) :- home_coordinate(X, Y), !, write('H').
 printChar(X, Y) :- ranch_coordinate(X, Y), !, write('R').
 printChar(X, Y) :- quest_coordinate(X, Y), !, write('Q').
-printChar(X, Y) :- hasAlchemist(Z), Z = true, wizard_coordinate(X, Y), !, write('W').
+printChar(X, Y) :- hasAlchemist(Z), Z = true, wizard_coordinate(X, Y), !, write('★').
 printChar(X, Y) :- 
     planted_coordinate(X, Y, Seed, _),
     !, 

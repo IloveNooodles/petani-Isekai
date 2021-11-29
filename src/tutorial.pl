@@ -86,9 +86,9 @@ tutorialStep(5):-
     % market
     write('\nThis is the marketplace.\n'),
     write('To interact with it, type \'market.\'\n'),
-    earnGold(25),
+    earnGold(10),
     write('And then, try to buy 1 sunflowerSeed (farming item).\n'),
-    write('Don\'t worry about the money, we have lent you 25 gold for this purchase.\n'),
+    write('Don\'t worry about the money, we have lent you 10 gold for this purchase.\n'),
     setTutorial(6).
 
 tutorialStep(6):-

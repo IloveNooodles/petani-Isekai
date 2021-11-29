@@ -20,7 +20,7 @@ startAlchemist:-
 
 doneAlchemist:-
   hasAlchemist(true), retractall(hasAlchemist(_)), asserta(hasAlchemist(false)),
-  write('An alchemist has left in the city.\n\n'), !.
+  write('The alchemist has left in the city.\n\n'), !.
 
 doneAlchemist:- !.
 

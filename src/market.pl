@@ -113,8 +113,7 @@ readCategory(Category):-
   listCategory(Category),
   write('What do you want to buy?\n> '),
   read(Items),
-  buy(Category, Items),
-  checkTutorialMarket(Items).
+  buy(Category, Items).
 
 readCategory(Category):-
   \+ listCategory(Category), 
@@ -193,7 +192,9 @@ buy(Category, Items) :-
     NewGold is CurGold - TotalPrice,
     retractall(gold(_)),
     asserta(gold(NewGold)),
-    processBuy(Items, Amount, Category)
+    processBuy(Items, Amount, Category),
+    format('Thank you for buying ~d ~w(s)!\n', [Amount, Items]),
+    checkTutorialMarket(Items)
     )
   ).
 
@@ -261,10 +262,11 @@ sell :-
   countXinInven(Item, List, Count),
   Count > 0,
   itemPrice(Item, Value),
-  format('You have ~d ~w (worth ~d gold each)! How many do you want to sell?\n> ', [Count, Item, Value]),
+  format('You have ~d ~w(s) (worth ~d gold each)! How many do you want to sell?\n> ', [Count, Item, Value]),
   read(Amount),
   NewValue is Value * Amount,
   earnGold(NewValue),
-  throw(Item, Amount)
+  throw(Item, Amount),
+  format('You have sold ~d ~w(s) and earned ~d gold.', [Amount, Item, NewValue])
   )),
   !.
