@@ -70,8 +70,8 @@ quest :-
     questAwal(HQ, FQ, RQ),
     level(general, Gen),
 
-    % SCALING UNTUK MENDAPAT GOLD = total items * level general * 5
-    Gold is (HQ+FQ+RQ)*Gen*5,
+    % SCALING UNTUK MENDAPAT GOLD = total items * level general * 10
+    Gold is (HQ+FQ+RQ)*Gen*10,
     earnGold(Gold),
 
     % SCALING UNTUK MENDAPAT EXP = total items * 15

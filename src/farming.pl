@@ -177,6 +177,7 @@ harvest:-
     harvestTime(PlusTime),
     addTime(H, M, PlusTime, HNew, MNew),
     setTime(HNew, MNew),
+    harvestCompletion(Amount),
     format('You harvested ~d ~w(s).\n', [Amount, SeedRipe]),
     checkTutorial(10).
 
