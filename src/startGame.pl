@@ -30,30 +30,34 @@ startGame:-
     write('% 3. exit.   : keluar dari game                                                %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n'),
     write('PENTING!!! Akhiri semua perintah atau inputmu dengan titik (.)\n'), !,
+    repeat,
     write('Masukkan command (start/help/exit):\n> '),
     read(Input),
-    prosesInput(Input).
+    prosesInput(Input),
+    do(Input),
+    endCondition(Input).
 
 /* PROSES INPUT STARTGAME */
 prosesInput(start) :-
     start.
 
 prosesInput(help) :-
-    help,
-    repeat,
-    write('Masukkan command (start/help/exit):\n> '),
-    read(Input),
-        (Input = start, prosesInput(start), !
-        ;
-        prosesInput(Input),
-        fail
-    ).
+    help.
 
 prosesInput(exit) :-
     exit.
 
 prosesInput(_) :-
     write('Command engga valid!!\n'), fail.
+
+endCondition(start).
+endCondition(X) :- is(X), !.
+
+do(X) :- is(X), !.
+do(start).
+do(_) :- write('Masukkan command (start/help/exit):\n> ').
+
+is(X) :- X == start, !.
 
 /* START */
 start:-
@@ -100,8 +104,8 @@ start:-
     % Assert level one stats
     levelOne,
     fill_map,
-    write('Let\'s start farming!\n'),
-    tutorial.
+    write('Let\'s start farming!\n').
+    % tutorial.
 
 /* PLAYER NAME AND BASE STATS */
 setPlayerName(Name) :-
