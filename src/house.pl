@@ -158,9 +158,9 @@ exitHouse:-
 dream(Number):-
   Number < 100,
   write('You\'ve met fairy in your dream'), nl, write('She says that she can teleport you to anyplace you want to go!\n'),
-  write('Enter X coordinate (2-21)'),
+  write('Enter X coordinate (2-21)\n> '),
   read(X),
-  write('Enter Y coordinate (2-21)'),
+  write('Enter Y coordinate (2-21)\n> '),
   read(Y),
   retractall(player(_, _)),
   asserta(player(X, Y)),
