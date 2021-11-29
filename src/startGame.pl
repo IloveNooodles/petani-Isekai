@@ -39,13 +39,13 @@ startGame:-
 
 /* PROSES INPUT STARTGAME */
 prosesInput(start) :-
-    start.
+    start,!.
 
 prosesInput(help) :-
-    help.
+    help,!.
 
 prosesInput(exit) :-
-    exit.
+    exit,!.
 
 prosesInput(_) :-
     write('Command engga valid!!\n'), fail.
@@ -55,7 +55,7 @@ endCondition(X) :- is(X), !.
 
 do(X) :- is(X), !.
 do(start).
-do(_) :- write('Masukkan command (start/help/exit):\n> ').
+do(_) :-!.
 
 is(X) :- X == start, !.
 

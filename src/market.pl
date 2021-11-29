@@ -122,7 +122,7 @@ readCategory(Category):-
 
 % proses buy sesuai item
 processBuy(Items, Amount, ranching) :-
-  addAnimal(Items, Amount).
+  forall(between(1, Amount, _), addAnimal(Items)).
 
 processBuy(Items, 1, tools) :- % tools
   \+ isXinInven(Items), !,
