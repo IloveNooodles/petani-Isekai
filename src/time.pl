@@ -229,6 +229,10 @@ replay(n):-
   write('Thank you for playing!\n'),
   halt.
 
+replay(_):-
+  write('Invalid input.\n'),
+  halt.
+
 endGameMessage:-
     day(Day),
     weather(Weather),
