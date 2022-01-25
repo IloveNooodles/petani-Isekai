@@ -2,6 +2,11 @@
 
 Tugas Besar Logika Komputasi IF2121. Pada tugas besar ini kita diminta untuk membuat sebuah game yang memiliki banyak spesifikasi dengan bahasa prolog. Made with <3 from GalaxyS22.
 
+## Screenshot
+![image](https://user-images.githubusercontent.com/63847012/151036561-3ec71d76-0229-4583-80db-4a42e0a7e65f.png)
+![image](https://user-images.githubusercontent.com/63847012/151036369-4f3d7eb8-5761-4f0a-9329-a8c6381d1bee.png)
+![image](https://user-images.githubusercontent.com/63847012/151036430-bd1a565f-92c1-4505-8967-64a1dbb7c3c0.png)
+
 ## Member list of GalaxyS22
 
 | Nama                           | NIM      |
